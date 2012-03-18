@@ -9,7 +9,7 @@ Bloggposten er basert på [del 2](http://magnhaug.github.com/BEKK-Python-Kurs/sl
 
 Pythonisk kode er kode som bruker vanlige idiomer i Python på en god måte, i stedet for å implementere koden ved hjelp av konsepter vanligere i andre språk.
 
-Dette kan illustreres med et enkelt eksempel hentet fra Pythons [offesielle ordliste](http://docs.python.org/glossary.html).
+Dette kan illustreres med et enkelt eksempel hentet fra Pythons [offesielle ordliste](http://docs.python.org/glossary.html#term-pythonic).
 I mange språk er det vanlig å iterere over elementer i lister ved hjelp av en eksplisitt indeks og en for-løkke.
 Dette er også mulig i Python, og kan gjøres slik:
 
@@ -53,89 +53,67 @@ La oss dermed gå videre til å se på noen av de konseptene vi mener er viktige
 ## List comprehension
 
 List comprehensions er en konsis syntaks for å lage eller transformere lister.
-Lar deg enkelt *iterere* over lister og *transformere* og *filtrere* elementene.
+Ved hjelp av list comprehensions kan man enkelt iterere over eksisterende sekvenser, og transformere og filtrere elementene, og lagre resultatet som en liste.
 
-Syntaks:
+Den viktigste fordelen med list comprehensions i forhold til å lage lister på vanlig måte ved hjelp av for-løkker er at koden blir kortere og mer lettlest, og dermed enklere å feilsøke.
+Som en bonus kan også list comprehensions ha bedre ytelse enn vanlige for-løkker i mange tilfeller.
 
-    resultat = [output for var in list if condition]
-    
-- `output` er elementene som ender opp i den endelige lista. Her kan vi skrive ut `var` direkte, eller som del av et utrykk.
-- `list` er referanse til en sekvens, og iterering fungerer på samme måte her som i vanlige for-løkker.
-- `if condition` kan filtrere bort elementer vi ikke ønsker å få med i resultatet. Dette siste leddet er valgfritt.
+Syntaksen for å skrive list comprehensions er som følger.
+
+    resultat = [uttrykk for element in liste if betingelse]
+
+List comprehension er avgrenset av firkantparenteser, og resultatet lagres her i `resultat`.
+`uttrykk` er et utrykk som evalueres for hver iterasjon av `for element in liste`, og resultatet av dette havner som et element i `resultat`. 
+I de fleste tilfeller vil `uttrykk` være en operasjon over `element`.
+Det siste leddet, `if betingelse` er valgfritt, og fungerer som et filter som lar oss ekskludere elementer vi ikke ønsker.
 
 ### Et enkelt eksempel
 
-Iterér over alle tall fra 0 til 10, filtrer slik at vi sitter igjen bare med de som er delelig på 3, og gang hvert element med -1 før de lagres i en ny liste.
+La oss ta utgangspunkt i kodesnutten under.
+Her itererer vi over de 100 første heltallene, og lagrer alle kvadrattall som er delelige på 7 i en ny liste.
 
     >>> resultat = []
-    >>> for i in range(10):
-    ...     if i%3 == 0:
-    ...         resultat.append(-i)
+    >>> for i in range(100):
+    ...     if i**2%7 == 0:
+    ...         resultat.append(i**2)
     ... 
-    >>> print resultat
-    [0, -3, -6, -9]
+    >>> resultat
+    [0, 49, 196, 441, 784, 1225, 1764, 2401, 3136, 3969, 4900, 5929, 7056, 8281, 9604]
 
-Med list comprehension kan vi i stedet skrive dette som:
-
-    >>> [-i for i in range(10) if i%3 == 0]
-    [0, -3, -6, -9]
+Denne koden kan gjøres mye penere ved hjelp av list comprehensions:
+r
+    >> [i**2 for i in range(100) if i**7%5 == 0]
+    [0, 49, 196, 441, 784, 1225, 1764, 2401, 3136, 3969, 4900, 5929, 7056, 8281, 9604]
     
-Hva skjer her? Vi itererer `for i in range(10)`, filtrerer `if i%3 == 0`, og transfomerer de resterende elementene til `-i`.
+Kodesnuttene over utrykker nøyaktig det samme, men den siste benytter et vanlig idiom i Python og blir dermed kortere og langt mer lettlest.
 
-List comprehensions kan også gjøres med nestede løkker:
+### Comprehensions med nøstede løkker
 
-Eksempel med 3 nivåer:
+List comprehensions kan også gjøres med nestede for-løkker, ved å liste disse etter hverandre i uttrykket.
 
-    >>> bokstaver = ['x','y','x']
-    >>> [a+b+c for a in bokstaver for b in bokstaver for c in bokstaver] 
-    ['xxx', 'xxy', 'xxx', 'xyx', 'xyy', 'xyx', 'xxx', 'xxy', 'xxx', 'yxx', 'yxy', 'yxx', 'yyx', 'yyy', 
-    'yyx', 'yxx', 'yxy', 'yxx', 'xxx', 'xxy', 'xxx', 'xyx', 'xyy', 'xyx', 'xxx', 'xxy', 'xxx']
+I eksempelet under lister vi opp alle permutasjoner av bokstavene x, y og z.
 
-Fra Python 2.7 finnes det også tilsvarende syntax for å lage set og dictionaries:
+    >>> [a+b+c for a in "xyz" for b in "xyz" for c in "xyz"]
+    ['xxx', 'xxy', 'xxz', 'xyx', 'xyy', 'xyz', 'xzx', 'xzy', 'xzz', 'yxx', 'yxy', 'yxz', 'yyx', 'yyy',
+     'yyz', 'yzx', 'yzy', 'yzz', 'zxx', 'zxy', 'zxz', 'zyx', 'zyy', 'zyz', 'zzx', 'zzy', 'zzz']
 
-    >>> [n%3 for n in range(5)]
-    [0, 1, 2, 0, 1]
-    >>> {n%3 for n in range(5)}
-    set([0, 1, 2])
-    >>> {n: n%3 for n in range(5)}
-    {0: 0, 1: 1, 2: 2, 3: 0, 4: 1}
+I dette tilfellet kan vi altså eliminiere tre nestede for-løkker, og samtidig øke lesbarheten.
+Vær imidlertid varsom med å ta dette for langt.
+Håpløst komplekse list comprehensions som gjør for mye på en gang er gjerne vanskeligere å lese enn de tilsvarende nøstede for-løkkene, og strider dermed mot tankegangen i Zen og Python!
 
-### Oppgaver
+I eksempelet over kan det forøvrig bemerkes at vi itererer over bokstavene i en streng på samme måte som vi vanligvis itererer over elementer i en liste.
+Dette er et godt eksempel på [duck typing](http://en.wikipedia.org/wiki/Duck_typing), et viktig prinsipp i Python.
+Duck typing er tanken om at det det som betyr noe ikke er hvilken type noe har, men hva du kan gjøre med det--i dette tilfellet iterering.
 
-Gjør følgende ved hjelp av list comprehensions:
+### Nøstede list comprehensions
 
-1. Lag en liste med 2er-potenser. Hint: `2 ** i` gir *2*<sup>*i*</sup>.
-1. Lag dictionary over de samme potensene der nøkkel er `i` og verdi er `2 ** i`.
-1. Lag en liste med alle tall mellom 1 og 100 som er delelig på enten 3 eller 7 men ikke begge.
-1. Lag liste med alle oddetall som er multiplikat av et tall fra 3 til 7 og et tall fra 10 til 14.
-1. Generer gangetabellen for tallene fra 1 til 10 som en 2-dimensjonal liste.
+I tillegg til å lage list comprehensions med nøstede for-løkker kan vi også lage nøstede list comprehensions.
+Dette gjør vi enkelt og greit ved å erstatte et uttrykk fra comprehension-uttryket med en ny list comprehension.
 
-### Løsninger
-
-Lag en liste med 2er-potenser. Hint: `2 ** i` gir *2*<sup>*i*</sup>.
-
-    >>> [2**i for i in range(1,10)]
-    [2, 4, 8, 16, 32, 64, 128, 256, 512]
-
-Lag dictionary over de samme potensene der nøkkel er `i` og verdi er `2**i`.
-
-    >>> {i: 2**i for i in range(1,10)}
-    {1: 2, 2: 4, 3: 8, 4: 16, 5: 32, 6: 64, 7: 128, 8: 256, 9: 512}
-        
-Lag en liste med alle tall mellom 1 og 100 som er delelig på enten 3 eller 7 men ikke begge.
-
-    >>> [x for x in range(1,100) if x%3==0 or x%7==0 if not x%3==x%7==0]
-    [3, 6, 7, 9, 12, 14, 15, 18, 24, 27, 28, 30, 33, 35, 36, 39, 45, 48, 49, 51, 54, 56, 57, 60, 66, 
-     69, 70, 72, 75, 77, 78, 81, 87, 90, 91, 93, 96, 98, 99]
-
-Lag liste med alle oddetall som er multiplikat av et tall fra 3 til 7 og et tall fra 10 til 14.
-
-    >>> [i*j for i in range(3,8) for j in range(10,15) if i*j%2 != 0]
-    [33, 39, 55, 65, 77, 91]
-        
-Generer gangetabellen for tallene fra 1 til 10 som en 2-dimensjonal liste.
+Eksempelet under viser hvordan vi kan bruke dette til å generere gangetabllen for tallene fra 1 til 10 som en 2-dimensjonal liste.
 
     >>> from pprint import pprint
+    >>>
     >>> tabell = [[i*j for i in range(1,11)] for j in range(1,11)]
     >>> pprint(tabell)
     [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -149,8 +127,27 @@ Generer gangetabellen for tallene fra 1 til 10 som en 2-dimensjonal liste.
      [9, 18, 27, 36, 45, 54, 63, 72, 81, 90],
      [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]]
 
+### Comprehensions for Set og Dictionaries
 
-## Generatorer og iteratorer
+Fra Python 2.7 finnes det også tilsvarende comprehensions for set og dictionaries.
+
+For set comprehension er syntaksen helt tilsvarende list comprehension, med unntak av at firkantparentesene er byttet ut med krøllparenteser.
+
+    >>> [i%3 for i in range(10)]
+    [0, 1, 2, 0, 1, 2, 0, 1, 2, 0]
+    >>> {i%3 for i in range(10)}
+    set([0, 1, 2])
+
+Dict comprehensions bruker også krøllparenteser, men her må vi oppgi et nøkkel/verdi par i stedet for et enkelt element.
+Eksempelet under demonstrerer hvordan vi kan lage en dict som kobler *i* og den tilhørende toer-potensen *2*<sup>*i*</sup>.
+
+    >>> {i: 2**i for i in range(10)}
+    {0: 1, 1: 2, 2: 4, 3: 8, 4: 16, 5: 32, 6: 64, 7: 128, 8: 256, 9: 512}
+
+I tillegg til disse finnes det også en liknende notasjon som bruker vanlige parenteser.
+Men for å lære om denne må vi først se nærmere på iteratorer og generatorer.
+
+## Iteratorer og generatorer
 
 Iteratorer er kanskje ikke veldig spennende, men det er en viktig byggesten.
 Flere av de python-elementene vi allerede kjenner kan fungere som iteratorer..
