@@ -1,6 +1,6 @@
 # Idiomatisk python
 
-Magnus Haug / Kjetil Valle
+TODO: introduksjon.
 
 ## List comprehension
 
@@ -632,30 +632,6 @@ Gitt implementasjonen av fibonacci under, lag dekoratoren `@memoize` som lagrer
                 return cache[arg]
         return wrapper
 
-## Easter Eggs
-
-The Zen of Python
-
-
-    import this
-    
-Hva Python-utviklerne tenker om { og }
-
-
-    from __future__ import braces
-
-Alternaltiv implementasjon av Hello World
-
-
-    import __hello__
-
-Og sist men ikke minst:
-
-
-    import antigravity
-
-
-
 ## Oppsummering
 
 - *List comprehensions* er en hendig syntaks for å lage/filtrere/mutere lister.
@@ -670,4 +646,6 @@ Og sist men ikke minst:
   - Dekoratorene erstatter den dekorerte funksjonen med en ny funksjon.
   - I praksis bare hendig syntax for å drive med høyere ordens programmering.
 
+---
 
+Magnus Haug / Kjetil Valle
