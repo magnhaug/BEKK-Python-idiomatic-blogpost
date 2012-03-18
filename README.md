@@ -1,4 +1,7 @@
-# Idiomatisk python
+
+# Idiomatisk Python
+
+*WIP: Bloggpost basert på [del 2](http://magnhaug.github.com/BEKK-Python-Kurs/slides/del2.html#1) av BEKKs [kursserie om Python](https://github.com/magnhaug/BEKK-Python-Kurs) på NTNU.*
 
 TODO: introduksjon.
 
