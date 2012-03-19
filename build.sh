@@ -2,8 +2,12 @@
 
 while true
 do
-    cat head.html > index.html
-    markdown README.md >> index.html
-    echo "</body></html></article>" >> index.html
+    for f in *.md
+    do
+        base="${f%.*}"
+        cat head.html > $base.html
+        markdown $f >> $base.html
+        echo "</body></html></article>" >> $base.html
+    done
     sleep 1
 done
