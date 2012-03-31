@@ -33,7 +33,14 @@ I Python er det imidlertid et vanlig idiom å iterere over alle elementene i en 
     for piece in food:
         print piece
 
-Den beste beskrivelsen av hva idiomatisk Python virkelig dreier seg om er kanskje gitt i The Zen of Python:
+Vi ser at koden umiddelbart blir enklere og penere, ved at vi kvitter oss med hele den forstyrrende indeksen.
+Selv om dette er et overforenklet eksempel, illusterer det godt essensen i hva som menes med *pythonisk*.
+
+Pythonisk kode er også tett knyttet opp mot filosofien om minimalisme og enkelhet som underbygger Python.
+
+## The Zen of Python
+
+Den beste beskrivelsen av denne Pythons filosofi er kanskje gitt i The Zen of Python:
 
     >> import this
     The Zen of Python, by Tim Peters
@@ -58,9 +65,19 @@ Den beste beskrivelsen av hva idiomatisk Python virkelig dreier seg om er kanskj
     If the implementation is easy to explain, it may be a good idea.
     Namespaces are one honking great idea -- let's do more of those!
 
-For å oppsummere dette er noe av det viktigste at kode skal være enkel og uttrykksfull.
+For å oppsummere, det aller viktigste er at kode er enkel og uttrykksfull.
 Vi ønsker kode som er så enkel å forstå at den blir vakker.
+
+> *Programs must be written for people to read, and only incidentally for machines to execute.*  
+> —Abelson & Sussman, Structure and Interpretation of Computer Programs
+
 Dette oppnår vi i Python ved å kjenne språket, og bruke de konstruktene som tilbys på riktig måte.
-La oss dermed gå videre til å se på noen av de konseptene vi mener er viktige å kunne for å skrive god pythonisk kode.
+Vil du lese mer, inneholder [denne stackoverflow-posten](http://stackoverflow.com/questions/228181/the-zen-of-python) diskusjoner og beskrivelser av hva som menes med mange uttrykkene i dette verset.
 
+La oss gå videre til å se på noen av de konseptene vi mener er viktige å kjenne for å skrive god pythonisk kode.
 
+## TODO...
+
+---
+
+Magnus Haug / Kjetil Valle
