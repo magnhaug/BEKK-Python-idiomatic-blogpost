@@ -18,6 +18,11 @@ Pythonisk kode er kode som bruker vanlige idiomer i Python på en god måte, i s
 
 Dette kan illustreres med et enkelt eksempel hentet fra Pythons [offesielle ordliste](http://docs.python.org/glossary.html#term-pythonic).
 I mange språk er det vanlig å iterere over elementer i lister ved hjelp av en eksplisitt indeks og en for-løkke.
+
+        for (int i=0; i<food.length; i++) {
+            System.out.println(food[i]);
+        }
+
 Dette er også mulig i Python, og kan gjøres slik:
 
     for i in range(len(food)):
