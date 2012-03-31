@@ -72,11 +72,26 @@ Vi ønsker kode som er så enkel å forstå at den blir vakker.
 > —Abelson & Sussman, Structure and Interpretation of Computer Programs
 
 Dette oppnår vi i Python ved å kjenne språket, og bruke de konstruktene som tilbys på riktig måte.
-Vil du lese mer, inneholder [denne stackoverflow-posten](http://stackoverflow.com/questions/228181/the-zen-of-python) diskusjoner og beskrivelser av hva som menes med mange uttrykkene i dette verset.
+Vil du lese mer, inneholder [denne stackoverflow-posten](http://stackoverflow.com/questions/228181/the-zen-of-python) diskusjoner og beskrivelser av hva som menes med mange uttrykkene i Zen of Python.
 
 La oss gå videre til å se på noen av de konseptene vi mener er viktige å kjenne for å skrive god pythonisk kode.
 
-## TODO...
+## TODO
+
+Skrive mer om (?)
+
+- Duck typing
+- EAFP vs LBYL
+- with statement
+- dictionary get, setdefault, og defaultdict
+- strengformatering
+- key functions
+- python moduler og pakker
+- script-kode i moduler
+
+        if __name__ == '__main__':
+            # script code here
+
 
 ---
 
