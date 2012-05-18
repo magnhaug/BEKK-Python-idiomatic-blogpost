@@ -94,82 +94,38 @@ Begrensningene består i at lambdaer ikke kan inneholde statements, og ikke kan 
 Lambdaer tar inn en (valgfri) liste med parametere, som brukes i uttrykket selve funksjonen består av.
 Når lambda-uttrykket er evaluert returneres resultatet implisitt fra funksjonen.
 
-Syntax: 
+At lambda-funksjoner er anonyme betyr at de kan defineres og kalles uten å være bundet til et variabelnavn.
+Man *kan* dog naturligvis også tilordne lambdaer til variabler hvis man ønsker, slik som med vanlige funksjoner.
 
+### Syntaks
 
-    lambda args: uttrykk
+Syntaktisk deklareres lambdaer på følgende måte.
 
-Vanlig funksjon:
+    lambda arg1, arg2: uttrykk
 
+Vi starter altså med nøkkelordet `lambda` etterfulgt av en (valgfri) liste med vilkårlig antall parametere.
+Dette er fulgt av et kolon, og deretter et enkelt uttrykk som evalueres og utgjør returverdien til lambda-funksjonen.
 
-    >>> def funksjonen_min(num):
-    ...     return num * 2
-    ...
-    >>> funksjonen_min(3)
-    6
+Gitt den følgende *vanlige* funksjonen.
 
-Lambda:
+    def inkrementer(num):
+        return num + 1
 
+Denne kan skrives om til en lambda, på følgende måte.
 
-    >>> lambdaen_min = lambda num: num * 2
-    >>> lambdaen_min(3)
-    6
+    inkrementer = lambda num: num + 1
 
-Som alle andre funksjoner kan også lambaer brukes som argumenter.
+### Bruk-og-kast-funksjoner
 
-    >>> def double( num ):
-    ...     return num * 2
-    ... 
-    >>> map(double, range(10))
-    [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+Styrken til lambdaer ligger i nettopp det at de er anonyme.
+Dette er bruk-og-kast-funksjoner som kan opprettes der de trengs, gjerne som del av funksjonskall eller liknende.
 
-Dette blir ofte mer konsist med en lambda:
+TODO: noe om map, reduce, filter
 
     >>> map(lambda num : num * 2, range(10))
     [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
 
-Akkurat dette tilfellet blir kanskje vel så pent med en list comprehension:
-
-    >>> [num * 2 for num in range(10)]
-    [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
-
-### Oppgaver
-
-1. Lag en funksjon som regner ut gjennomsnittet av to tall, som den får som parametre.
-1. Gjør om denne til en lambda.
-1. Utvid lambda-funksjonen til å regne ut gjennomsnittet av en liste med tall.
-1. Lag en funksjon make_adder(x), som returnerer en funksjon.  
-  Den returnerte funksjonen skal legge til x til et tall.
-1. Skriv kode som bruker make_adder.
-
-### Løsninger
-
-Lag en funksjon som regner ut gjennomsnittet av to tall, som den får som parametre.
-
-    def avg(a, b):
-        return (a+b)/2
-
-Gjør om denne til en lambda.
-
-    avg = lambda a, b: (a+b)/2
-
-Utvid lambda-funksjonen til å regne ut gjennomsnittet av en liste med tall.
-
-    avg = lambda alle_tall : sum(alle_tall) / len(alle_tall)
-
-Lag en funksjon make_adder(x), som returnerer en funksjon.  
-  Den returnerte funksjonen skal legge til x til et tall.
-
-    >>> def make_adder(x):
-    ...     def fn(y):
-    ...             return y+x
-    ...     return fn
-
-Skriv kode som bruker make_adder.
-
-    >>> add_two = make_adder(2)
-    >>> add_two(40)
-    42
+    >>> lambda *args: sum(args)/len(args)
 
 ## Dekoratorer
 
