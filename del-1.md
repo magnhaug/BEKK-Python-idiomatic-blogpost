@@ -76,13 +76,23 @@ Vil du lese mer, inneholder [denne stackoverflow-posten](http://stackoverflow.co
 
 La oss gå videre til å se på noen utvalgte konsepter vi mener er viktige å kjenne for å skrive god pythonisk kode.
 
-## TODO
+## Duck typing
 
-Skrive mer om (?)
+## EAFP vs LBYL
 
-- Duck typing
-- EAFP vs LBYL
-- with statement
+## The `with` statement
+
+Noe om ting som støtter with: filer, etc.
+
+Noe om hvordan implementere `__enter__` og `__exit__` selv.
+
+## Gettere og settere
+
+Gettere er *ikke* pythonisk!
+Joda, det er viktig med enkapsulering, men bruk `@property` i stedet.
+
+## Flere ting?
+
 - dictionary get, setdefault, og defaultdict
 - strengformatering
 - key functions
@@ -91,7 +101,6 @@ Skrive mer om (?)
 
         if __name__ == '__main__':
             # script code here
-
 
 ---
 
