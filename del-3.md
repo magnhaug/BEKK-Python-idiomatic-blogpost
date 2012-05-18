@@ -37,7 +37,9 @@ Eksempelet under lager et alias til Pythons innebygde `len`-funksjon.
 
 Ettersom funksjoner kan definers inne i andre funksjoner, og kan tilordnes navngitte variabler, er det kanskje ikke så overaskende at de også kan brukes som argumenter og returverdier.
 Dette gjøres på lik linje med alt annet som sendes inn og ut av funksjoner.
-Får en en funksjon som input til en annen funksjon, er dette altså bare et argument som tilfeldigvis kan kalles.
+Funksjoner som får inn eller returnerer andre funksjoner kalles *høyere ordens funksjoner*.
+
+Et argument som er en funksjon er ikke mer spesielle enn andre argumenter, bortsett fra at i dette tilfellet er det et argument som tilfeldigvis kan kalles.
 
     >>> def foo():
     ...     print "HAI from foo, kthxbye"
@@ -164,27 +166,38 @@ Skriv kode som bruker make_adder.
     >>> add_two(40)
     42
 
-## Decorators
+## Dekoratorer
 
-Dekoratorer lar oss endre funksjonaliteten av eksisterende funksjoner uten å måtte gjøre endringer i selve funksjonene.
+En dekorator lar oss endre hvordan en funksjon oppfører seg, uten at vi er nødt til å gjøre endringer i selve funksjonen.
 
-Syntaksen likner veldig på annotasjoner i Java:
+Dekoratorer kan for mange være ganske vanskelige å bli helt komfortable med, selv om de ikke bygger på mer enn det vi allerede har vært igjennom.
+Dette gjelder kanskje spesielt når vi kommer til dekoratorer som tar argumenter.
+Det er likevel vel verdt å bruke tiden det tar å opparbeide forståelsen, ettersom det gir god innsikt i hvordan høyere ordens funksjoner fungerer, og dekoratorer i seg selv kan være et veldig nyttig verktøy.
+
+Eksempler på praktisk bruk av dekoratorer finner en mange steder, slik som i webrammeverk som [flask](http://flask.pocoo.org/docs/patterns/viewdecorators/) og [django](https://docs.djangoproject.com/en/dev/topics/http/decorators/), testrammeverket [unittest](http://docs.python.org/library/unittest.html#skipping-tests-and-expected-failures), eller som [innebygde funksjoner i språket](http://docs.python.org/library/functions.html#property).
+
+### Syntaks
+
+Syntaktisk minner Python-dekoratorer en del om annotasjoner i Java.
 
     @dekorator
     def funksjon():
-        return "foo"
+        pass
 
-Eksempelet på forrige slide er egentlig bare syntaktisk sukker for følgende:
+I virkeligheten er `@dekorator`-syntaksen kun [sukker](http://en.wikipedia.org/wiki/Syntactic_sugar).
+Eksempelet over kunne like gjerne vært skrevet på følgende måte, med vanlige funksjonskall.
 
     def funksjon():
-        return "foo"
+        pass
     funksjon = dekorator(funksjon)
     
-En dekorator er altså en funksjon* som tar en funksjon som argument og returnerer en ny funksjon som fungerer som proxy/wrapper for den dekorerte funksjonen.
+Det som skjer er altså at funksjonen først defineres på vanlig måte.
+Deretter sendes den som argument til dekoratoren som returnerer en ny funksjon.
+Den nye funksjonen tilordnes, og erstatter, så navnet til den opprinnelige funksjonen.
 
-\* klasser kan også brukes, men vi holder oss til funksjoner her for å gjøre det enklere...
-
-En typisk dekorator ser omtrent slik ut:
+En dekorator er altså ikke noe annet enn en høyere ordens funksjon.
+Den tar inn en funksjon, modifiserer eller erstatter funksjoen, og returnerer en erstatning for den opprinnelige funksjonen.
+En typisk dekorator vil vanligvis se omtrent ut som følger.
 
     def dekorator(fn):
         def ny_fn():
@@ -192,40 +205,58 @@ En typisk dekorator ser omtrent slik ut:
             # Vanligvis inkluderer det et kall til fn().
         return ny_fn
 
-I den nye funksjonen kan vi definere funksjonalitet som skal skje før og etter den dekorerte funksjonen kalles. Eller vi kan la være å kalle den i det hele tatt. Eller vi kan endre argumentene den får inn. Eller...
+(I praksis kan også klasser brukes til å lage dekoratorer, ettersom funksjoner egentlig er objekter av typen `function`.
+For å forenkle ting holder vi oss til dekoratorer basert på vanlige funksjoner her.)
+
+Dekorator-funksjonen kan definere funksjonalitet som skal skje før/etter at den dekorerte funksjonen kalles.
+Den kan også la være å kalle den dekorerte funksjonen i det hele tatt, endre på argumentene den får inn, og så videre.
 
 ### Et enkelt eksempel 
 
-    >>> def foo(fn):
-    ...     print "inne i dekoratoren"
-    ...     def ny_fn():
-    ...         print "starter wrapper-funksjonen"
-    ...         fn()
-    ...         print "slutter wrapper-funksjonen"
-    ...     return ny_fn
-    ... 
-    >>> @foo
-    ... def bar():
-    ...     print "i den dekorerte funksjon"
-    ... 
-    inne i dekoratoren
-    >>> bar()
-    starter wrapper-funksjonen
-    i den dekorerte funksjon
-    slutter wrapper-funksjonen
+La oss ta for oss et enkelt eksempel for å se hva som foregår.
 
-For å dekorere funksjoner med ulikt antall argumenter bruker vi * og **.
+    >>> def dekorator(fn):
+    ...     print "DEKORERER"
+    ...     def wrapper():
+    ...         print "STARTER WRAPPER"
+    ...         fn()
+    ...         print "SLUTTER WRAPPER"
+    ...     return wrapper
+    ... 
+    >>> @dekorator
+    ... def test():
+    ...     print "TEST"
+    ... 
+    DEKORERER
+    >>> test()
+    STARTER WRAPPER
+    TEST
+    SLUTTER WRAPPER
+
+Som vi ser blir `dekorator()` kalt umiddelbart etter definisjonen av `test()`.
+Dette gjøres av python for å få laget en ny funksjon som erstatter `test` -- i dette tilfellet `wrapper` som ble definert inne i dekoratoren.
+Når vi så kaller `test()` ser vi at vi i virkeligheten kaller `wrapper`.
 
 ### Eksempel: Dekorator som teller antall argumenter en funksjon får inn:
 
-    >>> def count_args(fn):
-    ...     def wrapper_fn(*args, **kwargs):
-    ...         antall = len(args) + len(kwargs)
-    ...         print "fikk inn %d argumenter" % antall
-    ...         return fn(*args, **kwargs)
-    ...     return wrapper_fn
-    ... 
-    >>> @count_args
+Vi fortsetter med et litt mer reelt eksempel; en dekorator som printer antall argumenter en hvilken som helst dekorert funksjon får inn.
+
+For å kunne dekorere alle typer funksjoner, med ulike antall argumenter, må vi passe på at også funksjonen dekoratoren returerer håndterer dette.
+Det løser vi ved å la `wrapper` ta variabelt antall argumenter ved hjelp av `*args` og `**kwargs`.
+
+    def tell_argumenter(fn):
+        def wrapper(*args, **kwargs):
+            antall = len(args) + len(kwargs)
+            print "fikk inn %d argumenter" % antall
+            return fn(*args, **kwargs)
+        return wrapper
+    
+`wrapper` gjør ellers ikke noe mer magisk enn å summere antall argumenter, printe dette, og kalle videre til den dekorerte funksjonen.
+Legg også merke til at vi returerer resultatet fra `fn()`, slik at den dekorerte funksjonen beholder returverdien den ellers ville hatt.
+
+For å teste dekoratoren lager vi en funksjon som tar inn variabelt antall argumenter, og kaller denne.
+
+    >>> @tell_argumenter
     ... def foo(*args, **kwargs):
     ...     pass
     ... 
@@ -238,18 +269,88 @@ For å dekorere funksjoner med ulikt antall argumenter bruker vi * og **.
     >>> foo(*range(1000000))
     fikk inn 1000000 argumenter
 
-Det fungerer også fint å stacke dekoratorer på hverandre.
+### Stacking av dekoratorer
+
+Vi er heller ikke begrenset til å bruke en dekorator per funksjon.
+Det fungerer fint å stacke dekoratorer på hverandre som følger.
 
     @dekorator1
     @dekorator2
     def funksjon():
         pass
     
-Blir det samme som:
+På samme måte som ved én dekorator blir dette omgjort til funksjonskall av python.
+Dekoratorene evalueres slik at de nederste dekorator-funksjonene kalles først.
+Eksempelet over kan dermed skrives om på denne måten:
 
     def funksjon():
         pass
     funksjon = dekorator1(dekorator2(funksjon))
+
+### Flere eksempler
+
+Vi fortsetter med noen flere eksempler, for å vise forskjellige bruksområder der dekoratorer kan være passende.
+
+#### `@ignore`
+
+Dekoratorer som `@ignore` kjenner vi typisk fra testrammeverk, og brukes gjerne til å fortelle rammeverket at en test ikke skal kjøres.
+Her er en variant som fører til at den dekorerte funksjonen ikke gjør noen verdens ting.
+
+    def ignore(fn):
+        def wrapper(*args, **kwargs):
+            pass
+        return wrapper
+
+
+#### `@deprecated`
+
+En annen dekorator som mange gjerne kjenner, for eksempel som annotasjon i Java, er `@deprecated`.
+Denne er ment for å informere utviklere om at de bruker gamle utdaterte funksjoner, og skriver ut en advarsel om dette.
+
+    def deprecated(fn):
+        def wrapper(*args, **kwargs):
+            print "Warning: '%s' is deprecated!" % fn.__name__
+            return fn(*args, **kwargs)
+        return wrapper
+
+#### `@timed`
+
+Ofte, spesielt under utvikling, kan man være interessert i å finne ut hvor lang tid det tar å utføre et funksjonskall.
+I slike tilfeller kan en dekorator som `@timed` være grei å ha.
+
+    from time import time
+
+    def timed(fn):
+        def wrapper(*args, **kwargs):
+            start = time()
+            resultat = fn(*args, **kwargs)
+            print "brukte %f sekunder" % (time() - start)
+            return resultat
+        return wrapper
+
+#### `@memoize`
+
+En annen mulig applikasjon av dekoratorer er for å cache returverdier fra funksjoner.
+Slik lagring og gjennbruk av delløsninger kalles gjerne *memoisering*, og kan drastisk redusere kjøretid i mange tilfeller.
+
+La oss ta utgangspunkt i den følgende implementasjonen av fibonacci.
+
+    def fib(a):
+        if a in (0,1): return a
+        return fib(a-1) + fib(a-2)
+
+Dette er åpenbart en veldig naiv løsning, med antall rekursive kall til `fib` økende eksponensielt med *n*.
+Hvis vi dekorerer `fib` med følgende dekroator, vil i stedet antall `fib`-kal kun øke linjært.
+
+    def memoize(fn):
+        cache = {}
+        def wrapper(arg):
+            if arg in cache:
+                return cache[arg]
+            else:
+                cache[arg] = fn(arg)
+                return cache[arg]
+        return wrapper
 
 ### Wraps
 
@@ -278,10 +379,10 @@ Dette kan vi passende nok løse ved hjelp av enda en dekorator!
     >>> 
     >>> def yay_dekorator(fn):
     ...     @wraps(fn)
-    ...     def ny_fn(*args, **kwargs):
+    ...     def wrapper(*args, **kwargs):
     ...         # noe artig her
     ...         return fn(*args, **kwargs)
-    ...     return ny_fn
+    ...     return wrapper
     ... 
     >>> @yay_dekorator
     ... def foo():
@@ -293,7 +394,9 @@ Dette kan vi passende nok løse ved hjelp av enda en dekorator!
     >>> foo.__doc__
     foo sin docstring
 
-Vi kan også lage dekoratorer som tar inn parametere.
+### Dekoratorer med input
+
+Det er også mulig å lage dekoratorer som tar inn argumenter.
 
     >>> def gjenta(ganger):
     ...     def generert_dekorator(fn):
@@ -318,82 +421,17 @@ Her er `gjenta` egentlig en funksjon som genererer dekoratorer. `gjenta(4)` lage
     >>> spam()
     ['spam', 'spam', 'spam', 'spam']
 
-### Oppgaver
-
-1. Lag en `@ignore` decorator som gjør at kall til den dekorerte funksjonen ikke lenger gjør noenting.
-1. Lag en dekorator `@timed` som tar tiden på den dekorerte funksjonen. 
-1. Lag dekoratoren `@deprecated` som skriver ut en advarsel hvis noen bruker den dekorerte funksjonern. Bonus hvis du klarer å inkludere navnet på funksjonen i advarselen.
-1. Gitt implementasjonen av fibonacci under, lag dekoratoren `@memoize` som lagrer og gjenbruker delløsningene. Regn så ut `fib(100)`.
-
-Slik finner du tidspunkt i Python:
-
-
-    from time import time
-    tidspunkt = time()
-
-Implementasjon av fibonacci:
-
-    @memoize
-    def fib(a):
-        if a in (0,1): return a
-        return fib(a-1) + fib(a-2)
-
-### Løsninger
-
-Lag en `@ignore` decorator som gjør at kall til den dekorerte funksjonen ikke lenger gjør noenting.
-
-    def ignore(fn):
-        @wraps(fn)
-        def wrapper(*args, **kwargs):
-            pass
-        return wrapper
-
-
-Lag en dekorator `@timed` som tar tiden på den dekorerte funksjonen. 
-
-    from time import time
-
-    def timed(fn):
-        @wraps(fn)
-        def wrapper(*args, **kwargs):
-            start = time()
-            resultat = fn(*args, **kwargs)
-            print "brukte %f sekunder" % (time() - start)
-            return resultat
-        return wrapper
-
-Lag dekoratoren `@deprecated` som skriver ut en advarsel hvis noen bruker den dekorerte funksjonern. Bonus hvis du klarer å inkludere navnet på funksjonen i advarselen.
-
-    def deprecated(fn):
-        @wraps(fn)
-        def wrapper(*args, **kwargs):
-            print "Warning: '%s' is deprecated!" % fn.__name__
-            return fn(*args, **kwargs)
-        return wrapper
-
-Gitt implementasjonen av fibonacci under, lag dekoratoren `@memoize` som lagrer og gjenbruker delløsningene. Regn så ut `fib(100)`.
-
-    def memoize(fn):
-        cache = {}
-        @wraps(fn)
-        def wrapper(arg):
-            if arg in cache:
-                return cache[arg]
-            else:
-                cache[arg] = fn(arg)
-                return cache[arg]
-        return wrapper
-
 ## Oppsummering
 
-- *Funksjoner* er første-klasses i Python, og kan derfor:
+- *Funksjoner* er førsteklasses i Python, og kan derfor:
+  - Defineres inne i andre funksjoner.
   - Brukes som argumenter og returverdier fra andre funksjoner.
   - Tilordnes variabler.
   - Lagres i datastrukturer.
 - *Lambdaer* er enlinjes funksjoner uten navn.
 - *Dekoratorer* lar oss endre funksjonalitet på eksisterende funksjoner uten å endre dem direkte.
   - Dekoratorene erstatter den dekorerte funksjonen med en ny funksjon.
-  - I praksis bare hendig syntax for å drive med høyere ordens programmering.
+  - I praksis bare hendig syntax for å benytte høyere ordens funksjoner.
 
 ---
 
