@@ -87,7 +87,12 @@ En funksjon i Python kan...
 
 ## Lambda-funksjoner
 
-Lambdaer er anonyme én-linjes funksjoner som består av en (valgfri) liste med parametere og ett uttrykk som evalueres og returneres.
+En lambda er en anonym funksjon definert med en konsis syntaks.
+Lambda-funksjoner er mer begrensede enn funksjoner definert ved hjelp av `def`, men kan deklareres steder hvor det ikke er mulig å opprette slike vanlige funksjoner.
+Begrensningene består i at lambdaer ikke kan inneholde statements, og ikke kan spenne over mer enn én linje.
+
+Lambdaer tar inn en (valgfri) liste med parametere, som brukes i uttrykket selve funksjonen består av.
+Når lambda-uttrykket er evaluert returneres resultatet implisitt fra funksjonen.
 
 Syntax: 
 
