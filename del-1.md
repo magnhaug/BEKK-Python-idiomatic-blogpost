@@ -14,7 +14,7 @@ Bloggpostene er basert på [del 2](http://magnhaug.github.com/BEKK-Python-Kurs/s
 
 ## Hva er Pythonisk kode?
 
-Pythonisk kode er kode som bruker vanlige idiomer i Python på en god måte, i stedet for å implementere koden ved hjelp av konsepter vanligere i andre språk.
+Pythonisk kode er kode som bruker vanlige idiomer i Python på en god måte, i stedet for å implementere koden ved hjelp av konsepter og teknikker som er vanligere i andre språk.
 
 Dette kan illustreres med et enkelt eksempel hentet fra Pythons [offesielle ordliste](http://docs.python.org/glossary.html#term-pythonic).
 I mange språk er det vanlig å iterere over elementer i lister ved hjelp av en eksplisitt indeks og en for-løkke.
@@ -74,7 +74,7 @@ Vi ønsker kode som er så enkel å forstå at den blir vakker.
 Dette oppnår vi i Python ved å kjenne språket, og bruke de konstruktene som tilbys på riktig måte.
 Vil du lese mer, inneholder [denne stackoverflow-posten](http://stackoverflow.com/questions/228181/the-zen-of-python) diskusjoner og beskrivelser av hva som menes med mange uttrykkene i Zen of Python.
 
-La oss gå videre til å se på noen av de konseptene vi mener er viktige å kjenne for å skrive god pythonisk kode.
+La oss gå videre til å se på noen utvalgte konsepter vi mener er viktige å kjenne for å skrive god pythonisk kode.
 
 ## TODO
 
