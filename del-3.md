@@ -1,41 +1,87 @@
 # Idiomatisk Python - del 3 av 3
 
-TODO: introduksjon.
+I denne siste delen av vår serie med bloggposter om *idiomatisk Python* ser vi nærmere på bruk av funksjoner i Python.
+Vi skal se at funksjoner er mer kraftfulle i Python enn i mange andre objektorientererte språk, som for eksempel Java.
+Vi tar også en titt på Pythons anonyme funksjoner, *lambdaer*.
+Til sist introduseres *dekoratorer*, en syntaks som legger til rette for å bruke funksjoner til å modifisere andre funksjoners oppførsel.
 
 ## Funksjoner
 
-Funksjoner i python er *førsteklasses*, og vi kan derfor gjøre mer med dem enn vi er vant med fra Java.
-At funksjonene er førsteklasses vil si at vi kan...
+I Python har man stor frihet i hvordan man lager og bruker funksjoner.
+Dette kommer av at funksjoner er *førsteklasses* verdier i Python, noe som vil si at funksjoner kan behandles på samme måte som data.
 
-1. sende dem inn som argumenter til andre funksjoner
-1. returnere dem fra funksjoner
-1. tilordne dem til variabler
-1. lagre dem i datastrukturer
+En konsekvens av dette er at vi har muligheten til å definere funksjoner de samme stedene vi tilordner variabler.
+Funksjoner kan deklareres på toppnivå, som klasse-metoder, og til og med inne i andre funksjoner.
+La oss se et par eksempler.
 
-Vi har også større frihet i hvor vi kan definere funksjoner -- for eksempel inne i andre funksjoner.
+    def funksjon():
+        """En helt vanlig funksjon."""
+        pass
 
-Eksempel på hva man kan gjøre med funksjoner i Python
+    def ytre():
+        def indre():
+            """Funksjon definert inne i en annen funksjon."""
+            pass
 
-    >>> def n_doble(n): 
-    ...     def fn(a):         # Definerer funksjon inne i en annen funksjon
-    ...         return n*a
-    ...     return fn          # Returnerer en funksjon
+    class Foo:
+        def bar(self):
+            """Metode i en klasse. Kalles som Foo().bar()."""
+            pass
+
+Siden funksjoner kan behandles som vanlige dataelement kan vi også gi dem nye navn ved å tilordne dem til variabler.
+Eksempelet under lager et alias til Pythons innebygde `len`-funksjon.
+
+    >>> listelengde = len
+    >>> listelengde([1,2,3])
+    3
+
+Ettersom funksjoner kan definers inne i andre funksjoner, og kan tilordnes navngitte variabler, er det kanskje ikke så overaskende at de også kan brukes som argumenter og returverdier.
+Dette gjøres på lik linje med alt annet som sendes inn og ut av funksjoner.
+Får en en funksjon som input til en annen funksjon, er dette altså bare et argument som tilfeldigvis kan kalles.
+
+    >>> def foo():
+    ...     print "HAI from foo, kthxbye"
     ... 
-    >>> dobling_funksjoner = {
-    ... "to": n_doble(2),      # Lagrer funksjoner i en dictionary
-    ... "tre": n_doble(3),
-    ... "fire": n_doble(4),
-    ... "hundre": n_doble(100)
+    >>> def bar(fn):
+    ...     fn()
+    ... 
+    >>> bar(foo)
+    HAI from foo, kthxbye
+
+På tilsvarende måte er funksjoner som returneres en vanlig retur av et navn som tilfeldigvis tilhører en funksjon.
+
+    >>> def bar():
+    ...     def foo():
+    ...             print "Greetings from foo"
+    ...     return foo
+    ... 
+    >>> fn = bar()
+    >>> fn()
+    Greetings from foo
+
+En siste egenskap med funksjoner er at de, som annen data, kan lagres som del av datastrukturer.
+Eksempelet under viser en dictionary med funksjoner som verdier.
+
+    >>> def spam(n):
+    ...     return "spam" * n
+    ... 
+    >>> data = {
+    ...     'lag_spam': spam,
+    ...     'lag_liste': range
     ... }
-    >>> 
-    >>> firedoble = dobling_funksjoner["fire"] # Tilordner funksjonen til en variabel
-    >>> 
-    >>> def kall(fn, *args):   # Tar inn en funksjon som parameter
-    ...     return fn(*args)
-    ... 
-    >>> kall(firedoble, 3)     # Sender funksjon som argument
-    12
+    >>> data['lag_liste']
+    <built-in function range>
+    >>> data['lag_spam'](4)
+    'spamspamspamspam'
 
+La oss oppsummere egenskapene til *førsteklasses* funksjoner. 
+En funksjon i Python kan...
+
+1. defineres de fleste steder der en kan tilordne variabler, også inne i andre funksjoner.
+1. sendes som argumenter til andre funksjoner.
+1. brukes som returverdier fra andre funksjoner.
+1. tilordnes variabler etter at den er definert.
+1. lagres i datastrukturerer.
 
 ## Lambda-funksjoner
 
