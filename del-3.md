@@ -179,7 +179,7 @@ Dekoratorer kan for mange være ganske vanskelige å bli helt komfortable med, s
 Dette gjelder kanskje spesielt når vi kommer til dekoratorer som tar argumenter.
 Det er likevel vel verdt å bruke tiden det tar å opparbeide forståelsen, ettersom det gir god innsikt i hvordan høyere ordens funksjoner fungerer, og dekoratorer i seg selv kan være et veldig nyttig verktøy.
 
-Eksempler på praktisk bruk av dekoratorer finner en mange steder, slik som i webrammeverk som [flask](http://flask.pocoo.org/docs/patterns/viewdecorators/) og [django](https://docs.djangoproject.com/en/dev/topics/http/decorators/), testrammeverket [unittest](http://docs.python.org/library/unittest.html#skipping-tests-and-expected-failures), eller som [innebygde funksjoner i språket](http://docs.python.org/library/functions.html#property).
+Eksempler på praktisk bruk av dekoratorer finner en mange steder, slik som i webrammeverk som [Flask](http://flask.pocoo.org/docs/patterns/viewdecorators/) og [Django](https://docs.djangoproject.com/en/dev/topics/http/decorators/), testrammeverket [unittest](http://docs.python.org/library/unittest.html#skipping-tests-and-expected-failures), eller som [innebygde funksjoner i språket](http://docs.python.org/library/functions.html#property).
 
 ### Syntaks
 
@@ -345,7 +345,7 @@ La oss ta utgangspunkt i den følgende implementasjonen av fibonacci.
         return fib(a-1) + fib(a-2)
 
 Dette er åpenbart en veldig naiv løsning, med antall rekursive kall til `fib` økende eksponensielt med *n*.
-Hvis vi dekorerer `fib` med følgende dekroator, vil i stedet antall `fib`-kal kun øke linjært.
+Hvis vi dekorerer `fib` med følgende dekroator, vil i stedet antall `fib`-kall kun øke linjært.
 
     def memoize(fn):
         cache = {}
