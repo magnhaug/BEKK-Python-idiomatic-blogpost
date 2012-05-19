@@ -113,11 +113,35 @@ I stedet for å forsøke å forhindre alle feil, håndteres de dersom de skulle 
 Duck typing er altså et eksempel på EAFP.
 Det regnes generelt som mer pythonisk å følge EAFP, men ikke glem at det viktigste alltid er at koden blir lesbar og forståelig.
 
-## The `with` statement
+## `with`-uttrykk
 
-Noe om ting som støtter with: filer, etc.
+Et veldig vanlig mønster en ofte møter i mange kontekster er en variasjon over følgende.
 
-Noe om hvordan implementere `__enter__` og `__exit__` selv.
+    # noe settes opp
+    try:
+        # utfør operasjon
+    except:
+        # noe rives ned
+        
+Det som settes opp og rives ned kan for eksempel være en fil eller databasetilkobling som åpnes og lukkes.
+I stedet for at man skal tvinges til å gjøre dette overalt i koden, støtter mange av Pythons innebygde klasser et [with-uttrykk](http://docs.python.org/reference/compound_stmts.html#with).
+
+Et eksempel er [fil-objekter](http://docs.python.org/library/stdtypes.html#file-objects), som lar oss skrive
+
+    with open(filnavn) as f:
+        # utfør operasjon med f
+
+i stedet for
+
+    f = open(filnavn)
+    try:
+        # utfør operasjon med f
+    finally:
+        f.close()
+
+Det er også mulig å lage sine egne klasser som støtter `with`.
+Dette gjøres ved å la klassen implementere to metoder, `__enter__` og `__exit__`.
+For mer informasjon om hvordan dette fungerer, se [denne bloggposten](http://effbot.org/zone/python-with-statement.htm).
 
 ## Gettere og settere
 
