@@ -133,9 +133,29 @@ Les heller videre på  [denne fabelaktige guiden](http://www.rafekettler.com/mag
 
 ## Funksjoner er objekter
 
-TODO
+I Python er all data representert som [objekter](http://docs.python.org/reference/datamodel.html#objects).
+Dette gjelder ikke bare vanlige datastrukturer som tall, strenger og lister, men også slikt som funksjoner og generatorer.
 
-    __call__()
+Som tidligere nevnt bryr vi oss skjeldent om hvilke typer vi jobber med i pythonisk kode, så lenge de har de egenskapene vi trenger.
+Den egenskapen vi trenger fra noe vi vil behandle som en funksjon er at den *kan kalles*.
+
+Python inkulderer flere typer objekter med denne egenskapen.
+Dette gjelder naturligvis både brukerdefinerte og innebygde funksjoner og metoder, men også iteratorer og generatorer (som vi kommer nærmere tilbake til i del 2 av denne blogg-serien).
+rKlasser kan også kalles, noe som gjerne fører til at en instans av klassen returneres.
+
+I tillegg til dette kan noen ganger også instanser kalles som om de var funksjoner.
+Dette kan vi oppnå ved å benytte en av de *magiske metodene* diskutert over.
+Hvis en klasse implementerer en metode som heter `__call__`, så kan instanser av denne klassen kalles på samme måte som funksjoner.
+
+    >>> class Foo():
+    ...     def __call__(self):
+    ...         return "bar"
+    ...
+    >>> foo = Foo()
+    >>> foo
+    <__main__.Foo instance at 0xb72b9e2c>
+    >>> foo()
+    'bar'
 
 ## `with`-uttrykk
 
