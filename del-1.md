@@ -10,7 +10,7 @@ I denne delen tar vi for oss begrepet *Pythonisk kode* og diskuterer en rekke ko
 Del 2 kommer til å ta for seg sekvenser og lister, og gå igjennom hvordan Python legger opp til å arbeide med slike på en god måte.
 I den siste posten skal vi ta en nærmere titt på funksjoner i Python, og hva disse kan brukes til.
 
-Bloggpostene er basert på [del 2](http://magnhaug.github.com/BEKK-Python-Kurs/slides/del2.html#1) av BEKKs [kursserie om Python](https://github.com/bekkopen/BEKK-Python-Kurs) på NTNU, og er derfor beregnet på lesere som kjenner grunnleggende Python uten å være godt kjent med språket.
+Bloggpostene er delvis basert på [del 2](http://magnhaug.github.com/BEKK-Python-Kurs/slides/del2.html#1) av BEKKs [kursserie om Python](https://github.com/bekkopen/BEKK-Python-Kurs) på NTNU, og er derfor beregnet på lesere som kjenner grunnleggende Python uten å være godt kjent med språket.
 
 ## Hva er Pythonisk kode?
 
@@ -142,7 +142,7 @@ i stedet for
         f.close()
 
 Det er også mulig å lage sine egne klasser som støtter `with`.
-Dette gjøres ved å la klassen implementere to metoder, `__enter__` og `__exit__`.
+Dette gjøres ved å la klassen implementere metodene [`__enter__` og `__exit__`](http://docs.python.org/reference/datamodel.html#with-statement-context-managers) som begge er eksempler på *magiske metoder* beskrevet over.
 For mer informasjon om hvordan dette fungerer, se [denne bloggposten](http://effbot.org/zone/python-with-statement.htm).
 
 ## Gettere og settere
