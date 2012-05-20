@@ -50,7 +50,7 @@ Et argument som er en funksjon er ikke mer spesielle enn andre argumenter, borts
     >>> bar(foo)
     HAI from foo, kthxbye
 
-På tilsvarende måte er funksjoner som returneres en vanlig retur av et navn som tilfeldigvis tilhører en funksjon.
+På tilsvarende måte er retur av en funksjon en vanlig retur, der navnet som returneres tilfeldigvis tilhører en funksjon.
 
     >>> def bar():
     ...     def foo():
@@ -131,9 +131,9 @@ TODO: noe om map, reduce, filter
 
 En dekorator lar oss endre hvordan en funksjon oppfører seg, uten at vi er nødt til å gjøre endringer i selve funksjonen.
 
-Dekoratorer kan for mange være ganske vanskelige å bli helt komfortable med, selv om de ikke bygger på mer enn det vi allerede har vært igjennom.
-Dette gjelder kanskje spesielt når vi kommer til dekoratorer som tar argumenter.
-Det er likevel vel verdt å bruke tiden det tar å opparbeide forståelsen, ettersom det gir god innsikt i hvordan høyere ordens funksjoner fungerer, og dekoratorer i seg selv kan være et veldig nyttig verktøy.
+Dekoratorer er et konsept det for mange kan være vanskelig å bli helt komfortabel med, selv om det ikke bygger på mer enn det vi allerede har vært igjennom av teori om funksjoner.
+Vanskelighetene oppstår kanskje spesielt når vi kommer til dekoratorer som tar argumenter.
+Det er likevel vel verdt å bruke tiden det tar å opparbeide forståelsen, ettersom det gir god innsikt i hvordan høyere ordens funksjoner fungerer, og fordi dekoratorer i seg selv kan være et veldig nyttig verktøy.
 
 Eksempler på praktisk bruk av dekoratorer finner en mange steder, slik som i webrammeverk som [Flask](http://flask.pocoo.org/docs/patterns/viewdecorators/) og [Django](https://docs.djangoproject.com/en/dev/topics/http/decorators/), testrammeverket [unittest](http://docs.python.org/library/unittest.html#skipping-tests-and-expected-failures), eller som [innebygde funksjoner i språket](http://docs.python.org/library/functions.html#property).
 
