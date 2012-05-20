@@ -115,6 +115,28 @@ I stedet for å forsøke å forhindre alle feil, håndteres de dersom de skulle 
 Duck typing er altså et eksempel på EAFP.
 Det regnes generelt som mer pythonisk å følge EAFP, men ikke glem at det viktigste alltid er at koden blir lesbar og forståelig.
 
+## Magiske metoder
+
+Magiske metoder, eller [special method names](http://docs.python.org/reference/datamodel.html#specialnames) som de heter i Pythons offesielle dokumentasjon, er et kraftfult verktøy som det er vel verdt å lære å bruke. 
+Disse metodene lar oss implementere egendefinert oppførsel for mange av Pythons innebygde operasjoner.
+
+Den første "magiske" metoden nye Python-programmerer blir introdusert for er gjerne `__init__`, som lar oss definere initialiseringen av et objekt.
+I tillegg finnes `__new__` og `__del__` som henholdsvis instansierer objektet og kalles når objektet slettes ved garbage collection.
+
+Den virkelige nytten til de magiske metodene ligger likevel i at de lar oss lage egendefinerte objekter oppføre seg som innebygde typer.
+Et vanlig eksempel er sammenlikning av to objekter.
+Ved å implementere én enkelt metode, `__cmp__(self, other)`, støtter klassen sammenlikning på alle de vanlige måtene slik som `==`, `!=`, `<` og `>`.
+
+På samme måte finnes det metoder for å overlaste aritmetiske operasjoner, typekonvertering, aksessering av atributter, behandling objekter som sekvenser, og mer.
+Listen over tilgjengelige metoder er langt mer omfattende enn vi kan dekke i denne bloggposten.
+Les heller videre på  [denne fabelaktige guiden](http://www.rafekettler.com/magicmethods.html) for å lære om de mulighetene som finnes.
+
+## Funksjoner er objekter
+
+TODO
+
+    __call__()
+
 ## `with`-uttrykk
 
 Et veldig vanlig mønster en ofte møter i mange kontekster er en variasjon over følgende.
