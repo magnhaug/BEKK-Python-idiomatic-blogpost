@@ -118,14 +118,26 @@ Denne kan skrives om til en lambda, på følgende måte.
 ### Bruk-og-kast-funksjoner
 
 Styrken til lambdaer ligger i nettopp det at de er anonyme.
-Dette er bruk-og-kast-funksjoner som kan opprettes der de trengs, gjerne som del av funksjonskall eller liknende.
+Siden de kan opprettes der de skal brukes, er de veldig hendige som bruk-og-kast-funksjoner.
 
-TODO: noe om map, reduce, filter
+Dette er spesielt aktuelt når vi kaller funksjoner som tar inn funksjoner som argumenter.
+Det er flere slike innebygget i språket, hvorav [`map`](http://docs.python.org/library/functions.html#map), [`reduce`](http://docs.python.org/library/functions.html#reduce), og [`filter`](http://docs.python.org/library/functions.html#filter) nok er de som er mest brukte.
 
-    >>> map(lambda num : num * 2, range(10))
-    [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+For å ta et forholdsvis enkelt eksempel, la oss si vi ønsker å bruke `filter` til å finne partallene i en liste.
+Uten bruk av lambdaer må vi først definere en funksjon som forteller oss om elementet i lista er partall, og sende denne som første argument til `filter`.
 
-    >>> lambda *args: sum(args)/len(args)
+    def er_partall(x):
+        return x % 2 == 0
+
+    partall = filter(er_partall, [4, 8, 15, 16, 23, 42])
+
+Med en lambda definerer vi kun funksjonen akkurat der den trengs.
+
+    partall = filter(lambda x: x % 2 == 0, [4, 8, 15, 16, 23, 42])
+
+Brukt riktig kan altså lambdaer ofte hjelpe oss å skrive kode som er både kortere og mer lesbar.
+Det er imidlertid viktig å huske på at det er nettopp dette som er det viktigste.
+Pythonisk kode bruker lambdaer kun der det passer, og går ikke av veien for å definere funksjoner eksplisitt hvis det øker lesbarheten.
 
 ## Dekoratorer
 
