@@ -169,12 +169,14 @@ For mer informasjon om hvordan dette fungerer, se [denne bloggposten](http://eff
 
 ## Gettere og settere
 
-Klasser med private felter, som eksponeres ved hjelp av getter- og setter-metoder er et vanlig pattern i mange språk.
-Dette er *ikke* pythonisk!
+Klasser med private felter, som eksponeres ved hjelp av enkle getter- og setter-metoder er et vanlig pattern i mange språk.
+Dette anses *ikke* for å være pythonisk!
 
 Joda, det er viktig med enkapsulering, men Python byr på et konstrukt som løser dette på en langt mer elegant måte.
 
-TODO: beskriv `@property`
+TODO: beskriv `@property` 
+[doc](http://docs.python.org/library/functions.html#property),
+[google style guide](http://google-styleguide.googlecode.com/svn/trunk/pyguide.html?showone=Properties#Properties)
 
 ## TODO: Flere ting som kan nevnes?
 
@@ -185,6 +187,7 @@ TODO: beskriv `@property`
 - strengformatering
 - script-kode i moduler:
   - `if __name__ == '__main__'`
+- `__future__`
 
 ---
 
