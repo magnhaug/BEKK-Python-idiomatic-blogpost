@@ -154,16 +154,15 @@ Joda, det er viktig med enkapsulering, men Python byr på et konstrukt som løse
 
 TODO: beskriv `@property`
 
-## Flere ting?
+## TODO: Flere ting som kan nevnes?
 
-- dictionary get, setdefault, og defaultdict
+- conditional assignments: 
+  - `x = 3 if (y == 1) else 2` → *x er 3 hvis y er 1, eller er den 2*
+- forskjellige collections (i tillegg til `dict`, `list` og `set`): 
+  - `namedtuple`, `deque`, `Counter`, `OrderedDict`, `defaultdict`
 - strengformatering
-- key functions
-- python moduler og pakker
-- script-kode i moduler
-
-        if __name__ == '__main__':
-            # script code here
+- script-kode i moduler:
+  - `if __name__ == '__main__'`
 
 ---
 
