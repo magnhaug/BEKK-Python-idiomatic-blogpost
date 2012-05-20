@@ -74,10 +74,10 @@ For å oppsummere, det aller viktigste er at kode er enkel og uttrykksfull.
 Vi ønsker kode som er så enkel å forstå at den blir vakker.
 
 > *Programs must be written for people to read, and only incidentally for machines to execute.*  
-> —Abelson & Sussman, Structure and Interpretation of Computer Programs
+> — Abelson & Sussman, Structure and Interpretation of Computer Programs
 
 Dette oppnår vi altså i Python ved å kjenne språket, og bruke de konstruktene som tilbys på riktig måte.
-Vil du lese mer, inneholder [denne stackoverflow-posten](http://stackoverflow.com/questions/228181/the-zen-of-python) diskusjoner og beskrivelser av hva som menes med mange uttrykkene i Zen of Python.
+Vil du lese mer inneholder [denne stackoverflow-posten](http://stackoverflow.com/questions/228181/the-zen-of-python) gode diskusjoner og beskrivelser, og du kan også ta en titt på [eksempler på alle uttrykkene](http://artifex.org/~hblanks/talks/2011/pep20_by_example.html) fra Zen of Python.
 
 La oss gå videre til å se på noen utvalgte konsepter vi mener er viktige å kjenne for å skrive god pythonisk kode.
 
@@ -105,6 +105,8 @@ Implementert på denne måten kan `fil` godt være en fysisk fil, en socket, ell
 Navnet *duck typing* stammer fra en [diskusjon i pythons mailinglister](http://groups.google.com/group/comp.lang.python/msg/e230ca916be58835):
 
 > *don't check whether it IS-a duck: check whether it QUACKS-like-a duck, WALKS-like-a duck, etc, etc, depending on exactly what subset of duck-like behaviour you need*
+
+### EAFP over LBYL
 
 Et par akronymer som gjerne trekkes frem i forbindelse med duck typing er [EAFP (Easier to Ask Forgivness than Permission)](http://docs.python.org/glossary.html#term-eafp) og [LBYL (Look Before You Leap)](http://docs.python.org/glossary.html#term-lbyl).
 EAFP dreier seg om å forsøke å gjennomføre det en ønsker, uten å på forhånd sjekke alle mulige ting som kan gå galt.
