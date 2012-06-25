@@ -394,6 +394,13 @@ Her er `gjenta` egentlig en funksjon som genererer dekoratorer. `gjenta(4)` lage
     >>> spam()
     ['spam', 'spam', 'spam', 'spam']
 
+### @property
+
+I del 1 av denne serien med bloggposter introduserte vi Pythons innebygde `property`-funksjon og gave et eksempel på bruk av denne som dekorator.
+La oss avslutte med en nærmere titt på `@property`.
+
+*TODO: beskriv `@property`.
+
 ## Oppsummering
 
 - *Funksjoner* er førsteklasses i Python, og kan derfor:

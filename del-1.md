@@ -141,7 +141,7 @@ Den egenskapen vi trenger fra noe vi vil behandle som en funksjon er at den *kan
 
 Python inkulderer flere typer objekter med denne egenskapen.
 Dette gjelder naturligvis både brukerdefinerte og innebygde funksjoner og metoder, men også iteratorer og generatorer (som vi kommer nærmere tilbake til i del 2 av denne blogg-serien).
-rKlasser kan også kalles, noe som gjerne fører til at en instans av klassen returneres.
+Klasser kan også kalles, noe som gjerne fører til at en instans av klassen returneres.
 
 I tillegg til dette kan noen ganger også instanser kalles som om de var funksjoner.
 Dette kan vi oppnå ved å benytte en av de *magiske metodene* diskutert over.
@@ -189,14 +189,81 @@ For mer informasjon om hvordan dette fungerer, se [denne bloggposten](http://eff
 
 ## Gettere og settere
 
-Klasser med private felter, som eksponeres ved hjelp av enkle getter- og setter-metoder er et vanlig pattern i mange språk.
+Klasser med private felter som eksponeres ved hjelp av enkle get- og set-metoder er et vanlig pattern i mange språk.
 Dette anses *ikke* for å være pythonisk!
+Joda, det er viktig med enkapsulering, men et lass med gettere og settere for alle tenkelige attributter er ikke nødvendig for å oppnå dette. 
+Som Phillip J. Eby uttrykker det i [Python Is Not Java](http://dirtsimple.org/2004/12/python-is-not-java.html):
 
-Joda, det er viktig med enkapsulering, men Python byr på et konstrukt som løser dette på en langt mer elegant måte.
+> *In Java, you have to use getters and setters because using public fields gives you no opportunity to go back and change your mind later to using getters and setters. So in Java, you might as well get the chore out of the way up front. In Python, this is silly, because you can start with a normal attribute and change your mind at any time, without affecting any clients of the class.*
 
-TODO: beskriv `@property` 
-[doc](http://docs.python.org/library/functions.html#property),
-[google style guide](http://google-styleguide.googlecode.com/svn/trunk/pyguide.html?showone=Properties#Properties)
+Gettere og settere kan være nyttige, men aldri før det er behov for dem.
+Så lenge alt vi trenger er å lese og skrive verdien til et enkelt attributt, bør vi nøye oss med nettopp dét.
+Skulle vi på et senere tidspunkt få behov for noe mer fancy kan vi benytte Pythons innebyggde [`property`-funksjon](http://docs.python.org/library/functions.html#property) til å erstatte attributtet med metodekall.
+
+La oss ta et eksempel. Vi har behov for å representere vinkler, og lager oss den enkleste tenklige klassen: `Vinkel` med attributtet `grader`.
+
+    class Vinkel:
+        def __init__(self, grader):
+            self.grader = grader
+
+Klassen benyttes som en kan forvente:
+
+    >>> v = Vinkel(90)
+    >>> print v.grader
+    90
+    >>> v.grader = 60
+    >>> print v.grader
+    60
+
+Alt er fryd og gammen helt til det plutselig blir bestemt at vinkler internt skal representeres som radianer. Vi har plutselig behov for at vinkelens grader aksesseres via metodekall; `property` to the rescue!
+
+    import math
+    
+    class Vinkel:
+        def __init__(self, grader):
+            self.grader= grader
+            
+        def set_grader(self, grader):
+            self.radianer = grader * (math.pi/180)
+            
+        def get_grader(self):
+            return self.radianer * (180/math.pi)
+            
+        grader = property(get_grader, set_grader)
+
+I koden over har vi definert metodene `get_grader` og `set_metoder` for å håndtere konverteringen til og fra radianer.
+Kallet til `property` forkler disse som vårt gode gamle `grader` attributt.
+Utenfra ser klassen derfor fullstendig lik ut:
+
+    >>> v = Vinkel(90)
+    >>> print v.grader
+    90
+    >>> v.grader = 60
+    >>> print v.grader
+    60
+
+`property`-funksjonen tar fire argumenter, der alle untatt det første er valgfritt: `fget`, `fset`, `fdel`, `doc`. 
+De tre første argumentene er funksjoner for å henholdsvis *lese*, *skrive*, og *slette* attributtet.
+Det siste argumentet er attributtets dokumentasjonstreng.
+
+Det er også mulig å benytte `property` som en såkalt *dekorator*, noe som lar oss skrive klassen vår om til følgende.
+
+    import math
+
+    class Vinkel:
+        def __init__(self, grader):
+            self.grader = grader
+            
+        @property
+        def grader(self):
+            return self.radianer * (180/math.pi)
+
+        @grader.setter
+        def grader(self, grader):
+            self.radianer = grader * (math.pi/180)
+
+I del 3 av denne serien med bloggposter kommer vi til å gå nærmere inn på hva dekoratorer er, hvordan disse fungerer, og hva de kan brukes til.
+Stay tuned!
 
 ## TODO: Flere ting som kan nevnes?
 
