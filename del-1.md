@@ -10,7 +10,7 @@ I denne delen tar vi for oss begrepet *Pythonisk kode* og diskuterer en rekke ko
 Del 2 kommer til å ta for seg sekvenser og lister, og gå igjennom hvordan Python legger opp til å arbeide med slike på en god måte.
 I den siste posten skal vi ta en nærmere titt på funksjoner i Python, og hva disse kan brukes til.
 
-Bloggpostene er delvis basert på [del 2](http://magnhaug.github.com/BEKK-Python-Kurs/slides/del2.html#1) av BEKKs [kursserie om Python](https://github.com/bekkopen/BEKK-Python-Kurs) på NTNU, og er derfor beregnet på lesere som kjenner grunnleggende Python uten å være godt kjent med språket.
+Bloggpostene er delvis basert på [del 2](http://magnhaug.github.com/BEKK-Python-Kurs/slides/del2.html#1) av BEKKs [kursserie om Python](https://github.com/bekkopen/BEKK-Python-Kurs) på NTNU, og er derfor beregnet på lesere som kjenner grunnleggende Python uten å nødvendigvis være veldig godt kjent med språket.
 
 ## Hva er Pythonisk kode?
 
@@ -303,7 +303,7 @@ class Vinkel:
         self.radianer = grader * (math.pi/180)
 ```
 
-I del 3 av denne serien med bloggposter kommer vi til å gå nærmere inn på hva dekoratorer er, hvordan disse fungerer, og hva de kan brukes til.
+Vi til å gå nærmere inn på hva dekoratorer er, hvordan disse fungerer, og hva de kan brukes til i del 3 av denne serien med bloggposter.
 Stay tuned!
 
 ## TODO: Flere ting som kan nevnes?
@@ -316,6 +316,16 @@ Stay tuned!
 - script-kode i moduler:
   - `if __name__ == '__main__'`
 - `__future__`
+
+## Oppsummering
+
+Vi har i denne bloggposten forsøkt å forklare hva vi mener med begrepet *idiomatisk python*.
+For å skrive god *pythonisk* kode er det viktig å kjenne språket og de verktøyene en har til rådighet.
+Ved å utnytte disse på en god måte kan en uttrykke koden slik at den blir så enkel og lettlest som overhodet mulig.
+
+Denne posten har tatt for seg enkelte konsepter som må kunne anses som idiomatiske for Python, slik som duck typing, magiske metoder, funksjoner som objekter, with-uttrykk, og properties.
+I to kommende bloggposter i denne serien vil vi gå nærmere inn på noen temaer som er sentrale når en arbeider i Python.
+Del 2 vil fokusere på bruk av sekvenser slik som lister, iteratorer, og generatorer, mens vi i del 3 tar en nærmere titt på bruk av funksjoner i Python.
 
 ---
 
