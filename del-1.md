@@ -11,10 +11,7 @@ men krever absolutt ikke at man har kodet mye i språket.
 
 ## Hva er Pythonisk kode?
 
-Pythonisk kode er kode som bruker vanlige idiomer i Python på en god måte, i stedet for å implementere koden ved hjelp av konsepter og teknikker som er vanligere i andre språk.
-
-Dette kan illustreres med et enkelt eksempel hentet fra Pythons [offisielle ordliste](http://docs.python.org/glossary.html#term-pythonic).
-I mange språk er det vanlig å iterere over elementer i lister ved hjelp av ei løkke og en eksplisitt indeks.
+I mange språk er det vanlig å iterere over elementer i lister ved hjelp av ei løkke og en eksplisitt indeks, som her i Java:
 
 ```java
 for (int i=0; i<food.length; i++) {
@@ -31,15 +28,15 @@ while i < len(food):
     i += 1
 ```
 
-I Python er det imidlertid unødvendig å involvere indekser for dette siden det er et vanlig idiom å iterere over alle elementene i en sekvens direkte.
+I Python er det imidlertid unødvendig å involvere indekser siden det er et vanlig idiom å iterere over alle elementene i en sekvens direkte:
 
 ```python
 for piece in food:
     print piece
 ```
 
-Vi ser at koden umiddelbart blir enklere og penere ved at vi kvitter oss med den forstyrrende indeksen.
-Dette er selvsagt et overforenklet eksempel, men illusterer godt essensen i hva som menes med *pythonisk* kode.
+Vi ser at koden umiddelbart blir enklere og penere når vi kvitter oss med den forstyrrende indeksen.
+Dette er selvsagt et forenklet eksempel, men illusterer essensen i hva som menes med *pythonisk* kode.
 Mens kode som *ikke* er pythonisk gjerne kjennetegnes ved at den virker tungvint eller unødig omfattende og ordrik for en erfaren Python-programmerer, vil pythonisk kode utnytte de verktøyene Python tilbyr på slik måte at den uttrykkes enklest mulig.
 
 Det er, for eksempel, pythonisk å utnytte mulighetene til Pythons datastrukturer på en ren og lesbar måte, eller å basere seg på duck typing i stedet for å eksplisitt sjekke typer før en utfører operasjoner.
