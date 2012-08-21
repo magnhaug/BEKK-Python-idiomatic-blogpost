@@ -288,13 +288,12 @@ class Vinkel:
 
 ## Oppsummering
 
-Vi har i denne bloggposten forsøkt å forklare hva vi mener med begrepet *idiomatisk python*.
 For å skrive god *pythonisk* kode er det viktig å kjenne språket og de verktøyene en har til rådighet.
-Ved å utnytte disse på en god måte kan en uttrykke koden slik at den blir så enkel og lettlest som overhodet mulig.
+Målet er rett og slett å skrive så enkel og lettlest kode som mulig.
 
-Denne posten har tatt for seg enkelte konsepter som må kunne anses som idiomatiske for Python, slik som duck typing, magiske metoder, funksjoner som objekter, with-uttrykk, og properties.
-I to kommende bloggposter i denne serien vil vi gå nærmere inn på noen temaer som er sentrale når en arbeider i Python.
-Del 2 vil fokusere på bruk av sekvenser slik som lister, iteratorer, og generatorer, mens vi i del 3 tar en nærmere titt på bruk av funksjoner i Python.
+Denne bloggposten har tatt for seg noen konsepter som er idiomatiske for Python, blant duck typing, magiske metoder og with-uttrykk.
+I to kommende bloggposter skal vi gå nærmere inn på noen temaer som er sentrale når en arbeider i Python.
+Del 2 vil fokusere på lister, iteratorer og generatorer, mens vi i del 3 tar en nærmere titt på bruk av funksjoner i Python.
 
 ---
 
