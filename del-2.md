@@ -29,7 +29,7 @@ Her itererer vi over de 100 første heltallene, og lagrer alle kvadrattall som e
 ```python
 >>> resultat = []
 >>> for i in range(100):
-...     if i**2%7 == 0:
+...     if i**2 % 7 == 0:
 ...         resultat.append(i**2)
 ... 
 >>> resultat
@@ -39,7 +39,7 @@ Her itererer vi over de 100 første heltallene, og lagrer alle kvadrattall som e
 Denne koden kan gjøres mye penere ved hjelp av list comprehensions:
 
 ```python
->> [i**2 for i in range(100) if i**7%5 == 0]
+>> [i**2 for i in range(100) if i**2 % 7 == 0]
 [0, 49, 196, 441, 784, 1225, 1764, 2401, 3136, 3969, 4900, 5929, 7056, 8281, 9604]
 ```
     
@@ -52,7 +52,7 @@ List comprehensions kan også gjøres med nestede for-løkker, ved å liste diss
 I eksempelet under lister vi opp alle permutasjoner av bokstavene x, y og z.
 
 ```python
->>> [a+b+c for a in "xyz" for b in "xyz" for c in "xyz"]
+>>> [a + b + c for a in "xyz" for b in "xyz" for c in "xyz"]
 ['xxx', 'xxy', 'xxz', 'xyx', 'xyy', 'xyz', 'xzx', 'xzy', 'xzz', 'yxx', 'yxy', 'yxz', 'yyx', 'yyy',
  'yyz', 'yzx', 'yzy', 'yzz', 'zxx', 'zxy', 'zxz', 'zyx', 'zyy', 'zyz', 'zzx', 'zzy', 'zzz']
 ```
@@ -68,9 +68,9 @@ Duck typing er tanken om at det det som betyr noe ikke er hvilken type noe har, 
 ### Nøstede list comprehensions
 
 I tillegg til å lage list comprehensions med nøstede for-løkker kan vi også lage nøstede list comprehensions.
-Dette gjør vi enkelt og greit ved å erstatte et uttrykk fra comprehension-uttryket med en ny list comprehension.
+Dette gjør vi enkelt og greit ved å erstatte et del-uttrykk fra det originale comprehension-uttryket med en ny list comprehension.
 
-Eksempelet under viser hvordan vi kan bruke dette til å generere gangetabllen for tallene fra 1 til 10 som en 2-dimensjonal liste.
+Eksempelet under viser hvordan vi kan bruke dette til å generere gangetabllen for tallene fra 1 til 10.
 
 ```python
 >>> from pprint import pprint
@@ -96,9 +96,9 @@ Fra Python 2.7 finnes det også tilsvarende comprehensions for set og dictionari
 For set comprehension er syntaksen helt tilsvarende list comprehension, med unntak av at firkantparentesene er byttet ut med krøllparenteser.
 
 ```python
->>> [i%3 for i in range(10)]
+>>> [i % 3 for i in range(10)]
 [0, 1, 2, 0, 1, 2, 0, 1, 2, 0]
->>> {i%3 for i in range(10)}
+>>> {i % 3 for i in range(10)}
 set([0, 1, 2])
 ```
 
@@ -249,7 +249,7 @@ Hva skjedde her?
 - Som skapt for input til metoder som arbeider på elementer enkeltvis. (Da kan vi også droppe et sett parenteser.)
 
 ```python
-sum(x for x in range(100000) if x%2 == 0)
+sum(x for x in range(100000) if x % 2 == 0)
 ```
 
 ### Ulemper
@@ -275,7 +275,7 @@ sum(x for x in range(100000) if x%2 == 0)
 Lag en list comprehension som lister opp alle partall under 20, og print dem
 
 ```python
->>> partall = [i for i in xrange(20) if i%2==0]
+>>> partall = [i for i in xrange(20) if i % 2==0]
 >>> for i in partall:
 ...   print i, 
 ... 
@@ -285,7 +285,7 @@ Lag en list comprehension som lister opp alle partall under 20, og print dem
 Lag et generator expression som gjør det samme. Print dem.
 
 ```python
->>> partall = (i for i in xrange(20) if i%2==0)
+>>> partall = (i for i in xrange(20) if i % 2==0)
 >>> for i in partall:
 ...   print i, 
 ... 
@@ -298,7 +298,7 @@ Lag en generator som lister opp ALLE partall.
 >>> def allepartall():
 ...     i = 0
 ...     while True:
-...         if i%2 == 0:
+...         if i % 2 == 0:
 ...             yield i
 ...         i += 1
 ```
@@ -307,7 +307,7 @@ Lag et generator expression som lister opp ALLE partall.
 
 ```python
 >>> from itertools import count
->>> allepartall = (i for i in count() if i%2 == 0)
+>>> allepartall = (i for i in count() if i % 2 == 0)
 ```
 
 Lag en generator som generer tall-sekvensen 1, -1, 2, -2, 3, -3, ...
