@@ -185,7 +185,7 @@ except:
     # noe rives ned
 ```
         
-Det som settes opp og rives ned kan for eksempel være en fil eller databasetilkobling som åpnes og lukkes. 
+Det som settes opp og rives ned kan for eksempel være en fil. En databasetilkobling som åpnes og lukkes, eller en databasetransaksjon som må committes eller rulles tilbake er et annet bruksområde for dette patternet.
 I stedet for at man skal tvinges til å gjøre dette overalt i koden, støtter mange av Pythons innebygde klasser et [with-uttrykk](http://docs.python.org/reference/compound_stmts.html#with).
 
 Et eksempel er [fil-objekter](http://docs.python.org/library/stdtypes.html#file-objects), som lar oss skrive
@@ -203,6 +203,15 @@ try:
     # utfør operasjon med f
 finally:
     f.close()
+```
+
+Dette kan være nyttig i alle situasjoner der man ønsker å behandle feilhåndtering mer sømløst.
+Et annet eksempel er låser:
+
+```python
+lock = threading.Lock()
+with lock:
+    # ikke-trådsikker kode..
 ```
 
 Det er også mulig å lage sine egne klasser som støtter `with`.
