@@ -39,9 +39,6 @@ Vi ser at koden umiddelbart blir enklere og penere når vi kvitter oss med den f
 Dette er selvsagt et forenklet eksempel, men illusterer essensen i hva som menes med *pythonisk* kode.
 Mens kode som *ikke* er pythonisk gjerne kjennetegnes ved at den virker tungvint eller unødig omfattende og ordrik for en erfaren Python-programmerer, vil pythonisk kode utnytte de verktøyene Python tilbyr på slik måte at den uttrykkes enklest mulig.
 
-Det er, for eksempel, pythonisk å utnytte mulighetene til Pythons datastrukturer på en ren og lesbar måte, eller å basere seg på duck typing i stedet for å eksplisitt sjekke typer før en utfører operasjoner.
-Et annet eksempel er å strukturere kode på enklest mulig måte — alt trenger ikke være klasser, men klasser bør brukes der det gir mening.
-
 ## The Zen of Python
 
 Dette er tett knyttet opp mot filosofien om minimalisme og enkelhet som underbygger Python.
