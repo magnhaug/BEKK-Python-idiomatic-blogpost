@@ -185,7 +185,7 @@ except:
     # noe rives ned
 ```
         
-Det som settes opp og rives ned kan for eksempel være en fil eller databasetilkobling som åpnes og lukkes.
+Det som settes opp og rives ned kan for eksempel være en fil eller databasetilkobling som åpnes og lukkes. 
 I stedet for at man skal tvinges til å gjøre dette overalt i koden, støtter mange av Pythons innebygde klasser et [with-uttrykk](http://docs.python.org/reference/compound_stmts.html#with).
 
 Et eksempel er [fil-objekter](http://docs.python.org/library/stdtypes.html#file-objects), som lar oss skrive
