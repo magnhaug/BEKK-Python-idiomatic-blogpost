@@ -19,21 +19,27 @@ Pythonisk kode er kode som bruker vanlige idiomer i Python på en god måte, i s
 Dette kan illustreres med et enkelt eksempel hentet fra Pythons [offisielle ordliste](http://docs.python.org/glossary.html#term-pythonic).
 I mange språk er det vanlig å iterere over elementer i lister ved hjelp av ei løkke og en eksplisitt indeks.
 
+```java
         for (int i=0; i<food.length; i++) {
             System.out.println(food[i]);
         }
+```
 
 Dette er også mulig i Python, og kunne vært implementert på denne måten:
 
+```python
         i = 0
         while i < len(food):
             print food[i]
             i += 1
+```
 
 I Python er det imidlertid unødvendig å involvere indekser for dette siden det er et vanlig idiom å iterere over alle elementene i en sekvens direkte.
- 
+
+```python
     for piece in food:
         print piece
+```
 
 Vi ser at koden umiddelbart blir enklere og penere ved at vi kvitter oss med den forstyrrende indeksen.
 Dette er selvsagt et overforenklet eksempel, men illusterer godt essensen i hva som menes med *pythonisk* kode.
@@ -47,7 +53,7 @@ Et annet eksempel er å strukturere kode på enklest mulig måte — alt trenger
 Dette er tett knyttet opp mot filosofien om minimalisme og enkelhet som underbygger Python.
 Den beste beskrivelsen av denne filosofien er kanskje gitt i The Zen of Python:
 
-    >> import this
+    >>> import this
     The Zen of Python, by Tim Peters
 
     Beautiful is better than ugly.
@@ -90,15 +96,19 @@ La oss for eksempel si at vi har et filobjekt `fil`, og ønsker å skrive til de
 Ettersom Python er dynamisk typet vil vi ofte ikke kunne være sikre på at `fil` faktisk er av typen `file` før under kjøretid.
 En (lite pythonisk) måte å håndtere dette på vil være å sjekke typen på `fil` før vi skriver til den.
 
+```python
     if isinstance(fil, file):
         fil.write(data)
+```
 
 Det vi i virkeligheten bryr oss om er egentlig ikke *hva* `fil` er, så lenge det er mulig å skrive til den.
 
+```python
     try:
         fil.write(data)
     except:
         # håndter feilsituasjon
+```
 
 Implementert på denne måten kan `fil` godt være en fysisk fil, en socket, eller noe helt annet, så lenge vi får skrevet dataene våre.
 
@@ -117,7 +127,7 @@ Det regnes generelt som mer pythonisk å følge EAFP, men ikke glem at det vikti
 
 ## Magiske metoder
 
-Magiske metoder, eller [special method names](http://docs.python.org/reference/datamodel.html#specialnames) som de heter i Pythons offesielle dokumentasjon, er et kraftfult verktøy som det er vel verdt å lære å bruke. 
+Magiske metoder, eller [special method names](http://docs.python.org/reference/datamodel.html#specialnames) som de heter i Pythons offisielle dokumentasjon, er et kraftfullt verktøy som det er vel verdt å lære å bruke. 
 Disse metodene lar oss implementere egendefinert oppførsel for mange av Pythons innebygde operasjoner.
 
 Den første "magiske" metoden nye Python-programmerer blir introdusert for er gjerne `__init__`, som lar oss definere initialiseringen av et objekt.
@@ -133,8 +143,8 @@ Les heller videre på  [denne fabelaktige guiden](http://www.rafekettler.com/mag
 
 ## Funksjoner er objekter
 
-I Python er all data representert som [objekter](http://docs.python.org/reference/datamodel.html#objects).
-Dette gjelder ikke bare vanlige datastrukturer som tall, strenger og lister, men også slikt som funksjoner og generatorer.
+I Python er alle data representert som [objekter](http://docs.python.org/reference/datamodel.html#objects).
+Dette gjelder ikke bare vanlige datastrukturer som tall, strenger og lister, men også som funksjoner, generatorer og klasser.
 
 Som tidligere nevnt bryr vi oss skjeldent om hvilke typer vi jobber med i pythonisk kode, så lenge de har de egenskapene vi trenger.
 Den egenskapen vi trenger fra noe vi vil behandle som en funksjon er at den *kan kalles*.
@@ -147,6 +157,7 @@ I tillegg til dette kan noen ganger også instanser kalles som om de var funksjo
 Dette kan vi oppnå ved å benytte en av de *magiske metodene* diskutert over.
 Hvis en klasse implementerer en metode som heter `__call__`, så kan instanser av denne klassen kalles på samme måte som funksjoner.
 
+```python
     >>> class Foo():
     ...     def __call__(self):
     ...         return "bar"
@@ -160,32 +171,39 @@ Hvis en klasse implementerer en metode som heter `__call__`, så kan instanser a
     >>> # kaller instansen, som fører til at __call__-metoden kjøres
     >>> foo() 
     'bar'
+```
 
 ## `with`-uttrykk
 
 Et veldig vanlig mønster en ofte møter i mange kontekster er en variasjon over følgende.
 
+```python
     # noe settes opp
     try:
         # utfør operasjon
     except:
         # noe rives ned
+```
         
 Det som settes opp og rives ned kan for eksempel være en fil eller databasetilkobling som åpnes og lukkes.
 I stedet for at man skal tvinges til å gjøre dette overalt i koden, støtter mange av Pythons innebygde klasser et [with-uttrykk](http://docs.python.org/reference/compound_stmts.html#with).
 
 Et eksempel er [fil-objekter](http://docs.python.org/library/stdtypes.html#file-objects), som lar oss skrive
 
+```python
     with open(filnavn) as f:
         # utfør operasjon med f
+```
 
 i stedet for
 
+```python
     f = open(filnavn)
     try:
         # utfør operasjon med f
     finally:
         f.close()
+```
 
 Det er også mulig å lage sine egne klasser som støtter `with`.
 Dette gjøres ved å la klassen implementere metodene [`__enter__` og `__exit__`](http://docs.python.org/reference/datamodel.html#with-statement-context-managers) som er enda et par eksempler på *magiske metoder*.
@@ -206,21 +224,26 @@ Skulle vi på et senere tidspunkt få behov for noe mer fancy kan vi benytte Pyt
 
 La oss ta et eksempel. Vi har behov for å representere vinkler, og lager oss den enkleste tenklige klassen: `Vinkel` med attributtet `grader`.
 
+```python
     class Vinkel:
         def __init__(self, grader):
             self.grader = grader
+```
 
 Klassen benyttes som en kan forvente:
 
+```python
     >>> v = Vinkel(90)
     >>> print v.grader
     90
     >>> v.grader = 60
     >>> print v.grader
     60
+```
 
 Alt er fryd og gammen helt til det plutselig blir bestemt at vinkler internt skal representeres som radianer. Vi har plutselig behov for at vinkelens grader aksesseres via metodekall; `property` to the rescue!
 
+```python
     import math
     
     class Vinkel:
@@ -234,17 +257,20 @@ Alt er fryd og gammen helt til det plutselig blir bestemt at vinkler internt ska
             return self.radianer * (180/math.pi)
             
         grader = property(get_grader, set_grader)
+```
 
 I koden over har vi definert metodene `get_grader` og `set_metoder` for å håndtere konverteringen til og fra radianer.
 Kallet til `property` forkler disse som vårt gode gamle `grader` attributt.
 Utenfra ser klassen derfor fullstendig lik ut:
 
+```python
     >>> v = Vinkel(90)
     >>> print v.grader
     90
     >>> v.grader = 60
     >>> print v.grader
     60
+```
 
 `property`-funksjonen tar fire argumenter, der alle untatt det første er valgfritt: `fget`, `fset`, `fdel`, `doc`. 
 De tre første argumentene er funksjoner for å henholdsvis *lese*, *skrive*, og *slette* attributtet.
@@ -252,6 +278,7 @@ Det siste argumentet er attributtets dokumentasjonstreng.
 
 Det er også mulig å benytte `property` som en såkalt *dekorator*, noe som lar oss skrive klassen vår om til følgende.
 
+```python
     import math
 
     class Vinkel:
@@ -265,6 +292,7 @@ Det er også mulig å benytte `property` som en såkalt *dekorator*, noe som lar
         @grader.setter
         def grader(self, grader):
             self.radianer = grader * (math.pi/180)
+```
 
 I del 3 av denne serien med bloggposter kommer vi til å gå nærmere inn på hva dekoratorer er, hvordan disse fungerer, og hva de kan brukes til.
 Stay tuned!
