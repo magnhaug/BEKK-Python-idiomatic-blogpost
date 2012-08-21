@@ -14,26 +14,30 @@ En konsekvens av dette er at vi har muligheten til å definere funksjoner de sam
 Funksjoner kan deklareres på toppnivå, som klasse-metoder, og til og med inne i andre funksjoner.
 La oss se et par eksempler.
 
-    def funksjon():
-        """En helt vanlig funksjon."""
+```python
+def funksjon():
+    """En helt vanlig funksjon."""
+    pass
+
+def ytre():
+    def indre():
+        """Funksjon definert inne i en annen funksjon."""
         pass
 
-    def ytre():
-        def indre():
-            """Funksjon definert inne i en annen funksjon."""
-            pass
-
-    class Foo:
-        def bar(self):
-            """Metode i en klasse. Kalles som Foo().bar()."""
-            pass
+class Foo:
+    def bar(self):
+        """Metode i en klasse. Kalles som Foo().bar()."""
+        pass
+```
 
 Siden funksjoner kan behandles som vanlige dataelement kan vi også gi dem nye navn ved å tilordne dem til variabler.
 Eksempelet under lager et alias til Pythons innebygde `len`-funksjon.
 
-    >>> listelengde = len
-    >>> listelengde([1,2,3])
-    3
+```python
+>>> listelengde = len
+>>> listelengde([1,2,3])
+3
+```
 
 Ettersom funksjoner kan definers inne i andre funksjoner, og kan tilordnes navngitte variabler, er det kanskje ikke så overaskende at de også kan brukes som argumenter og returverdier.
 Dette gjøres på lik linje med alt annet som sendes inn og ut av funksjoner.
@@ -41,40 +45,46 @@ Funksjoner som får inn eller returnerer andre funksjoner kalles *høyere ordens
 
 Et argument som er en funksjon er ikke mer spesielle enn andre argumenter, bortsett fra at i dette tilfellet er det et argument som tilfeldigvis kan kalles.
 
-    >>> def foo():
-    ...     print "HAI from foo, kthxbye"
-    ... 
-    >>> def bar(fn):
-    ...     fn()
-    ... 
-    >>> bar(foo)
-    HAI from foo, kthxbye
+```python
+>>> def foo():
+...     print "HAI from foo, kthxbye"
+... 
+>>> def bar(fn):
+...     fn()
+... 
+>>> bar(foo)
+HAI from foo, kthxbye
+```
 
 På tilsvarende måte er retur av en funksjon en vanlig retur, der navnet som returneres tilfeldigvis tilhører en funksjon.
 
-    >>> def bar():
-    ...     def foo():
-    ...             print "Greetings from foo"
-    ...     return foo
-    ... 
-    >>> fn = bar()
-    >>> fn()
-    Greetings from foo
+```python
+>>> def bar():
+...     def foo():
+...             print "Greetings from foo"
+...     return foo
+... 
+>>> fn = bar()
+>>> fn()
+Greetings from foo
+```
 
 En siste egenskap med funksjoner er at de, som annen data, kan lagres som del av datastrukturer.
 Eksempelet under viser en dictionary med funksjoner som verdier.
 
-    >>> def spam(n):
-    ...     return "spam" * n
-    ... 
-    >>> data = {
-    ...     'lag_spam': spam,
-    ...     'lag_liste': range
-    ... }
-    >>> data['lag_liste']
-    <built-in function range>
-    >>> data['lag_spam'](4)
-    'spamspamspamspam'
+```python
+>>> def spam(n):
+...     return "spam" * n
+... 
+>>> data = {
+...     'lag_spam': spam,
+...     'lag_liste': range
+... }
+>>> data['lag_liste']
+<built-in function range>
+>>> data['lag_spam'](4)
+'spamspamspamspam'
+```
 
 La oss oppsummere egenskapene til *førsteklasses* funksjoner. 
 En funksjon i Python kan...
@@ -101,19 +111,25 @@ Man *kan* dog naturligvis også tilordne lambdaer til variabler hvis man ønsker
 
 Syntaktisk deklareres lambdaer på følgende måte.
 
-    lambda arg1, arg2: uttrykk
+```python
+lambda arg1, arg2: uttrykk
+```
 
 Vi starter altså med nøkkelordet `lambda` etterfulgt av en (valgfri) liste med vilkårlig antall parametere.
 Dette er fulgt av et kolon, og deretter et enkelt uttrykk som evalueres og utgjør returverdien til lambda-funksjonen.
 
 Gitt den følgende *vanlige* funksjonen.
 
-    def inkrementer(num):
-        return num + 1
+```python
+def inkrementer(num):
+    return num + 1
+```
 
 Denne kan skrives om til en lambda, på følgende måte.
 
-    inkrementer = lambda num: num + 1
+```python
+inkrementer = lambda num: num + 1
+```
 
 ### Bruk-og-kast-funksjoner
 
@@ -126,14 +142,18 @@ Det er flere slike innebygget i språket, hvorav [`map`](http://docs.python.org/
 For å ta et forholdsvis enkelt eksempel, la oss si vi ønsker å bruke `filter` til å finne partallene i en liste.
 Uten bruk av lambdaer må vi først definere en funksjon som forteller oss om elementet i lista er partall, og sende denne som første argument til `filter`.
 
-    def er_partall(x):
-        return x % 2 == 0
+```python
+def er_partall(x):
+    return x % 2 == 0
 
-    partall = filter(er_partall, [4, 8, 15, 16, 23, 42])
+partall = filter(er_partall, [4, 8, 15, 16, 23, 42])
+```
 
 Med en lambda definerer vi kun funksjonen akkurat der den trengs.
 
-    partall = filter(lambda x: x % 2 == 0, [4, 8, 15, 16, 23, 42])
+```python
+partall = filter(lambda x: x % 2 == 0, [4, 8, 15, 16, 23, 42])
+```
 
 Brukt riktig kan altså lambdaer ofte hjelpe oss å skrive kode som er både kortere og mer lesbar.
 Det er imidlertid viktig å huske på at det er nettopp dette som er det viktigste.
@@ -153,17 +173,21 @@ Eksempler på praktisk bruk av dekoratorer finner en mange steder, slik som i we
 
 Syntaktisk minner Python-dekoratorer en del om annotasjoner i Java.
 
-    @dekorator
-    def funksjon():
-        pass
+```python
+@dekorator
+def funksjon():
+    pass
+```
 
 I virkeligheten er `@dekorator`-syntaksen kun [sukker](http://en.wikipedia.org/wiki/Syntactic_sugar).
 Eksempelet over kunne like gjerne vært skrevet på følgende måte, med vanlige funksjonskall.
 
-    def funksjon():
-        pass
-    funksjon = dekorator(funksjon)
-    
+```python
+def funksjon():
+    pass
+funksjon = dekorator(funksjon)
+```
+
 Det som skjer er altså at funksjonen først defineres på vanlig måte.
 Deretter sendes den som argument til dekoratoren som returnerer en ny funksjon.
 Den nye funksjonen tilordnes, og erstatter, så navnet til den opprinnelige funksjonen.
@@ -172,11 +196,13 @@ En dekorator er altså ikke noe annet enn en høyere ordens funksjon.
 Den tar inn en funksjon, modifiserer eller erstatter funksjoen, og returnerer en erstatning for den opprinnelige funksjonen.
 En typisk dekorator vil vanligvis se omtrent ut som følger.
 
-    def dekorator(fn):
-        def ny_fn():
-            # Her kan vi gjøre hva vi vil!
-            # Vanligvis inkluderer det et kall til fn().
-        return ny_fn
+```python
+def dekorator(fn):
+    def ny_fn():
+        # Her kan vi gjøre hva vi vil!
+        # Vanligvis inkluderer det et kall til fn().
+    return ny_fn
+```
 
 (I praksis kan også klasser brukes til å lage dekoratorer, ettersom funksjoner egentlig er objekter av typen `function`.
 For å forenkle ting holder vi oss til dekoratorer basert på vanlige funksjoner her.)
@@ -188,23 +214,25 @@ Den kan også la være å kalle den dekorerte funksjonen i det hele tatt, endre 
 
 La oss ta for oss et enkelt eksempel for å se hva som foregår.
 
-    >>> def dekorator(fn):
-    ...     print "DEKORERER"
-    ...     def wrapper():
-    ...         print "STARTER WRAPPER"
-    ...         fn()
-    ...         print "SLUTTER WRAPPER"
-    ...     return wrapper
-    ... 
-    >>> @dekorator
-    ... def test():
-    ...     print "TEST"
-    ... 
-    DEKORERER
-    >>> test()
-    STARTER WRAPPER
-    TEST
-    SLUTTER WRAPPER
+```python
+>>> def dekorator(fn):
+...     print "DEKORERER"
+...     def wrapper():
+...         print "STARTER WRAPPER"
+...         fn()
+...         print "SLUTTER WRAPPER"
+...     return wrapper
+... 
+>>> @dekorator
+... def test():
+...     print "TEST"
+... 
+DEKORERER
+>>> test()
+STARTER WRAPPER
+TEST
+SLUTTER WRAPPER
+```
 
 Som vi ser blir `dekorator()` kalt umiddelbart etter definisjonen av `test()`.
 Dette gjøres av python for å få laget en ny funksjon som erstatter `test` -- i dette tilfellet `wrapper` som ble definert inne i dekoratoren.
@@ -217,48 +245,56 @@ Vi fortsetter med et litt mer reelt eksempel; en dekorator som printer antall ar
 For å kunne dekorere alle typer funksjoner, med ulike antall argumenter, må vi passe på at også funksjonen dekoratoren returerer håndterer dette.
 Det løser vi ved å la `wrapper` ta variabelt antall argumenter ved hjelp av `*args` og `**kwargs`.
 
-    def tell_argumenter(fn):
-        def wrapper(*args, **kwargs):
-            antall = len(args) + len(kwargs)
-            print "fikk inn %d argumenter" % antall
-            return fn(*args, **kwargs)
-        return wrapper
-    
+```python
+def tell_argumenter(fn):
+    def wrapper(*args, **kwargs):
+        antall = len(args) + len(kwargs)
+        print "fikk inn %d argumenter" % antall
+        return fn(*args, **kwargs)
+    return wrapper
+```
+
 `wrapper` gjør ellers ikke noe mer magisk enn å summere antall argumenter, printe dette, og kalle videre til den dekorerte funksjonen.
 Legg også merke til at vi returerer resultatet fra `fn()`, slik at den dekorerte funksjonen beholder returverdien den ellers ville hatt.
 
 For å teste dekoratoren lager vi en funksjon som tar inn variabelt antall argumenter, og kaller denne.
 
-    >>> @tell_argumenter
-    ... def foo(*args, **kwargs):
-    ...     pass
-    ... 
-    >>> foo()
-    fikk inn 0 argumenter
-    >>> foo(1, 2, 3)
-    fikk inn 3 argumenter
-    >>> foo(1, 2, 3, bar="baz")
-    fikk inn 4 argumenter
-    >>> foo(*range(1000000))
-    fikk inn 1000000 argumenter
+```python
+>>> @tell_argumenter
+... def foo(*args, **kwargs):
+...     pass
+... 
+>>> foo()
+fikk inn 0 argumenter
+>>> foo(1, 2, 3)
+fikk inn 3 argumenter
+>>> foo(1, 2, 3, bar="baz")
+fikk inn 4 argumenter
+>>> foo(*range(1000000))
+fikk inn 1000000 argumenter
+```
 
 ### Stacking av dekoratorer
 
 Vi er heller ikke begrenset til å bruke en dekorator per funksjon.
 Det fungerer fint å stacke dekoratorer på hverandre som følger.
 
-    @dekorator1
-    @dekorator2
-    def funksjon():
-        pass
-    
+```python
+@dekorator1
+@dekorator2
+def funksjon():
+    pass
+```
+
 På samme måte som ved én dekorator blir dette omgjort til funksjonskall av python.
 Dekoratorene evalueres slik at de nederste dekorator-funksjonene kalles først.
 Eksempelet over kan dermed skrives om på denne måten:
 
-    def funksjon():
-        pass
-    funksjon = dekorator1(dekorator2(funksjon))
+```python
+def funksjon():
+    pass
+funksjon = dekorator1(dekorator2(funksjon))
+```
 
 ### Flere eksempler
 
@@ -269,37 +305,42 @@ Vi fortsetter med noen flere eksempler, for å vise forskjellige bruksområder d
 Dekoratorer som `@ignore` kjenner vi typisk fra testrammeverk, og brukes gjerne til å fortelle rammeverket at en test ikke skal kjøres.
 Her er en variant som fører til at den dekorerte funksjonen ikke gjør noen verdens ting.
 
-    def ignore(fn):
-        def wrapper(*args, **kwargs):
-            pass
-        return wrapper
-
+```python
+def ignore(fn):
+    def wrapper(*args, **kwargs):
+        pass
+    return wrapper
+```
 
 #### `@deprecated`
 
 En annen dekorator som mange gjerne kjenner, for eksempel som annotasjon i Java, er `@deprecated`.
 Denne er ment for å informere utviklere om at de bruker gamle utdaterte funksjoner, og skriver ut en advarsel om dette.
 
-    def deprecated(fn):
-        def wrapper(*args, **kwargs):
-            print "Warning: '%s' is deprecated!" % fn.__name__
-            return fn(*args, **kwargs)
-        return wrapper
+```python
+def deprecated(fn):
+    def wrapper(*args, **kwargs):
+        print "Warning: '%s' is deprecated!" % fn.__name__
+        return fn(*args, **kwargs)
+    return wrapper
+```
 
 #### `@timed`
 
 Ofte, spesielt under utvikling, kan man være interessert i å finne ut hvor lang tid det tar å utføre et funksjonskall.
 I slike tilfeller kan en dekorator som `@timed` være grei å ha.
 
-    from time import time
+```python
+from time import time
 
-    def timed(fn):
-        def wrapper(*args, **kwargs):
-            start = time()
-            resultat = fn(*args, **kwargs)
-            print "brukte %f sekunder" % (time() - start)
-            return resultat
-        return wrapper
+def timed(fn):
+    def wrapper(*args, **kwargs):
+        start = time()
+        resultat = fn(*args, **kwargs)
+        print "brukte %f sekunder" % (time() - start)
+        return resultat
+    return wrapper
+```
 
 #### `@memoize`
 
@@ -308,91 +349,103 @@ Slik lagring og gjennbruk av delløsninger kalles gjerne *memoisering*, og kan d
 
 La oss ta utgangspunkt i den følgende implementasjonen av fibonacci.
 
-    def fib(a):
-        if a in (0,1): return a
-        return fib(a-1) + fib(a-2)
+```python
+def fib(a):
+    if a in (0,1): return a
+    return fib(a-1) + fib(a-2)
+```
 
 Dette er åpenbart en veldig naiv løsning, med antall rekursive kall til `fib` økende eksponensielt med *n*.
 Hvis vi dekorerer `fib` med følgende dekroator, vil i stedet antall `fib`-kall kun øke linjært.
 
-    def memoize(fn):
-        cache = {}
-        def wrapper(arg):
-            if arg in cache:
-                return cache[arg]
-            else:
-                cache[arg] = fn(arg)
-                return cache[arg]
-        return wrapper
+```python
+def memoize(fn):
+    cache = {}
+    def wrapper(arg):
+        if arg in cache:
+            return cache[arg]
+        else:
+            cache[arg] = fn(arg)
+            return cache[arg]
+    return wrapper
+```
 
 ### Wraps
 
 Dekoratorene vi har skrevet til nå erstatter funksjonene våre med nye funksjoner.
 Vi har dermed endret på hvordan den dekorerte funksjonen ser ut utenfra, ved å endre navn, doc-string, etc.
 
-    >>> def buu_dekorator(fn):
-    ...     def ny_fn(*args, **kwargs):
-    ...         # noe artig her
-    ...         return fn(*args, **kwargs)
-    ...     return ny_fn
-    ... 
-    >>> @buu_dekorator
-    ... def foo():
-    ...     """foo sin docstring"""
-    ...     pass
-    ... 
-    >>> foo.__name__
-    ny_fn
-    >>> foo.__doc__
-    None
-        
+```python
+>>> def buu_dekorator(fn):
+...     def ny_fn(*args, **kwargs):
+...         # noe artig her
+...         return fn(*args, **kwargs)
+...     return ny_fn
+... 
+>>> @buu_dekorator
+... def foo():
+...     """foo sin docstring"""
+...     pass
+... 
+>>> foo.__name__
+ny_fn
+>>> foo.__doc__
+None
+```
+
 Dette kan vi passende nok løse ved hjelp av enda en dekorator!
 
-    >>> from functools import wraps
-    >>> 
-    >>> def yay_dekorator(fn):
-    ...     @wraps(fn)
-    ...     def wrapper(*args, **kwargs):
-    ...         # noe artig her
-    ...         return fn(*args, **kwargs)
-    ...     return wrapper
-    ... 
-    >>> @yay_dekorator
-    ... def foo():
-    ...     """foo sin docstring"""
-    ...     pass
-    ... 
-    >>> foo.__name__
-    foo
-    >>> foo.__doc__
-    foo sin docstring
+```python
+>>> from functools import wraps
+>>> 
+>>> def yay_dekorator(fn):
+...     @wraps(fn)
+...     def wrapper(*args, **kwargs):
+...         # noe artig her
+...         return fn(*args, **kwargs)
+...     return wrapper
+... 
+>>> @yay_dekorator
+... def foo():
+...     """foo sin docstring"""
+...     pass
+... 
+>>> foo.__name__
+foo
+>>> foo.__doc__
+foo sin docstring
+```
 
 ### Dekoratorer med input
 
 Det er også mulig å lage dekoratorer som tar inn argumenter.
 
-    >>> def gjenta(ganger):
-    ...     def generert_dekorator(fn):
-    ...         def wrapper(*args, **kwargs):
-    ...             return [fn(*args, **kwargs) for i in range(ganger)]
-    ...         return wrapper
-    ...     return generert_dekorator
-    ... 
-    >>> @gjenta(4)
-    ... def spam():
-    ...     return "spam"
-    ... 
-    >>> spam()
-    ['spam', 'spam', 'spam', 'spam']
+```python
+>>> def gjenta(ganger):
+...     def generert_dekorator(fn):
+...         def wrapper(*args, **kwargs):
+...             return [fn(*args, **kwargs) for i in range(ganger)]
+...         return wrapper
+...     return generert_dekorator
+... 
+>>> @gjenta(4)
+... def spam():
+...     return "spam"
+... 
+>>> spam()
+['spam', 'spam', 'spam', 'spam']
+```
 
 Her er `gjenta` egentlig en funksjon som genererer dekoratorer. `gjenta(4)` lager dekoratoren som gjentar funksjonen 4 ganger, som brukes til å dekorere `spam`. Tilsvarende uten det syntaktiske sukkeret blir:
 
-    >>> def spam():
-    ...     return "spam"
-    ... 
-    >>> spam = gjenta(4)(spam)
-    >>> spam()
-    ['spam', 'spam', 'spam', 'spam']
+```python
+>>> def spam():
+...     return "spam"
+... 
+>>> spam = gjenta(4)(spam)
+>>> spam()
+['spam', 'spam', 'spam', 'spam']
+```
 
 ### @property
 
