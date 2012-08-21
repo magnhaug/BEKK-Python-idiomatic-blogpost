@@ -1,23 +1,17 @@
-# Idiomatisk Python - del 1 av 3
+# Idiomatisk Python
 
-Alle språk har sine særegenheter, med sine styrker og svakheter. 
-Bak et hvert språk ligger en filosofi—en tanke om hvordan språket bør brukes.
-Dette reflekteres gjerne i hvilke konstruksjoner og konsepter språket tilbyr.
-For å skrive pen kode er det viktig å kjenne og bruke språkets særegenheter; de uttrykk som er idiomatiske for språket.
+Alle språk har sine særegenheter, og bak hvert språk ligger en
+filosofi—en tanke om hvordan språket bør brukes.  For å skrive pen kode
+er det viktig å kjenne og bruke språkets særegenheter; de uttrykk som er
+idiomatiske for språket.
 
-Dette er første del i en serie på 3 bloggposter om idiomatisk Python.
-I denne delen tar vi for oss begrepet *Pythonisk kode* og diskuterer en rekke konsepter som underbygger dette.
-Del 2 kommer til å ta for seg sekvenser og lister, og gå igjennom hvordan Python legger opp til å arbeide med slike på en god måte.
-I den siste posten skal vi ta en nærmere titt på funksjoner i Python, og hva disse kan brukes til.
-
-Bloggpostene er delvis basert på [del 2](http://magnhaug.github.com/BEKK-Python-Kurs/slides/del2.html#1) av BEKKs [kursserie om Python](https://github.com/bekkopen/BEKK-Python-Kurs) på NTNU, og er derfor beregnet på lesere som kjenner grunnleggende Python uten å nødvendigvis være veldig godt kjent med språket.
+I denne bloggposten skal vi gå nærmere inn på hva idiomatisk Python er.
+Denne bloggposten er beregnet for de som kjenner grunnleggende Python,
+men krever absolutt ikke at man har kodet mye i språket.
 
 ## Hva er Pythonisk kode?
 
-Pythonisk kode er kode som bruker vanlige idiomer i Python på en god måte, i stedet for å implementere koden ved hjelp av konsepter og teknikker som er vanligere i andre språk.
-
-Dette kan illustreres med et enkelt eksempel hentet fra Pythons [offisielle ordliste](http://docs.python.org/glossary.html#term-pythonic).
-I mange språk er det vanlig å iterere over elementer i lister ved hjelp av ei løkke og en eksplisitt indeks.
+I mange språk er det vanlig å iterere over elementer i lister ved hjelp av ei løkke og en eksplisitt indeks, som her i Java:
 
 ```java
 for (int i=0; i<food.length; i++) {
@@ -34,19 +28,16 @@ while i < len(food):
     i += 1
 ```
 
-I Python er det imidlertid unødvendig å involvere indekser for dette siden det er et vanlig idiom å iterere over alle elementene i en sekvens direkte.
+I Python er det imidlertid unødvendig å involvere indekser siden det er et vanlig idiom å iterere over alle elementene i en sekvens direkte:
 
 ```python
 for piece in food:
     print piece
 ```
 
-Vi ser at koden umiddelbart blir enklere og penere ved at vi kvitter oss med den forstyrrende indeksen.
-Dette er selvsagt et overforenklet eksempel, men illusterer godt essensen i hva som menes med *pythonisk* kode.
+Vi ser at koden umiddelbart blir enklere og penere når vi kvitter oss med den forstyrrende indeksen.
+Dette er selvsagt et forenklet eksempel, men illusterer essensen i hva som menes med *pythonisk* kode.
 Mens kode som *ikke* er pythonisk gjerne kjennetegnes ved at den virker tungvint eller unødig omfattende og ordrik for en erfaren Python-programmerer, vil pythonisk kode utnytte de verktøyene Python tilbyr på slik måte at den uttrykkes enklest mulig.
-
-Det er, for eksempel, pythonisk å utnytte mulighetene til Pythons datastrukturer på en ren og lesbar måte, eller å basere seg på duck typing i stedet for å eksplisitt sjekke typer før en utfører operasjoner.
-Et annet eksempel er å strukturere kode på enklest mulig måte — alt trenger ikke være klasser, men klasser bør brukes der det gir mening.
 
 ## The Zen of Python
 
@@ -90,11 +81,13 @@ La oss gå videre til å se på noen utvalgte konsepter vi mener er viktige å k
 ## Duck typing
 
 Et viktig konsept som mange prater om i sammenheng med pythonisk kode er *duck typing*.
-Tankegangen går ut på at hvis et objekt støtter den operasjonen vi ønsker å utføre, så er det ikke så farlig hvilken type objektet har.
+[Tankegangen](http://groups.google.com/group/comp.lang.python/msg/e230ca916be58835) går ut på at hvis et objekt støtter den operasjonen vi ønsker å utføre, så er det ikke så farlig hvilken type objektet har:
+
+> *don't check whether it IS-a duck: check whether it QUACKS-like-a duck, WALKS-like-a duck, etc, etc, depending on exactly what subset of duck-like behaviour you need*
 
 La oss for eksempel si at vi har et filobjekt `fil`, og ønsker å skrive til dette.
 Ettersom Python er dynamisk typet vil vi ofte ikke kunne være sikre på at `fil` faktisk er av typen `file` før under kjøretid.
-En (lite pythonisk) måte å håndtere dette på vil være å sjekke typen på `fil` før vi skriver til den.
+En lite pythonisk måte å håndtere dette på vil være å sjekke typen på `fil` før vi skriver til den.
 
 ```python
 if isinstance(fil, file):
@@ -111,10 +104,6 @@ except:
 ```
 
 Implementert på denne måten kan `fil` godt være en fysisk fil, en socket, eller noe helt annet, så lenge vi får skrevet dataene våre.
-
-Navnet *duck typing* stammer fra en [diskusjon i pythons mailinglister](http://groups.google.com/group/comp.lang.python/msg/e230ca916be58835):
-
-> *don't check whether it IS-a duck: check whether it QUACKS-like-a duck, WALKS-like-a duck, etc, etc, depending on exactly what subset of duck-like behaviour you need*
 
 ### EAFP over LBYL
 
@@ -137,16 +126,15 @@ Den virkelige nytten til de magiske metodene ligger likevel i at de lar oss lage
 Et vanlig eksempel er sammenlikning av to objekter.
 Ved å implementere én enkelt metode, `__cmp__(self, other)`, støtter klassen sammenlikning på alle de vanlige måtene slik som `==`, `!=`, `<` og `>`.
 
-På samme måte finnes det metoder for å overlaste aritmetiske operasjoner, typekonvertering, aksessering av atributter, behandling objekter som sekvenser, og mer.
-Listen over tilgjengelige metoder er langt mer omfattende enn vi kan dekke i denne bloggposten.
-Les heller videre på  [denne fabelaktige guiden](http://www.rafekettler.com/magicmethods.html) for å lære om de mulighetene som finnes.
+På samme måte finnes det metoder for blant annet å overlaste aritmetiske operasjoner, typekonvertering, aksessering av attributter og behandling objekter som sekvenser.
+Les [denne fabelaktige guiden](http://www.rafekettler.com/magicmethods.html) for å lære om de mulighetene som finnes.
 
 ## Funksjoner er objekter
 
 I Python er alle data representert som [objekter](http://docs.python.org/reference/datamodel.html#objects).
 Dette gjelder ikke bare vanlige datastrukturer som tall, strenger og lister, men også som funksjoner, generatorer og klasser.
 
-Som tidligere nevnt bryr vi oss skjeldent om hvilke typer vi jobber med i pythonisk kode, så lenge de har de egenskapene vi trenger.
+Som tidligere nevnt bryr vi oss sjeldent om hvilke typer vi jobber med i pythonisk kode, så lenge de har de egenskapene vi trenger.
 Den egenskapen vi trenger fra noe vi vil behandle som en funksjon er at den *kan kalles*.
 
 Python inkulderer flere typer objekter med denne egenskapen.
@@ -175,7 +163,7 @@ Hvis en klasse implementerer en metode som heter `__call__`, så kan instanser a
 
 ## `with`-uttrykk
 
-Et veldig vanlig mønster en ofte møter i mange kontekster er en variasjon over følgende.
+Et vanlig mønster en møter er en variasjon over:
 
 ```python
 # noe settes opp
@@ -185,17 +173,15 @@ except:
     # noe rives ned
 ```
         
-Det som settes opp og rives ned kan for eksempel være en fil. En databasetilkobling som åpnes og lukkes, eller en databasetransaksjon som må committes eller rulles tilbake er et annet bruksområde for dette patternet.
-I stedet for at man skal tvinges til å gjøre dette overalt i koden, støtter mange av Pythons innebygde klasser et [with-uttrykk](http://docs.python.org/reference/compound_stmts.html#with).
-
-Et eksempel er [fil-objekter](http://docs.python.org/library/stdtypes.html#file-objects), som lar oss skrive
+Det som settes opp og rives ned kan for eksempel være en fil, en databasetilkobling som åpnes og lukkes, eller en databasetransaksjon som må committes eller rulles tilbake.
+For å slippe dette mønsteret støtter mange av Pythons innebygde klasser [with-uttrykk](http://docs.python.org/reference/compound_stmts.html#with). For [fil-objekter](http://docs.python.org/library/stdtypes.html#file-objects) kan vi da skrive:
 
 ```python
 with open(filnavn) as f:
     # utfør operasjon med f
 ```
 
-i stedet for
+i stedet for:
 
 ```python
 f = open(filnavn)
@@ -214,22 +200,19 @@ with lock:
     # ikke-trådsikker kode..
 ```
 
-Det er også mulig å lage sine egne klasser som støtter `with`.
-Dette gjøres ved å la klassen implementere metodene [`__enter__` og `__exit__`](http://docs.python.org/reference/datamodel.html#with-statement-context-managers) som er enda et par eksempler på *magiske metoder*.
-For mer informasjon om hvordan dette fungerer, se [denne bloggposten](http://effbot.org/zone/python-with-statement.htm).
+For å støtte `with` er det nok at en klasse implementere metodene [`__enter__` og `__exit__`](http://docs.python.org/reference/datamodel.html#with-statement-context-managers).
+For mer informasjon om `with`, sjekk ut [denne bloggposten](http://effbot.org/zone/python-with-statement.htm).
 
 ## Gettere og settere
 
-Klasser med private felter som eksponeres ved hjelp av enkle get- og set-metoder er et vanlig pattern i mange språk.
-Dette anses *ikke* for å være pythonisk!
-Joda, det er viktig med enkapsulering, men et lass med gettere og settere for alle tenkelige attributter er ikke nødvendig for å oppnå dette. 
+Klasser med private felter som eksponeres ved hjelp av enkle get- og
+set-metoder er et vanlig pattern i mange språk, men det er absolutt *ikke* pythonisk!
 Som Phillip J. Eby uttrykker det i [Python Is Not Java](http://dirtsimple.org/2004/12/python-is-not-java.html):
 
 > *In Java, you have to use getters and setters because using public fields gives you no opportunity to go back and change your mind later to using getters and setters. So in Java, you might as well get the chore out of the way up front. In Python, this is silly, because you can start with a normal attribute and change your mind at any time, without affecting any clients of the class.*
 
-Gettere og settere kan være nyttige, men aldri før det er behov for dem.
-Så lenge alt vi trenger er å lese og skrive verdien til et enkelt attributt, bør vi nøye oss med nettopp dét.
-Skulle vi på et senere tidspunkt få behov for noe mer fancy kan vi benytte Pythons innebyggde [`property`-funksjon](http://docs.python.org/library/functions.html#property) til å erstatte attributtet med metodekall.
+Så lenge alt vi trenger er å lese og skrive verdien til et attributt, er det ikke behov for gettere og settere i Python.
+Dersom vi på et tidspunkt få behov for mer, kan vi for eksempel benytte Pythons innebyggde [`property`-funksjon](http://docs.python.org/library/functions.html#property) til å erstatte attributtet med metodekall.
 
 La oss ta et eksempel. Vi har behov for å representere vinkler, og lager oss den enkleste tenklige klassen: `Vinkel` med attributtet `grader`.
 
@@ -239,7 +222,7 @@ class Vinkel:
         self.grader = grader
 ```
 
-Klassen benyttes som en kan forvente:
+Vi bruker attributtet direkte:
 
 ```python
 >>> v = Vinkel(90)
@@ -250,7 +233,7 @@ Klassen benyttes som en kan forvente:
 60
 ```
 
-Alt er fryd og gammen helt til det plutselig blir bestemt at vinkler internt skal representeres som radianer. Vi har plutselig behov for at vinkelens grader aksesseres via metodekall; `property` to the rescue!
+Dersom vi så bestemmer oss for å representere vinkler med radianer internt, kan vi benytte `property`:
 
 ```python
 import math
@@ -269,8 +252,8 @@ class Vinkel:
 ```
 
 I koden over har vi definert metodene `get_grader` og `set_metoder` for å håndtere konverteringen til og fra radianer.
-Ved hjelp av kallet til `property` fungerer vårt gode gamle `grader` attributt nå som en front for de nye getter- og setter-metodene.
-Utenfra ser klassen derfor fullstendig lik ut:
+Ved hjelp av kallet til `property` fungerer `grader`-attributtet nå som en front for de nye getter- og setter-metodene.
+Utenfra ser klassen helt lik ut:
 
 ```python
 >>> v = Vinkel(90)
@@ -281,11 +264,11 @@ Utenfra ser klassen derfor fullstendig lik ut:
 60
 ```
 
-`property`-funksjonen tar fire argumenter, der alle untatt det første er valgfritt: `fget`, `fset`, `fdel`, `doc`. 
+`property`-funksjonen tar fire argumenter, der alle unntatt det første er valgfritt: `fget`, `fset`, `fdel`, `doc`. 
 De tre første argumentene er funksjoner for å henholdsvis *lese*, *skrive*, og *slette* attributtet.
 Det siste argumentet er attributtets dokumentasjonstreng.
 
-Det er også mulig å benytte `property` som en såkalt *dekorator*, noe som lar oss skrive klassen vår om til følgende.
+Det er også mulig å benytte `property` som en såkalt *dekorator*, noe som lar oss skrive klassen vår om til følgende:
 
 ```python
 import math
@@ -303,18 +286,14 @@ class Vinkel:
         self.radianer = grader * (math.pi/180)
 ```
 
-Vi til å gå nærmere inn på hva dekoratorer er, hvordan disse fungerer, og hva de kan brukes til i del 3 av denne serien med bloggposter.
-Stay tuned!
-
 ## Oppsummering
 
-Vi har i denne bloggposten forsøkt å forklare hva vi mener med begrepet *idiomatisk python*.
 For å skrive god *pythonisk* kode er det viktig å kjenne språket og de verktøyene en har til rådighet.
-Ved å utnytte disse på en god måte kan en uttrykke koden slik at den blir så enkel og lettlest som overhodet mulig.
+Målet er rett og slett å skrive så enkel og lettlest kode som mulig.
 
-Denne posten har tatt for seg enkelte konsepter som må kunne anses som idiomatiske for Python, slik som duck typing, magiske metoder, funksjoner som objekter, with-uttrykk, og properties.
-I to kommende bloggposter i denne serien vil vi gå nærmere inn på noen temaer som er sentrale når en arbeider i Python.
-Del 2 vil fokusere på bruk av sekvenser slik som lister, iteratorer, og generatorer, mens vi i del 3 tar en nærmere titt på bruk av funksjoner i Python.
+Denne bloggposten har tatt for seg noen konsepter som er idiomatiske for Python, blant duck typing, magiske metoder og with-uttrykk.
+I to kommende bloggposter skal vi gå nærmere inn på noen temaer som er sentrale når en arbeider i Python.
+Del 2 vil fokusere på lister, iteratorer og generatorer, mens vi i del 3 tar en nærmere titt på bruk av funksjoner i Python.
 
 ---
 
