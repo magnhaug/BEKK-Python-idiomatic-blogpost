@@ -151,10 +151,14 @@ Hvis en klasse implementerer en metode som heter `__call__`, så kan instanser a
     ...     def __call__(self):
     ...         return "bar"
     ...
+    >>>
+    >>> # kaller selve klassen, og får en instans returnert
     >>> foo = Foo()
     >>> foo
     <__main__.Foo instance at 0xb72b9e2c>
-    >>> foo()
+    >>>
+    >>> # kaller instansen, som fører til at __call__-metoden kjøres
+    >>> foo() 
     'bar'
 
 ## `with`-uttrykk
@@ -184,7 +188,7 @@ i stedet for
         f.close()
 
 Det er også mulig å lage sine egne klasser som støtter `with`.
-Dette gjøres ved å la klassen implementere metodene [`__enter__` og `__exit__`](http://docs.python.org/reference/datamodel.html#with-statement-context-managers) som begge er eksempler på *magiske metoder* beskrevet over.
+Dette gjøres ved å la klassen implementere metodene [`__enter__` og `__exit__`](http://docs.python.org/reference/datamodel.html#with-statement-context-managers) som er enda et par eksempler på *magiske metoder*.
 For mer informasjon om hvordan dette fungerer, se [denne bloggposten](http://effbot.org/zone/python-with-statement.htm).
 
 ## Gettere og settere
