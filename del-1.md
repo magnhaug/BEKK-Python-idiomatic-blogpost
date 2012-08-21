@@ -126,9 +126,8 @@ Den virkelige nytten til de magiske metodene ligger likevel i at de lar oss lage
 Et vanlig eksempel er sammenlikning av to objekter.
 Ved å implementere én enkelt metode, `__cmp__(self, other)`, støtter klassen sammenlikning på alle de vanlige måtene slik som `==`, `!=`, `<` og `>`.
 
-På samme måte finnes det metoder for å overlaste aritmetiske operasjoner, typekonvertering, aksessering av atributter, behandling objekter som sekvenser, og mer.
-Listen over tilgjengelige metoder er langt mer omfattende enn vi kan dekke i denne bloggposten.
-Les heller videre på  [denne fabelaktige guiden](http://www.rafekettler.com/magicmethods.html) for å lære om de mulighetene som finnes.
+På samme måte finnes det metoder for blant annet å overlaste aritmetiske operasjoner, typekonvertering, aksessering av attributter og behandling objekter som sekvenser.
+Les [denne fabelaktige guiden](http://www.rafekettler.com/magicmethods.html) for å lære om de mulighetene som finnes.
 
 ## Funksjoner er objekter
 
