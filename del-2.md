@@ -300,5 +300,5 @@ Bruk denne til å finne det 100 000'ende fibonacci-tallet.
 
 ---
 
-Magnus Haug / Kjetil Valle
+Magnus Haug / Kjetil Valle  
 Bekk Consulting AS
