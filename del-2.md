@@ -204,7 +204,7 @@ Uendelige lister, store datamengder:
 2
 ```
 
-Spørsmål: Hvordan holder man en uendelig liste i minne?!
+Hvordan holder man en uendelig liste i minne? Det går rett og slett ikke an -- man er nødt til å jukse litt og generere dataene på farten. Og det noe generatorer er virkelig gode til.
 
 # Generator expressions
 
