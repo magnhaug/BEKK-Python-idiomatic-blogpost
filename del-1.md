@@ -319,4 +319,5 @@ Stay tuned!
 
 ---
 
-Magnus Haug / Kjetil Valle
+Magnus Haug / Kjetil Valle  
+Bekk Consulting AS
