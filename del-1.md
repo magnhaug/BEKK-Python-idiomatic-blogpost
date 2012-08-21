@@ -1,16 +1,13 @@
-# Idiomatisk Python - del 1 av 3
+# Idiomatisk Python
 
-Alle språk har sine særegenheter, med sine styrker og svakheter. 
-Bak et hvert språk ligger en filosofi—en tanke om hvordan språket bør brukes.
-Dette reflekteres gjerne i hvilke konstruksjoner og konsepter språket tilbyr.
-For å skrive pen kode er det viktig å kjenne og bruke språkets særegenheter; de uttrykk som er idiomatiske for språket.
+Alle språk har sine særegenheter, og bak hvert språk ligger en
+filosofi—en tanke om hvordan språket bør brukes.  For å skrive pen kode
+er det viktig å kjenne og bruke språkets særegenheter; de uttrykk som er
+idiomatiske for språket.
 
-Dette er første del i en serie på 3 bloggposter om idiomatisk Python.
-I denne delen tar vi for oss begrepet *Pythonisk kode* og diskuterer en rekke konsepter som underbygger dette.
-Del 2 kommer til å ta for seg sekvenser og lister, og gå igjennom hvordan Python legger opp til å arbeide med slike på en god måte.
-I den siste posten skal vi ta en nærmere titt på funksjoner i Python, og hva disse kan brukes til.
-
-Bloggpostene er delvis basert på [del 2](http://magnhaug.github.com/BEKK-Python-Kurs/slides/del2.html#1) av BEKKs [kursserie om Python](https://github.com/bekkopen/BEKK-Python-Kurs) på NTNU, og er derfor beregnet på lesere som kjenner grunnleggende Python uten å nødvendigvis være veldig godt kjent med språket.
+I denne bloggposten skal vi gå nærmere inn på hva idiomatisk Python er.
+Denne bloggposten er beregnet for de som kjenner grunnleggende Python,
+men krever absolutt ikke at man har kodet mye i språket.
 
 ## Hva er Pythonisk kode?
 
