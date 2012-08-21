@@ -117,7 +117,7 @@ Det regnes generelt som mer pythonisk å følge EAFP, men ikke glem at det vikti
 
 ## Magiske metoder
 
-Magiske metoder, eller [special method names](http://docs.python.org/reference/datamodel.html#specialnames) som de heter i Pythons offesielle dokumentasjon, er et kraftfult verktøy som det er vel verdt å lære å bruke. 
+Magiske metoder, eller [special method names](http://docs.python.org/reference/datamodel.html#specialnames) som de heter i Pythons offisielle dokumentasjon, er et kraftfullt verktøy som det er vel verdt å lære å bruke. 
 Disse metodene lar oss implementere egendefinert oppførsel for mange av Pythons innebygde operasjoner.
 
 Den første "magiske" metoden nye Python-programmerer blir introdusert for er gjerne `__init__`, som lar oss definere initialiseringen av et objekt.
@@ -133,8 +133,8 @@ Les heller videre på  [denne fabelaktige guiden](http://www.rafekettler.com/mag
 
 ## Funksjoner er objekter
 
-I Python er all data representert som [objekter](http://docs.python.org/reference/datamodel.html#objects).
-Dette gjelder ikke bare vanlige datastrukturer som tall, strenger og lister, men også slikt som funksjoner og generatorer.
+I Python er alle data representert som [objekter](http://docs.python.org/reference/datamodel.html#objects).
+Dette gjelder ikke bare vanlige datastrukturer som tall, strenger og lister, men også som funksjoner, generatorer og klasser.
 
 Som tidligere nevnt bryr vi oss skjeldent om hvilke typer vi jobber med i pythonisk kode, så lenge de har de egenskapene vi trenger.
 Den egenskapen vi trenger fra noe vi vil behandle som en funksjon er at den *kan kalles*.
