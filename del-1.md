@@ -16,7 +16,7 @@ Bloggpostene er delvis basert på [del 2](http://magnhaug.github.com/BEKK-Python
 
 Pythonisk kode er kode som bruker vanlige idiomer i Python på en god måte, i stedet for å implementere koden ved hjelp av konsepter og teknikker som er vanligere i andre språk.
 
-Dette kan illustreres med et enkelt eksempel hentet fra Pythons [offesielle ordliste](http://docs.python.org/glossary.html#term-pythonic).
+Dette kan illustreres med et enkelt eksempel hentet fra Pythons [offisielle ordliste](http://docs.python.org/glossary.html#term-pythonic).
 I mange språk er det vanlig å iterere over elementer i lister ved hjelp av ei løkke og en eksplisitt indeks.
 
         for (int i=0; i<food.length; i++) {
