@@ -205,16 +205,14 @@ For mer informasjon om `with`, sjekk ut [denne bloggposten](http://effbot.org/zo
 
 ## Gettere og settere
 
-Klasser med private felter som eksponeres ved hjelp av enkle get- og set-metoder er et vanlig pattern i mange språk.
-Dette anses *ikke* for å være pythonisk!
-Joda, det er viktig med enkapsulering, men et lass med gettere og settere for alle tenkelige attributter er ikke nødvendig for å oppnå dette. 
+Klasser med private felter som eksponeres ved hjelp av enkle get- og
+set-metoder er et vanlig pattern i mange språk, men det er absolutt *ikke* pythonisk!
 Som Phillip J. Eby uttrykker det i [Python Is Not Java](http://dirtsimple.org/2004/12/python-is-not-java.html):
 
 > *In Java, you have to use getters and setters because using public fields gives you no opportunity to go back and change your mind later to using getters and setters. So in Java, you might as well get the chore out of the way up front. In Python, this is silly, because you can start with a normal attribute and change your mind at any time, without affecting any clients of the class.*
 
-Gettere og settere kan være nyttige, men aldri før det er behov for dem.
-Så lenge alt vi trenger er å lese og skrive verdien til et enkelt attributt, bør vi nøye oss med nettopp dét.
-Skulle vi på et senere tidspunkt få behov for noe mer fancy kan vi benytte Pythons innebyggde [`property`-funksjon](http://docs.python.org/library/functions.html#property) til å erstatte attributtet med metodekall.
+Så lenge alt vi trenger er å lese og skrive verdien til et attributt, er det ikke behov for gettere og settere i Python.
+Dersom vi på et tidspunkt få behov for mer, kan vi for eksempel benytte Pythons innebyggde [`property`-funksjon](http://docs.python.org/library/functions.html#property) til å erstatte attributtet med metodekall.
 
 La oss ta et eksempel. Vi har behov for å representere vinkler, og lager oss den enkleste tenklige klassen: `Vinkel` med attributtet `grader`.
 
@@ -224,7 +222,7 @@ class Vinkel:
         self.grader = grader
 ```
 
-Klassen benyttes som en kan forvente:
+Vi bruker attributtet direkte:
 
 ```python
 >>> v = Vinkel(90)
@@ -235,7 +233,7 @@ Klassen benyttes som en kan forvente:
 60
 ```
 
-Alt er fryd og gammen helt til det plutselig blir bestemt at vinkler internt skal representeres som radianer. Vi har plutselig behov for at vinkelens grader aksesseres via metodekall; `property` to the rescue!
+Dersom vi så bestemmer oss for å representere vinkler med radianer internt, kan vi benytte `property`:
 
 ```python
 import math
@@ -254,8 +252,8 @@ class Vinkel:
 ```
 
 I koden over har vi definert metodene `get_grader` og `set_metoder` for å håndtere konverteringen til og fra radianer.
-Ved hjelp av kallet til `property` fungerer vårt gode gamle `grader` attributt nå som en front for de nye getter- og setter-metodene.
-Utenfra ser klassen derfor fullstendig lik ut:
+Ved hjelp av kallet til `property` fungerer `grader`-attributtet nå som en front for de nye getter- og setter-metodene.
+Utenfra ser klassen helt lik ut:
 
 ```python
 >>> v = Vinkel(90)
@@ -266,11 +264,11 @@ Utenfra ser klassen derfor fullstendig lik ut:
 60
 ```
 
-`property`-funksjonen tar fire argumenter, der alle untatt det første er valgfritt: `fget`, `fset`, `fdel`, `doc`. 
+`property`-funksjonen tar fire argumenter, der alle unntatt det første er valgfritt: `fget`, `fset`, `fdel`, `doc`. 
 De tre første argumentene er funksjoner for å henholdsvis *lese*, *skrive*, og *slette* attributtet.
 Det siste argumentet er attributtets dokumentasjonstreng.
 
-Det er også mulig å benytte `property` som en såkalt *dekorator*, noe som lar oss skrive klassen vår om til følgende.
+Det er også mulig å benytte `property` som en såkalt *dekorator*, noe som lar oss skrive klassen vår om til følgende:
 
 ```python
 import math
@@ -287,9 +285,6 @@ class Vinkel:
     def grader(self, grader):
         self.radianer = grader * (math.pi/180)
 ```
-
-Vi til å gå nærmere inn på hva dekoratorer er, hvordan disse fungerer, og hva de kan brukes til i del 3 av denne serien med bloggposter.
-Stay tuned!
 
 ## Oppsummering
 
