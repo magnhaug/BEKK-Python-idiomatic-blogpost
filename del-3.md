@@ -415,4 +415,5 @@ La oss avslutte med en nærmere titt på `@property`.
 
 ---
 
-Magnus Haug / Kjetil Valle
+Magnus Haug / Kjetil Valle  
+Bekk Consulting AS
