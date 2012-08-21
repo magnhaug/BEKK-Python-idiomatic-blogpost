@@ -260,7 +260,7 @@ class Vinkel:
 ```
 
 I koden over har vi definert metodene `get_grader` og `set_metoder` for å håndtere konverteringen til og fra radianer.
-Kallet til `property` forkler disse som vårt gode gamle `grader` attributt.
+Ved hjelp av kallet til `property` fungerer vårt gode gamle `grader` attributt nå som en front for de nye getter- og setter-metodene.
 Utenfra ser klassen derfor fullstendig lik ut:
 
 ```python
