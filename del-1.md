@@ -81,11 +81,13 @@ La oss gå videre til å se på noen utvalgte konsepter vi mener er viktige å k
 ## Duck typing
 
 Et viktig konsept som mange prater om i sammenheng med pythonisk kode er *duck typing*.
-Tankegangen går ut på at hvis et objekt støtter den operasjonen vi ønsker å utføre, så er det ikke så farlig hvilken type objektet har.
+[Tankegangen](http://groups.google.com/group/comp.lang.python/msg/e230ca916be58835) går ut på at hvis et objekt støtter den operasjonen vi ønsker å utføre, så er det ikke så farlig hvilken type objektet har:
+
+> *don't check whether it IS-a duck: check whether it QUACKS-like-a duck, WALKS-like-a duck, etc, etc, depending on exactly what subset of duck-like behaviour you need*
 
 La oss for eksempel si at vi har et filobjekt `fil`, og ønsker å skrive til dette.
 Ettersom Python er dynamisk typet vil vi ofte ikke kunne være sikre på at `fil` faktisk er av typen `file` før under kjøretid.
-En (lite pythonisk) måte å håndtere dette på vil være å sjekke typen på `fil` før vi skriver til den.
+En lite pythonisk måte å håndtere dette på vil være å sjekke typen på `fil` før vi skriver til den.
 
 ```python
 if isinstance(fil, file):
@@ -102,10 +104,6 @@ except:
 ```
 
 Implementert på denne måten kan `fil` godt være en fysisk fil, en socket, eller noe helt annet, så lenge vi får skrevet dataene våre.
-
-Navnet *duck typing* stammer fra en [diskusjon i pythons mailinglister](http://groups.google.com/group/comp.lang.python/msg/e230ca916be58835):
-
-> *don't check whether it IS-a duck: check whether it QUACKS-like-a duck, WALKS-like-a duck, etc, etc, depending on exactly what subset of duck-like behaviour you need*
 
 ### EAFP over LBYL
 
