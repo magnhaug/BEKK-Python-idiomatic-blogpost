@@ -306,17 +306,6 @@ class Vinkel:
 Vi til å gå nærmere inn på hva dekoratorer er, hvordan disse fungerer, og hva de kan brukes til i del 3 av denne serien med bloggposter.
 Stay tuned!
 
-## TODO: Flere ting som kan nevnes?
-
-- conditional assignments: 
-  - `x = 3 if (y == 1) else 2` → *x er 3 hvis y er 1, eller er den 2*
-- forskjellige collections (i tillegg til `dict`, `list` og `set`): 
-  - `namedtuple`, `deque`, `Counter`, `OrderedDict`, `defaultdict`
-- strengformatering
-- script-kode i moduler:
-  - `if __name__ == '__main__'`
-- `__future__`
-
 ## Oppsummering
 
 Vi har i denne bloggposten forsøkt å forklare hva vi mener med begrepet *idiomatisk python*.
