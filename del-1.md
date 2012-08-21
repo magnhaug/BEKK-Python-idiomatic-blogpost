@@ -164,7 +164,7 @@ Hvis en klasse implementerer en metode som heter `__call__`, så kan instanser a
 
 ## `with`-uttrykk
 
-Et veldig vanlig mønster en ofte møter i mange kontekster er en variasjon over følgende.
+Et vanlig mønster en møter er en variasjon over:
 
 ```python
 # noe settes opp
@@ -174,17 +174,15 @@ except:
     # noe rives ned
 ```
         
-Det som settes opp og rives ned kan for eksempel være en fil. En databasetilkobling som åpnes og lukkes, eller en databasetransaksjon som må committes eller rulles tilbake er et annet bruksområde for dette patternet.
-I stedet for at man skal tvinges til å gjøre dette overalt i koden, støtter mange av Pythons innebygde klasser et [with-uttrykk](http://docs.python.org/reference/compound_stmts.html#with).
-
-Et eksempel er [fil-objekter](http://docs.python.org/library/stdtypes.html#file-objects), som lar oss skrive
+Det som settes opp og rives ned kan for eksempel være en fil, en databasetilkobling som åpnes og lukkes, eller en databasetransaksjon som må committes eller rulles tilbake.
+For å slippe dette mønsteret støtter mange av Pythons innebygde klasser [with-uttrykk](http://docs.python.org/reference/compound_stmts.html#with). For [fil-objekter](http://docs.python.org/library/stdtypes.html#file-objects) kan vi da skrive:
 
 ```python
 with open(filnavn) as f:
     # utfør operasjon med f
 ```
 
-i stedet for
+i stedet for:
 
 ```python
 f = open(filnavn)
@@ -203,9 +201,8 @@ with lock:
     # ikke-trådsikker kode..
 ```
 
-Det er også mulig å lage sine egne klasser som støtter `with`.
-Dette gjøres ved å la klassen implementere metodene [`__enter__` og `__exit__`](http://docs.python.org/reference/datamodel.html#with-statement-context-managers) som er enda et par eksempler på *magiske metoder*.
-For mer informasjon om hvordan dette fungerer, se [denne bloggposten](http://effbot.org/zone/python-with-statement.htm).
+For å støtte `with` er det nok at en klasse implementere metodene [`__enter__` og `__exit__`](http://docs.python.org/reference/datamodel.html#with-statement-context-managers).
+For mer informasjon om `with`, sjekk ut [denne bloggposten](http://effbot.org/zone/python-with-statement.htm).
 
 ## Gettere og settere
 
