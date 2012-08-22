@@ -132,7 +132,7 @@ Les [denne fabelaktige guiden](http://www.rafekettler.com/magicmethods.html) for
 ## Funksjoner er objekter
 
 I Python er alle data representert som [objekter](http://docs.python.org/reference/datamodel.html#objects).
-Dette gjelder ikke bare vanlige datastrukturer som tall, strenger og lister, men også som funksjoner, generatorer og klasser.
+Dette gjelder ikke bare vanlige datastrukturer som tall, strenger og lister, men også slikt som funksjoner, generatorer og klasser.
 
 Som tidligere nevnt bryr vi oss sjeldent om hvilke typer vi jobber med i pythonisk kode, så lenge de har de egenskapene vi trenger.
 Den egenskapen vi trenger fra noe vi vil behandle som en funksjon er at den *kan kalles*.
