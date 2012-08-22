@@ -11,11 +11,11 @@ men krever absolutt ikke at man har kodet mye i språket.
 
 ## Hva er Pythonisk kode?
 
-I mange språk er det vanlig å iterere over elementer i lister ved hjelp av ei løkke og en eksplisitt indeks, som her i Java:
+I mange språk er det vanlig å iterere over elementer i lister ved hjelp av ei løkke og en eksplisitt indeks, som her i C:
 
-```java
-for (int i=0; i<food.length; i++) {
-    System.out.println(food[i]);
+```c
+for (size_t i=0; i < food.length; i++) {
+    printf("%s\n", food[i]);
 }
 ```
 
