@@ -14,7 +14,7 @@ men krever absolutt ikke at man har kodet mye i språket.
 I mange språk er det vanlig å iterere over elementer i lister ved hjelp av ei løkke og en eksplisitt indeks, som her i C:
 
 ```c
-for (size_t i=0; i < food.length; i++) {
+for (size_t i=0; i < sizeof(food); i++) {
     printf("%s\n", food[i]);
 }
 ```
