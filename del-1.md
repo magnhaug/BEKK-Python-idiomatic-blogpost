@@ -291,7 +291,7 @@ class Vinkel:
 For å skrive god *pythonisk* kode er det viktig å kjenne språket og de verktøyene en har til rådighet.
 Målet er rett og slett å skrive så enkel og lettlest kode som mulig.
 
-Denne bloggposten har tatt for seg noen konsepter som er idiomatiske for Python, blant duck typing, magiske metoder og with-uttrykk.
+Denne bloggposten har tatt for seg noen konsepter som er idiomatiske for Python, blant annet duck typing, magiske metoder og with-uttrykk.
 I to kommende bloggposter skal vi gå nærmere inn på noen temaer som er sentrale når en arbeider i Python.
 Del 2 vil fokusere på lister, iteratorer og generatorer, mens vi i del 3 tar en nærmere titt på bruk av funksjoner i Python.
 
