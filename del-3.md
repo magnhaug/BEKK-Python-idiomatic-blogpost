@@ -56,7 +56,7 @@ Et argument som er en funksjon er ikke mer spesielle enn andre argumenter, borts
 HAI from foo, kthxbye
 ```
 
-På tilsvarende måte er retur av en funksjon en vanlig retur, der navnet som returneres tilfeldigvis tilhører en funksjon.
+På tilsvarende måte er retur av en funksjon en vanlig retur, der navnet som returneres tilfeldigvis kan tilhøre en annen funksjon.
 
 ```python
 >>> def bar():
@@ -87,7 +87,7 @@ Eksempelet under viser en dictionary med funksjoner som verdier.
 ```
 
 La oss oppsummere egenskapene til *førsteklasses* funksjoner. 
-En funksjon i Python kan...
+En funksjon i Python kan:
 
 1. defineres de fleste steder der en kan tilordne variabler, også inne i andre funksjoner.
 1. sendes som argumenter til andre funksjoner.
@@ -140,7 +140,7 @@ Dette er spesielt aktuelt når vi kaller funksjoner som tar inn funksjoner som a
 Det er flere slike innebygget i språket, hvorav [`map`](http://docs.python.org/library/functions.html#map), [`reduce`](http://docs.python.org/library/functions.html#reduce), og [`filter`](http://docs.python.org/library/functions.html#filter) nok er de som er mest brukte.
 
 For å ta et forholdsvis enkelt eksempel, la oss si vi ønsker å bruke `filter` til å finne partallene i en liste.
-Uten bruk av lambdaer må vi først definere en funksjon som forteller oss om elementet i lista er partall, og sende denne som første argument til `filter`.
+Uten bruk av lambdaer må vi først definere en funksjon som forteller oss hvorvidt et gitt tall er partall, og deretter sende denne som argument til `filter`.
 
 ```python
 def er_partall(x):
