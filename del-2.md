@@ -160,7 +160,7 @@ class countdown(object):
         return r
 ```
 
-Og bruke den:
+Så kan vi bruke den nye iteratoren vår slik:
 
 ```python
 >>> c = countdown(5)
