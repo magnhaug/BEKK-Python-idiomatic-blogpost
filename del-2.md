@@ -7,9 +7,9 @@ En stor del av det vi programmerer omhandler å på én eller annen måte behand
 ## List comprehensions
 
 List comprehensions er en konsis syntaks for å lage eller transformere lister.
-Ved hjelp av list comprehensions kan man enkelt iterere over eksisterende sekvenser, og transformere og filtrere elementene, og lagre resultatet som en liste.
+Ved hjelp av list comprehensions kan man enkelt iterere over eksisterende sekvenser, transformere og filtrere elementene, og lagre resultatet som en ny liste.
 
-Den viktigste fordelen med list comprehensions i forhold til å lage lister på vanlig måte ved hjelp av for-løkker er at koden blir kortere og mer lettlest, og dermed enklere å feilsøke.
+Den viktigste fordelen med list comprehensions i forhold til å lage lister på vanlig måte ved hjelp av for-løkker er at koden blir kortere og mer lettlest, og dermed enklere å feilsøke eller verifisere.
 Som en bonus kan også list comprehensions ha bedre ytelse enn vanlige for-løkker i mange tilfeller.
 
 Syntaksen for å skrive list comprehensions er som følger.
@@ -18,10 +18,9 @@ Syntaksen for å skrive list comprehensions er som følger.
 resultat = [uttrykk for element in liste if betingelse]
 ```
 
-List comprehension er avgrenset av firkantparenteser, og resultatet lagres her i `resultat`.
-`uttrykk` er et utrykk som evalueres for hver iterasjon av `for element in liste`, og resultatet av dette havner som et element i `resultat`. 
-I de fleste tilfeller vil `uttrykk` være en operasjon over `element`.
-Det siste leddet, `if betingelse` er valgfritt, og fungerer som et filter som lar oss ekskludere elementer vi ikke ønsker.
+`uttrykk` evalueres for hver iterasjon av `for element in liste`, og resultatet av dette havner som et element i `resultat`. 
+Det siste leddet, `if betingelse` er valgfritt, og lar oss ekskludere elementer vi ikke ønsker å ta med i lista.
+Resultatet lagres her i `resultat`-listen.
 
 ### Et enkelt eksempel
 
