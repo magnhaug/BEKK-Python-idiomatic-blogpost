@@ -91,9 +91,9 @@ Eksempelet under viser hvordan vi kan bruke dette til å generere gangetabllen f
 
 ### Comprehensions for Set og Dictionaries
 
-Fra Python 2.7 finnes det også tilsvarende comprehensions for set og dictionaries.
+Fra og med Python 2.7 finnes det også tilsvarende comprehensions for set og dictionaries.
 
-For set comprehension er syntaksen helt tilsvarende list comprehension, med unntak av at firkantparentesene er byttet ut med krøllparenteser.
+For set comprehension bytter man ut firkantparentesene med krøllparenteser.
 
 ```python
 >>> [i % 3 for i in range(10)]
@@ -113,9 +113,9 @@ Eksempelet under demonstrerer hvordan vi kan lage en dict som kobler *i* og den 
 I tillegg til disse finnes det også en liknende notasjon som bruker vanlige parenteser.
 Men for å lære om denne må vi først se nærmere på iteratorer og generatorer.
 
-## Iteratorer og generatorer
+## Iteratorer
 
-Iteratorer er kanskje ikke veldig spennende, men det er en viktig byggesten.
+Det er ikke ofte man implementerer en iterator fra bunnen av, men det er en viktig byggesten og følgelig viktig å forstå.
 Flere av de python-elementene vi allerede kjenner kan fungere som iteratorer..
 F.eks. lister:
 
@@ -135,7 +135,7 @@ StopIteration
 >>>
 ```
 
-Syntaktisk sukker
+For-løkker er faktisk bare syntaktisk sukker for å iterere over en iterator helt frem til det kastes en StopIteration exception.
 
 ```python
 >>> items = [1, 4, 5]
@@ -171,7 +171,9 @@ Og bruke den:
 5 4 3 2 1
 ```
 
-Dette var mye styr, kan det gjøres enklere? Yep, med generatorer:
+## Generatorer
+
+Iteratorer føles ofte klunkete. Generatorer gir oss en kraftfull måte å lage den samme funksjonaliteten som en iterator, men med betraktelig mye mer lettlest syntaks. Her er countdown-iteratoren fra forrige eksempel implementert som en generator:
 
 ```python
 def countdown(i):
@@ -189,9 +191,10 @@ Resultat:
 5 4 3 2 1
 ```
 
-### Hva er nytteverdien?
+### Hva er nytteverdien av generatorer?
 
-Uendelige lister, store datamengder:
+Om man jobber med store datamengder, eller med uendelige lister, er det upraktisk (eller umulig) å lagre alle dataene som en liste før man plukker ut ett og ett element.
+Derfor er det en del bruksområder hvor lister ikke er tilstrekkelige, enten de er skrevet med list comprehensions eller om de er opprettet med en for-løkke.
 
 ```python
 >>> from itertools import count
