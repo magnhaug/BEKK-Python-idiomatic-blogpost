@@ -116,8 +116,7 @@ Men for å lære om denne må vi først se nærmere på iteratorer og generatore
 ## Iteratorer
 
 Det er ikke ofte man implementerer en iterator fra bunnen av, men det er en viktig byggesten og følgelig viktig å forstå.
-Flere av de python-elementene vi allerede kjenner kan fungere som iteratorer..
-F.eks. lister:
+Flere av de python-elementene vi allerede kjenner kan fungere som iteratorer, som f.eks. lister:
 
 ```python
 >>> items = [1, 4, 5]
@@ -135,7 +134,7 @@ StopIteration
 >>>
 ```
 
-For-løkker er faktisk bare syntaktisk sukker for å iterere over en iterator helt frem til det kastes en StopIteration exception.
+`for`-løkker er faktisk bare syntaktisk sukker for å iterere over en iterator helt frem til det kastes en StopIteration exception.
 
 ```python
 >>> items = [1, 4, 5]
@@ -195,6 +194,7 @@ Resultat:
 
 Om man jobber med store datamengder, eller med uendelige lister, er det upraktisk (eller umulig) å lagre alle dataene som en liste før man plukker ut ett og ett element.
 Derfor er det en del bruksområder hvor lister ikke er tilstrekkelige, enten de er skrevet med list comprehensions eller om de er opprettet med en for-løkke.
+Her har vi et veldig enkelt eksempel på at vi plukker elementer fra en uendelig iterator.
 
 ```python
 >>> from itertools import count
@@ -207,11 +207,9 @@ Derfor er det en del bruksområder hvor lister ikke er tilstrekkelige, enten de 
 2
 ```
 
-Hvordan holder man en uendelig liste i minne? Det går rett og slett ikke an -- man er nødt til å jukse litt og generere dataene på farten. Og det noe generatorer er virkelig gode til.
-
 # Generator expressions
 
-List comprehensions kan automagisk skrives som en generator:
+List comprehensions kan *nesten* direkte oversettes til et generator-uttrykk. Disse kan ved første øyekast se ut som lister, men vil oppføre seg som generatorer:
 
 ```python
 >>> liste = [i for i in range(10)]
@@ -242,14 +240,14 @@ List comprehensions kan automagisk skrives som en generator:
 ... 
 ```
 
-Hva skjedde her?
+Hva skjedde her? Iteratorer og generatorer kan man kun iterere over én gang, før man må instansiere dem på ny eller evt. resette dem. Ei liste kan selvfølgelig itereres over så mange ganger man vil. Dette har sine fordeler og ulemper.
 
 ### Fordeler
 
-- Er mer kompakte (men kan være mindre fleksible) enn vanlige generatorer med yield.
-- Er mer minnevennlige enn lister.
-  - Uendelig lange lister passer dårlig i minnet...
-- Som skapt for input til metoder som arbeider på elementer enkeltvis. (Da kan vi også droppe et sett parenteser.)
+- Generator-uttrykk mer kompakte (men kan være mindre fleksible) enn vanlige generatorer med yield.
+- Generatorer og generator-uttrykk er mer minnevennlige enn lister.
+  - Uendelig lange lister har ikke plass i minnet
+- Generatorer er som skapt for input til metoder som arbeider på elementer enkeltvis, slik som vi her sender inn en generator til sum-funksjonen:
 
 ```python
 sum(x for x in range(100000) if x % 2 == 0)
@@ -258,7 +256,7 @@ sum(x for x in range(100000) if x % 2 == 0)
 ### Ulemper
 
 - Kan ikke itereres over flere ganger.
-- Kan ikke bruke indeksering/slicing eller de vanlige liste-metodene (`append`, `insert`, `count`, `sort`, etc).
+- Kan ikke bruke indeksering/oppstykking eller de vanlige liste-metodene (`append`, `insert`, `count`, `sort`, etc).
 
 
 ### Oppgaver:
