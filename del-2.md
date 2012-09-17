@@ -1,8 +1,10 @@
 # Idiomatisk Python - del 2 av 3
 
-TODO: introduksjon.
+# Lister og sekvenser
 
-## List comprehension
+En stor del av det vi programmerer omhandler å på én eller annen måte behandler sekvenser av data. I klassiske imperative språk kan det å jobbe med lister og sekvenser være ganske slitsomt, om man først har hatt gleden av å jobbe en stund med et mer moderne språk. I denne bloggposten vil vi vise ved eksempel hvilke mekanismer Python tilbyr for å jobbe med sekvenser av data, og hvilke fordeler dette gir.
+
+## List comprehensions
 
 List comprehensions er en konsis syntaks for å lage eller transformere lister.
 Ved hjelp av list comprehensions kan man enkelt iterere over eksisterende sekvenser, og transformere og filtrere elementene, og lagre resultatet som en liste.
