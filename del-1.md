@@ -251,7 +251,7 @@ class Vinkel:
     grader = property(get_grader, set_grader)
 ```
 
-I koden over har vi definert metodene `get_grader` og `set_metoder` for å håndtere konverteringen til og fra radianer.
+I koden over har vi definert metodene `get_grader` og `set_grader` for å håndtere konverteringen til og fra radianer.
 Ved hjelp av kallet til `property` fungerer `grader`-attributtet nå som en front for de nye getter- og setter-metodene.
 Utenfra ser klassen helt lik ut:
 
