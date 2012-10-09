@@ -209,7 +209,8 @@ Her har vi et veldig enkelt eksempel på at vi plukker elementer fra en uendelig
 
 # Generator expressions
 
-List comprehensions kan *nesten* direkte oversettes til et generator-uttrykk. Disse kan ved første øyekast se ut som lister, men vil oppføre seg som generatorer:
+List comprehensions kan *nesten* direkte oversettes til et generator-uttrykk. Disse kan ved første øyekast se ut som lister, men vil oppføre seg som generatorer.
+Her er et trivielt eksempel på å iterere over en liste:
 
 ```python
 >>> liste = [i for i in range(10)]
@@ -225,7 +226,7 @@ List comprehensions kan *nesten* direkte oversettes til et generator-uttrykk. Di
 0 1 2 3 4 5 6 7 8 9
 ```
 
-&nbsp;
+.. og her forsøker vi det samme med en generator:
 
 ```python
 >>> generator = (i for i in range(10))
@@ -242,106 +243,22 @@ List comprehensions kan *nesten* direkte oversettes til et generator-uttrykk. Di
 
 Hva skjedde her? Iteratorer og generatorer kan man kun iterere over én gang, før man må instansiere dem på ny eller evt. resette dem. Ei liste kan selvfølgelig itereres over så mange ganger man vil. Dette har sine fordeler og ulemper.
 
-### Fordeler
+#### Fordeler
 
 - Generator-uttrykk mer kompakte (men kan være mindre fleksible) enn vanlige generatorer med yield.
 - Generatorer og generator-uttrykk er mer minnevennlige enn lister.
   - Uendelig lange lister har ikke plass i minnet
-- Generatorer er som skapt for input til metoder som arbeider på elementer enkeltvis, slik som vi her sender inn en generator til sum-funksjonen:
 
-```python
-sum(x for x in range(100000) if x % 2 == 0)
-```
-
-### Ulemper
+#### Ulemper
 
 - Kan ikke itereres over flere ganger.
 - Kan ikke bruke indeksering/oppstykking eller de vanlige liste-metodene (`append`, `insert`, `count`, `sort`, etc).
 
-
-### Oppgaver:
-
-1. Lag en list comprehension som lister opp alle partall under 20, og print dem
-1. Lag et generator expression som gjør det samme. Print dem.
-1. Lag en generator som lister opp ALLE partall.
-1. Lag et generator expression som lister opp ALLE partall.
-1. Print de første 20 av dem, f.eks. slik:  
-    `print [alle_partall.next() for i in xrange(20)]`
-1. Lag en generator som generer tall-sekvensen 1, -1, 2, -2, 3, -3, ...
-1. Lag en generator som genererer fibonacci-tallene.
-   Bruk denne til å finne det 100 000'ende fibonacci-tallet.
-
-### Løsninger:
-
-Lag en list comprehension som lister opp alle partall under 20, og print dem
-
-```python
->>> partall = [i for i in xrange(20) if i % 2==0]
->>> for i in partall:
-...   print i, 
-... 
-0 2 4 6 8 10 12 14 16 18
-```
-
-Lag et generator expression som gjør det samme. Print dem.
-
-```python
->>> partall = (i for i in xrange(20) if i % 2==0)
->>> for i in partall:
-...   print i, 
-... 
-0 2 4 6 8 10 12 14 16 18
-```
-
-Lag en generator som lister opp ALLE partall.
-
-```python
->>> def allepartall():
-...     i = 0
-...     while True:
-...         if i % 2 == 0:
-...             yield i
-...         i += 1
-```
-
-Lag et generator expression som lister opp ALLE partall.
-
-```python
->>> from itertools import count
->>> allepartall = (i for i in count() if i % 2 == 0)
-```
-
-Lag en generator som generer tall-sekvensen 1, -1, 2, -2, 3, -3, ...
-
-```python
->>> def plusminus():
-...     i = 1
-...     while True:
-...             yield i
-...             yield -i
-...             i += 1
-```
-
-Lag en generator som genererer fibonacci-tallene.  
-Bruk denne til å finne det 100 000'ende fibonacci-tallet.
-
-```python
->>> def fib():
-...     a, b = 1, 1
-...     yield a
-...     while True:
-...             yield a
-...             a, b = a+b, a
->>> a = fib()
->>> for i in xrange(100000):
-...     result  = a.next()
-```
-
 ## Oppsummering
 
-- *List comprehensions* er en hendig syntaks for å lage/filtrere/mutere lister.
+- *List comprehensions* er en hendig syntaks for å lage/filtrere/mutere lister, med en mer lettlest syntax enn man kan være vant med fra andre språk.
 - *Generatorer* gir oss muligheten til å generere (uendelig) lange sekvenser uten at disse må lagres i minnet.
-  - Generator-uttrykk er en kompakt og konsis syntaks for å lage generatorer.
+  Vi anbefaler David Beazleys to særdeles gode presentasjoner om [enkel](http://www.dabeaz.com/generators/) og [avansert](http://www.dabeaz.com/coroutines/) praktisk bruk av generatorer.
 
 ---
 
