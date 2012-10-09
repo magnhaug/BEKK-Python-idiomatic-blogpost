@@ -209,7 +209,7 @@ Her har vi et veldig enkelt eksempel på at vi plukker elementer fra en uendelig
 
 # Generator expressions
 
-List comprehensions kan *nesten* direkte oversettes til et generator-uttrykk. Disse kan ved første øyekast se ut som lister, men vil oppføre seg som generatorer.
+List comprehensions kan nesten direkte oversettes til et generator-uttrykk. Disse kan ved første øyekast se ut som lister, men vil oppføre seg som generatorer.
 Her er et trivielt eksempel på å iterere over en liste:
 
 ```python
@@ -226,7 +226,7 @@ Her er et trivielt eksempel på å iterere over en liste:
 0 1 2 3 4 5 6 7 8 9
 ```
 
-.. og her forsøker vi det samme med en generator:
+.. og her forsøker vi det samme med et generator-uttrykk:
 
 ```python
 >>> generator = (i for i in range(10))
@@ -241,7 +241,8 @@ Her er et trivielt eksempel på å iterere over en liste:
 ... 
 ```
 
-Hva skjedde her? Iteratorer og generatorer kan man kun iterere over én gang, før man må instansiere dem på ny eller evt. resette dem. Ei liste kan selvfølgelig itereres over så mange ganger man vil. Dette har sine fordeler og ulemper.
+Hva skjedde her? Iteratorer og generatorer kan man kun iterere over én gang, før man må instansiere dem på ny eller evt. resette dem.
+Ei liste kan selvfølgelig itereres over så mange ganger man vil. Generator-uttrykket lager en generator for oss, så dette objektet kan kun itereres over én gang.
 
 #### Fordeler
 
