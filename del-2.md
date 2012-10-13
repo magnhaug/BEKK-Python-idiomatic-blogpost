@@ -2,7 +2,7 @@
 
 # Lister og sekvenser
 
-En stor del av det vi programmerer omhandler å på én eller annen måte behandler sekvenser av data. I klassiske imperative språk kan det å jobbe med lister og sekvenser være ganske slitsomt, om man først har hatt gleden av å jobbe en stund med et mer moderne språk. I denne bloggposten vil vi vise ved eksempel hvilke mekanismer Python tilbyr for å jobbe med sekvenser av data, og hvilke fordeler dette gir.
+En stor del av det vi programmerer omhandler å på én eller annen måte å behandle sekvenser av data. I klassiske imperative språk kan det å jobbe med lister og sekvenser være ganske slitsomt, om man først har hatt gleden av å jobbe en stund med et mer moderne språk. I denne bloggposten vil vi vise ved eksempel hvilke mekanismer Python tilbyr for å jobbe med sekvenser av data, og hvilke fordeler dette gir.
 
 ## List comprehensions
 
@@ -60,17 +60,17 @@ I eksempelet under lister vi opp alle permutasjoner av bokstavene x, y og z.
 
 I dette tilfellet kan vi altså eliminiere tre nestede for-løkker, og samtidig øke lesbarheten.
 Vær imidlertid varsom med å ta dette for langt.
-Håpløst komplekse list comprehensions som gjør for mye på en gang er gjerne vanskeligere å lese enn de tilsvarende nøstede for-løkkene, og strider dermed mot tankegangen i Zen of Python!
+Håpløst komplekse list comprehensions som gjør for mye på en gang er gjerne vanskeligere å lese enn de tilsvarende nøstede for-løkkene, og strider dermed mot tankegangen i the Zen of Python!
 
 I eksempelet over kan det forøvrig bemerkes at vi itererer over bokstavene i en streng på samme måte som vi vanligvis itererer over elementer i en liste.
 Dette er et godt eksempel på [duck typing](http://en.wikipedia.org/wiki/Duck_typing), et viktig prinsipp i Python.
-Duck typing er tanken om at det det som betyr noe ikke er hvilken type noe har, men hva du kan gjøre med det--i dette tilfellet iterering.
+Duck typing er tanken om at det som betyr noe ikke er hvilken type noe har, men hva du kan gjøre med det—i dette tilfellet iterering.
 
 ### Nøstede list comprehensions
 
 Dersom man ønsker å generere en liste av lister, lar dette seg gjøre med nøstede list expressions.
 
-Eksempelet under viser hvordan vi kan bruke dette til å generere gangetabllen for tallene fra 1 til 10.
+Eksempelet under viser hvordan vi kan bruke dette til å generere gangetabellen for tallene fra 1 til 10.
 
 ```python
 >>> from pprint import pprint
@@ -134,7 +134,7 @@ StopIteration
 >>>
 ```
 
-`for`-løkker er faktisk bare syntaktisk sukker for å iterere over en iterator helt frem til det kastes en StopIteration exception.
+for-løkker er faktisk bare syntaktisk sukker for å iterere over en iterator helt frem til det kastes en StopIteration exception.
 
 ```python
 >>> items = [1, 4, 5]
@@ -246,7 +246,7 @@ Ei liste kan selvfølgelig itereres over så mange ganger man vil. Generator-utt
 
 #### Fordeler
 
-- Generator-uttrykk mer kompakte (men kan være mindre fleksible) enn vanlige generatorer med yield.
+- Generator-uttrykk er mer kompakte (men kan være mindre fleksible) enn vanlige generatorer med yield.
 - Generatorer og generator-uttrykk er mer minnevennlige enn lister.
   - Uendelig lange lister har ikke plass i minnet
 
