@@ -48,7 +48,7 @@ Kodesnuttene over utrykker nøyaktig det samme, men den siste benytter et vanlig
 
 ### Comprehensions med nøstede løkker
 
-List comprehensions kan også gjøres med nestede for-løkker, ved å liste disse etter hverandre i uttrykket.
+List comprehensions kan også gjøres med nøstede for-løkker, ved å liste disse etter hverandre i uttrykket.
 
 I eksempelet under lister vi opp alle permutasjoner av bokstavene x, y og z.
 
@@ -58,7 +58,7 @@ I eksempelet under lister vi opp alle permutasjoner av bokstavene x, y og z.
  'yyz', 'yzx', 'yzy', 'yzz', 'zxx', 'zxy', 'zxz', 'zyx', 'zyy', 'zyz', 'zzx', 'zzy', 'zzz']
 ```
 
-I dette tilfellet kan vi altså eliminiere tre nestede for-løkker, og samtidig øke lesbarheten.
+I dette tilfellet kan vi altså eliminiere tre nøstede for-løkker, og samtidig øke lesbarheten.
 Vær imidlertid varsom med å ta dette for langt.
 Håpløst komplekse list comprehensions som gjør for mye på en gang er gjerne vanskeligere å lese enn de tilsvarende nøstede for-løkkene, og strider dermed mot tankegangen i the Zen of Python!
 
