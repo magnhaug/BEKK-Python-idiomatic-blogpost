@@ -1,7 +1,7 @@
 # Lister og sekvenser - Idiomatisk Python del 2
 
-En stor del av det vi programmerer omhandler å på én eller annen måte å behandle sekvenser av data. 
-I klassiske imperative språk kan det å jobbe med lister og sekvenser være ganske slitsomt, om man først har hatt gleden av å jobbe en stund med et mer moderne språk. 
+En stor del å programmere omhandler å på én eller annen måte å behandle sekvenser av data. 
+I klassiske imperative språk kan det å jobbe med lister og sekvenser være ganske slitsomt, spesielt om en først har hatt gleden av å jobbe en stund med et mer moderne språk. 
 Denne blogposten fortsetter der vi slapp i [del 1](http://open.bekk.no/idiomatisk-python/), og tar for seg typiske idiomer for å arbeide med sekvenser i Python.
 Vi vil vise eksempler på mekanismer Python tilbyr, og se på hvilke fordeler disse gir.
 
@@ -19,7 +19,7 @@ Syntaksen for å skrive list comprehensions er som følger.
 resultat = [uttrykk for element in liste if betingelse]
 ```
 
-`uttrykk` evalueres for hver iterasjon av `for element in liste`, og resultatet av dette havner som et element i `resultat`. 
+`uttrykk` evalueres for hver iterasjon av `for element in liste`, og resultatet av hver av disse havner som et element i `resultat`. 
 Det siste leddet, `if betingelse` er valgfritt, og lar oss ekskludere elementer vi ikke ønsker å ta med i lista.
 
 ### Et enkelt eksempel
@@ -55,9 +55,8 @@ List comprehensions kan også gjøres med nøstede for-løkker, ved å liste dis
 I eksempelet under lister vi opp alle permutasjoner av bokstavene x, y og z.
 
 ```python
->>> [a + b + c for a in "xyz" for b in "xyz" for c in "xyz"]
-['xxx', 'xxy', 'xxz', 'xyx', 'xyy', 'xyz', 'xzx', 'xzy', 'xzz', 'yxx', 'yxy', 'yxz', 'yyx', 'yyy',
- 'yyz', 'yzx', 'yzy', 'yzz', 'zxx', 'zxy', 'zxz', 'zyx', 'zyy', 'zyz', 'zzx', 'zzy', 'zzz']
+>>> [a+b+c for a in "xyz" for b in "xyz" for c in "xyz" if a!=b!=c!=a]
+['xyz', 'xzy', 'yxz', 'yzx', 'zxy', 'zyx']
 ```
 
 I dette tilfellet kan vi altså eliminiere tre nøstede for-løkker, og samtidig øke lesbarheten.
@@ -65,8 +64,8 @@ Vær imidlertid varsom med å ta dette for langt.
 Håpløst komplekse list comprehensions som gjør for mye på en gang er gjerne vanskeligere å lese enn de tilsvarende nøstede for-løkkene, og strider dermed mot tankegangen i the Zen of Python!
 
 I eksempelet over kan det forøvrig bemerkes at vi itererer over bokstavene i en streng på samme måte som vi vanligvis itererer over elementer i en liste.
-Dette er et godt eksempel på [duck typing](http://en.wikipedia.org/wiki/Duck_typing), et viktig prinsipp i Python.
-Duck typing er tanken om at det som betyr noe ikke er hvilken type noe har, men hva du kan gjøre med det—i dette tilfellet iterering.
+Dette er et godt eksempel på [duck typing](http://en.wikipedia.org/wiki/Duck_typing) brukt i praksis i Python.
+Det som betyr noe ikke er hvilken type noe har, men hva du kan gjøre med det — i dette tilfellet iterering.
 
 ### Nøstede list comprehensions
 
@@ -112,8 +111,10 @@ Eksempelet under demonstrerer hvordan vi kan lage en dict som kobler *i* og den 
 {0: 1, 1: 2, 2: 4, 3: 8, 4: 16, 5: 32, 6: 64, 7: 128, 8: 256, 9: 512}
 ```
 
-I tillegg til disse finnes det også en liknende notasjon som bruker vanlige parenteser.
+I tillegg til disse finnes det også en [liknende notasjon][generator-expressions] som bruker vanlige parenteser.
 Men for å lære om denne må vi først se nærmere på iteratorer og generatorer.
+
+[generator-expressions]: https://github.com/magnhaug/BEKK-Python-idiomatic-blogpost/blob/master/del-2.md/#generator-expressions
 
 ## Iteratorer
 
@@ -174,7 +175,10 @@ Så kan vi bruke den nye iteratoren vår slik:
 
 ## Generatorer
 
-Iteratorer føles ofte klunkete. Generatorer gir oss en kraftfull måte å lage den samme funksjonaliteten som en iterator, men med betraktelig mye mer lettlest syntaks. Her er countdown-iteratoren fra forrige eksempel implementert som en generator:
+Selv om det kan være svært kraftfult å implementere egne iteratorer, slik at en kan iterere over vanlige domeneobjekter, kan det til tider føles klunkete.
+*Generatorer* er funksjoner som returnerer iteratorer, hvilket gir oss en kraftfull måte å lage den samme funksjonaliteten, men med en betraktelig mer lettlest syntaks. 
+
+Her er countdown-iteratoren fra forrige eksempel implementert som en generator:
 
 ```python
 def countdown(i):
@@ -192,11 +196,17 @@ Resultat:
 5 4 3 2 1
 ```
 
-### Hva er nytteverdien av generatorer?
+Nøkkelen her er å forstå `yield`-nøkkelordet.
+`yield` fungerer på samme måte som `return`, men i stedet for å avslutte blir prosesseringen kun suspenderet midlertidig.
+Neste gang iteratoren kalles fortsetter prosesseringen fra der siste `yield` returnerte.
+
+### Hva er nytteverdien av dette?
 
 Om man jobber med store datamengder, eller med uendelige lister, er det upraktisk (eller umulig) å lagre alle dataene som en liste før man plukker ut ett og ett element.
 Derfor er det en del bruksområder hvor lister ikke er tilstrekkelige, enten de er skrevet med list comprehensions eller om de er opprettet med en for-løkke.
-Her har vi et veldig enkelt eksempel på at vi plukker elementer fra en uendelig iterator.
+
+Under er et veldig enkelt eksempel på at vi plukker elementer fra en uendelig iterator.
+[Itertools](http://docs.python.org/library/itertools.html) er en av pythons innebygde moduler, og inneholder en rekke hendige iteratorer klare til bruk.
 
 ```python
 >>> from itertools import count
@@ -211,7 +221,10 @@ Her har vi et veldig enkelt eksempel på at vi plukker elementer fra en uendelig
 
 # Generator expressions
 
-En list comprehension kan nesten direkte oversettes til et generator-uttrykk. Disse kan ved første øyekast se ut som lister, men vil oppføre seg som generatorer.
+En list comprehension kan nesten direkte oversettes til et generator-uttrykk. 
+Disse kan ved første øyekast se ut som lister, men vil oppføre seg som generatorer.
+På samme måte som en vanlig generator kan sees på som en funksjon som returnerer en iterator, er generator expressions en måte å definere iteratorer ved hjelp av *uttrykk*.
+
 Her er et trivielt eksempel på å iterere over en liste:
 
 ```python
@@ -243,25 +256,28 @@ Her er et trivielt eksempel på å iterere over en liste:
 ... 
 ```
 
-Hva skjedde her? Iteratorer og generatorer kan man kun iterere over én gang, før man må instansiere dem på ny eller evt. resette dem.
-Ei liste kan selvfølgelig itereres over så mange ganger man vil. Generator-uttrykket lager en generator for oss, så dette objektet kan kun itereres over én gang.
+Hva skjedde her? Iteratorer kan man kun iterere over én gang, før man må instansiere dem på ny eller eventuelt resette dem.
+Ei liste kan selvfølgelig itereres over så mange ganger man vil. 
+Generator-uttrykket lager en iterator for oss, så dette objektet kan kun itereres over én gang.
 
 #### Fordeler
 
 - Generator-uttrykk er mer kompakte (men kan være mindre fleksible) enn vanlige generatorer med yield.
 - Generatorer og generator-uttrykk er mer minnevennlige enn lister.
-  - Uendelig lange lister har ikke plass i minnet
+  - *Uendelig lange lister får ikke plass i minnet!*
 
 #### Ulemper
 
 - Kan ikke itereres over flere ganger.
 - Kan ikke bruke indeksering/oppstykking eller de vanlige liste-metodene (`append`, `insert`, `count`, `sort`, etc).
 
+Til slutt vil vi anbefale David Beazleys to særdeles gode presentasjoner om [enkel](http://www.dabeaz.com/generators/) og [avansert](http://www.dabeaz.com/coroutines/) praktisk bruk av generatorer.
+
 ## Oppsummering
 
-- *List comprehensions* er en hendig syntaks for å lage/filtrere/mutere lister, med en mer lettlest syntax enn man kan være vant med fra andre språk.
-- *Generatorer* gir oss muligheten til å generere (uendelig) lange sekvenser uten at disse må lagres i minnet.
-  Vi anbefaler David Beazleys to særdeles gode presentasjoner om [enkel](http://www.dabeaz.com/generators/) og [avansert](http://www.dabeaz.com/coroutines/) praktisk bruk av generatorer.
+- *List comprehensions* er en hendig syntaks for å lage/filtrere/mutere lister, og kan uttrykke mange ting på en langt mer lettlest måte enn i mange andre språk.
+- *Iteratorer* gir oss muligheten til å generere (uendelig) lange sekvenser uten at disse må lagres i minnet.
+- *Generatorer* og *generator expressions* er to enkle måter å definere iteratorer på.
 
 ---
 
