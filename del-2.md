@@ -1,8 +1,9 @@
-# Idiomatisk Python - del 2 av 3
+# Lister og sekvenser - Idiomatisk Python del 2
 
-# Lister og sekvenser
-
-En stor del av det vi programmerer omhandler å på én eller annen måte å behandle sekvenser av data. I klassiske imperative språk kan det å jobbe med lister og sekvenser være ganske slitsomt, om man først har hatt gleden av å jobbe en stund med et mer moderne språk. I denne bloggposten vil vi vise ved eksempel hvilke mekanismer Python tilbyr for å jobbe med sekvenser av data, og hvilke fordeler dette gir.
+En stor del av det vi programmerer omhandler å på én eller annen måte å behandle sekvenser av data. 
+I klassiske imperative språk kan det å jobbe med lister og sekvenser være ganske slitsomt, om man først har hatt gleden av å jobbe en stund med et mer moderne språk. 
+Denne blogposten fortsetter der vi slapp i [del 1](http://open.bekk.no/idiomatisk-python/), og tar for seg typiske idiomer for å arbeide med sekvenser i Python.
+Vi vil vise eksempler på mekanismer Python tilbyr, og se på hvilke fordeler disse gir.
 
 ## List comprehensions
 
@@ -20,12 +21,13 @@ resultat = [uttrykk for element in liste if betingelse]
 
 `uttrykk` evalueres for hver iterasjon av `for element in liste`, og resultatet av dette havner som et element i `resultat`. 
 Det siste leddet, `if betingelse` er valgfritt, og lar oss ekskludere elementer vi ikke ønsker å ta med i lista.
-Resultatet lagres her i `resultat`-listen.
 
 ### Et enkelt eksempel
 
 La oss ta utgangspunkt i kodesnutten under.
 Her itererer vi over de 100 første heltallene, og lagrer alle kvadrattall som er delelige på 7 i en ny liste.
+
+På klassisk imperativt vis med for-løkke:
 
 ```python
 >>> resultat = []
@@ -147,7 +149,7 @@ for-løkker er faktisk bare syntaktisk sukker for å iterere over en iterator he
 La oss implementere en iterator selv:
 
 ```python
-class countdown(object):
+class Countdown(object):
     def __init__(self,start):
         self.count = start
     def __iter__(self):
@@ -163,7 +165,7 @@ class countdown(object):
 Så kan vi bruke den nye iteratoren vår slik:
 
 ```python
->>> c = countdown(5)
+>>> c = Countdown(5)
 >>> for i in c:
 ...     print i,
 ...
@@ -209,7 +211,7 @@ Her har vi et veldig enkelt eksempel på at vi plukker elementer fra en uendelig
 
 # Generator expressions
 
-List comprehensions kan nesten direkte oversettes til et generator-uttrykk. Disse kan ved første øyekast se ut som lister, men vil oppføre seg som generatorer.
+En list comprehension kan nesten direkte oversettes til et generator-uttrykk. Disse kan ved første øyekast se ut som lister, men vil oppføre seg som generatorer.
 Her er et trivielt eksempel på å iterere over en liste:
 
 ```python
