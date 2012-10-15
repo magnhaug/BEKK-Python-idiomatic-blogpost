@@ -1,4 +1,4 @@
-# Idiomatisk Python - del 3 av 3
+# Funksjoner - Idiomatisk Python del 3
 
 I denne siste delen av vår serie med bloggposter om *idiomatisk Python* ser vi nærmere på bruk av funksjoner i Python.
 Vi skal se at funksjoner er mer kraftfulle i Python enn i mange andre objektorientererte språk, som for eksempel Java.
