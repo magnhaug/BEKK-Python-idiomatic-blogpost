@@ -143,16 +143,18 @@ For å ta et forholdsvis enkelt eksempel, la oss si vi ønsker å bruke `filter`
 Uten bruk av lambdaer må vi først definere en funksjon som forteller oss hvorvidt et gitt tall er partall, og deretter sende denne som argument til `filter`.
 
 ```python
-def er_partall(x):
-    return x % 2 == 0
-
-partall = filter(er_partall, [4, 8, 15, 16, 23, 42])
+>>> def er_partall(x):
+...     return x % 2 == 0
+... 
+>>> filter(er_partall, [4, 8, 15, 16, 23, 42])
+[4, 8, 16, 42]
 ```
 
 Med en lambda definerer vi kun funksjonen akkurat der den trengs.
 
 ```python
-partall = filter(lambda x: x % 2 == 0, [4, 8, 15, 16, 23, 42])
+>>> filter(lambda x: x % 2 == 0, [4, 8, 15, 16, 23, 42])
+[4, 8, 16, 42]
 ```
 
 Brukt riktig kan altså lambdaer ofte hjelpe oss å skrive kode som er både kortere og mer lesbar.
@@ -161,7 +163,7 @@ Pythonisk kode bruker lambdaer kun der det passer, og går ikke av veien for å 
 
 ## Dekoratorer
 
-En dekorator lar oss endre hvordan en funksjon oppfører seg, uten at vi er nødt til å gjøre endringer i selve funksjonen.
+En dekorator er, kort oppsummert, en måte å endre hvordan en funksjon oppfører seg uten å gjøre endringer i selve funksjonen.
 
 Dekoratorer er et konsept det for mange kan være vanskelig å bli helt komfortabel med, selv om det ikke bygger på mer enn det vi allerede har vært igjennom av teori om funksjoner.
 Vanskelighetene oppstår kanskje spesielt når vi kommer til dekoratorer som tar argumenter.
@@ -192,7 +194,7 @@ Det som skjer er altså at funksjonen først defineres på vanlig måte.
 Deretter sendes den som argument til dekoratoren som returnerer en ny funksjon.
 Den nye funksjonen tilordnes, og erstatter, så navnet til den opprinnelige funksjonen.
 
-En dekorator er altså ikke noe annet enn en høyere ordens funksjon.
+En dekorator er altså, som vi ser, en høyere ordens funksjon.
 Den tar inn en funksjon, modifiserer eller erstatter funksjoen, og returnerer en erstatning for den opprinnelige funksjonen.
 En typisk dekorator vil vanligvis se omtrent ut som følger.
 
@@ -350,9 +352,9 @@ Slik lagring og gjennbruk av delløsninger kalles gjerne *memoisering*, og kan d
 La oss ta utgangspunkt i den følgende implementasjonen av fibonacci.
 
 ```python
-def fib(a):
-    if a in (0,1): return a
-    return fib(a-1) + fib(a-2)
+def fib(n):
+    if n in (0,1): return n
+    return fib(n-1) + fib(n-2)
 ```
 
 Dette er åpenbart en veldig naiv løsning, med antall rekursive kall til `fib` økende eksponensielt med *n*.
@@ -418,7 +420,10 @@ foo sin docstring
 
 ### Dekoratorer med input
 
-Det er også mulig å lage dekoratorer som tar inn argumenter.
+Hvis vi ser nøye på eksempelet over, ser vi at dekoratoren `functools.wraps` tar inn den opprinnelige funksjonen som et argument.
+Dette er ikke noe ekstra magisk, og vi kan også selv lage dekoratorer som aksepterer argumenter.
+
+Vi går rett på et kodeeksempel:
 
 ```python
 >>> def gjenta(ganger):
@@ -436,7 +441,11 @@ Det er også mulig å lage dekoratorer som tar inn argumenter.
 ['spam', 'spam', 'spam', 'spam']
 ```
 
-Her er `gjenta` egentlig en funksjon som genererer dekoratorer. `gjenta(4)` lager dekoratoren som gjentar funksjonen 4 ganger, som brukes til å dekorere `spam`. Tilsvarende uten det syntaktiske sukkeret blir:
+Her defineres dekoratoren `gjenta`, som tar inn argumentet som forteller hvor mange ganger den dekorerte funksjonen skal gjentas før resultatet av kallene returneres som en liste.
+
+`gjenta` er ikke helt som generatorene vi har laget så langt, men i praksis en funksjon som genererer dekoratorer, slik at `gjenta(4)` lager dekoratoren som gjentar funksjonen 4 ganger, som så brukes til å dekorere `spam`. 
+
+Tilsvarende uten det syntaktiske sukkeret blir:
 
 ```python
 >>> def spam():
@@ -447,12 +456,6 @@ Her er `gjenta` egentlig en funksjon som genererer dekoratorer. `gjenta(4)` lage
 ['spam', 'spam', 'spam', 'spam']
 ```
 
-### @property
-
-I del 1 av denne serien med bloggposter introduserte vi Pythons innebygde `property`-funksjon og gave et eksempel på bruk av denne som dekorator.
-La oss avslutte med en nærmere titt på `@property`.
-
-*TODO: beskriv `@property`.
 
 ## Oppsummering
 
