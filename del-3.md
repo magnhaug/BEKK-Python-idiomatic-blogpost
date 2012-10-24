@@ -237,14 +237,14 @@ SLUTTER WRAPPER
 ```
 
 Som vi ser blir `dekorator()` kalt umiddelbart etter definisjonen av `test()`.
-Dette gjøres av python for å få laget en ny funksjon som erstatter `test` -- i dette tilfellet `wrapper` som ble definert inne i dekoratoren.
+Dette gjøres av Python for å få laget en ny funksjon som erstatter `test` – i dette tilfellet `wrapper` som ble definert inne i dekoratoren.
 Når vi så kaller `test()` ser vi at vi i virkeligheten kaller `wrapper`.
 
 ### Eksempel: Dekorator som teller antall argumenter en funksjon får inn:
 
 Vi fortsetter med et litt mer reelt eksempel; en dekorator som printer antall argumenter en hvilken som helst dekorert funksjon får inn.
 
-For å kunne dekorere alle typer funksjoner, med ulike antall argumenter, må vi passe på at også funksjonen dekoratoren returerer håndterer dette.
+For å kunne dekorere alle typer funksjoner, med ulike antall argumenter, må vi passe på at også funksjonen som dekoratoren returerer håndterer dette.
 Det løser vi ved å la `wrapper` ta variabelt antall argumenter ved hjelp av `*args` og `**kwargs`.
 
 ```python
@@ -279,7 +279,7 @@ fikk inn 1000000 argumenter
 ### Stacking av dekoratorer
 
 Vi er heller ikke begrenset til å bruke en dekorator per funksjon.
-Det fungerer fint å stacke dekoratorer på hverandre som følger.
+Det fungerer fint å stacke dekoratorer på hverandre:
 
 ```python
 @dekorator1
@@ -288,9 +288,9 @@ def funksjon():
     pass
 ```
 
-På samme måte som ved én dekorator blir dette omgjort til funksjonskall av python.
-Dekoratorene evalueres slik at de nederste dekorator-funksjonene kalles først.
-Eksempelet over kan dermed skrives om på denne måten:
+På samme måte som ved én dekorator blir dette omgjort til funksjonskall av Python,
+der den nederste dekorator-funksjonen kalles først.
+Eksempelet over kan dermed skrives om til:
 
 ```python
 def funksjon():
@@ -347,9 +347,9 @@ def timed(fn):
 #### `@memoize`
 
 En annen mulig applikasjon av dekoratorer er for å cache returverdier fra funksjoner.
-Slik lagring og gjennbruk av delløsninger kalles gjerne *memoisering*, og kan drastisk redusere kjøretid i mange tilfeller.
+Slik lagring og gjenbruk av delløsninger kalles gjerne *memoisering*, og kan drastisk redusere kjøretid i mange tilfeller.
 
-La oss ta utgangspunkt i den følgende implementasjonen av fibonacci.
+La oss ta utgangspunkt i den følgende implementasjonen for å finne Fibonaccitall:
 
 ```python
 def fib(n):
@@ -357,7 +357,7 @@ def fib(n):
     return fib(n-1) + fib(n-2)
 ```
 
-Dette er åpenbart en veldig naiv løsning, med antall rekursive kall til `fib` økende eksponensielt med *n*.
+Dette er åpenbart en veldig naiv løsning, der antall rekursive kall til `fib` øker eksponensielt med *n*.
 Hvis vi dekorerer `fib` med følgende dekroator, vil i stedet antall `fib`-kall kun øke linjært.
 
 ```python
@@ -443,9 +443,9 @@ Vi går rett på et kodeeksempel:
 
 Her defineres dekoratoren `gjenta`, som tar inn argumentet som forteller hvor mange ganger den dekorerte funksjonen skal gjentas før resultatet av kallene returneres som en liste.
 
-`gjenta` er ikke helt som generatorene vi har laget så langt, men i praksis en funksjon som genererer dekoratorer, slik at `gjenta(4)` lager dekoratoren som gjentar funksjonen 4 ganger, som så brukes til å dekorere `spam`. 
+`gjenta` er ikke helt som generatorene vi har laget så langt, men i praksis en funksjon som genererer dekoratorer, slik at `gjenta(4)` lager dekoratoren som gjentar funksjonen fire ganger, som så brukes til å dekorere `spam`. 
 
-Tilsvarende uten det syntaktiske sukkeret blir:
+Tilsvarende uten det syntaktiske sukkeret:
 
 ```python
 >>> def spam():
@@ -456,18 +456,21 @@ Tilsvarende uten det syntaktiske sukkeret blir:
 ['spam', 'spam', 'spam', 'spam']
 ```
 
-
 ## Oppsummering
 
-- *Funksjoner* er førsteklasses i Python, og kan derfor:
-  - Defineres inne i andre funksjoner.
-  - Brukes som argumenter og returverdier fra andre funksjoner.
-  - Tilordnes variabler.
-  - Lagres i datastrukturer.
-- *Lambdaer* er enlinjes funksjoner uten navn.
-- *Dekoratorer* lar oss endre funksjonalitet på eksisterende funksjoner uten å endre dem direkte.
-  - Dekoratorene erstatter den dekorerte funksjonen med en ny funksjon.
-  - I praksis bare hendig syntax for å benytte høyere ordens funksjoner.
+*Funksjoner* er førsteklasses i Python, og kan derfor:
+
+- Defineres inne i andre funksjoner.
+- Brukes som argumenter og returverdier fra andre funksjoner.
+- Tilordnes variabler.
+- Lagres i datastrukturer.
+
+*Lambdaer* er enlinjes funksjoner uten navn.
+
+*Dekoratorer* lar oss endre funksjonalitet på eksisterende funksjoner uten å endre dem direkte.
+
+- Dekoratorene erstatter den dekorerte funksjonen med en ny funksjon.
+- I praksis bare hendig syntaks for å benytte høyere ordens funksjoner.
 
 ---
 
