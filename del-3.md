@@ -95,16 +95,16 @@ En funksjon i Python kan:
 1. tilordnes variabler etter at den er definert.
 1. lagres i datastrukturerer.
 
-## Lambda-funksjoner
+## Lambdaer
 
 En lambda er en anonym funksjon definert med en konsis syntaks.
-Lambda-funksjoner er mer begrensede enn funksjoner definert ved hjelp av `def`, men kan deklareres steder hvor det ikke er mulig å opprette slike vanlige funksjoner.
+Lambdaer er mer begrensede enn funksjoner definert ved hjelp av `def`, men kan deklareres steder hvor det ikke er mulig å opprette slike vanlige funksjoner.
 Begrensningene består i at lambdaer ikke kan inneholde statements, og ikke kan spenne over mer enn én linje.
 
 Lambdaer tar inn en (valgfri) liste med parametere, som brukes i uttrykket selve funksjonen består av.
 Når lambda-uttrykket er evaluert returneres resultatet implisitt fra funksjonen.
 
-At lambda-funksjoner er anonyme betyr at de kan defineres og kalles uten å være bundet til et variabelnavn.
+At lambdaer er anonyme betyr at de kan defineres og kalles uten å være bundet til et variabelnavn.
 Man *kan* dog naturligvis også tilordne lambdaer til variabler hvis man ønsker, slik som med vanlige funksjoner.
 
 ### Syntaks
@@ -116,7 +116,7 @@ lambda arg1, arg2: uttrykk
 ```
 
 Vi starter altså med nøkkelordet `lambda` etterfulgt av en (valgfri) liste med vilkårlig antall parametere.
-Dette er fulgt av et kolon, og deretter et enkelt uttrykk som evalueres og utgjør returverdien til lambda-funksjonen.
+Dette er fulgt av et kolon, og deretter et enkelt uttrykk som evalueres og utgjør returverdien til lambdaen.
 
 Gitt den følgende *vanlige* funksjonen.
 
