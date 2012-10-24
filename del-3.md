@@ -1,6 +1,6 @@
 # Funksjoner - Idiomatisk Python del 3
 
-I denne siste delen av vår serie med bloggposter om *idiomatisk Python* ser vi nærmere på bruk av funksjoner i Python.
+I denne siste delen av vår bloggpostserie om *idiomatisk Python* ser vi nærmere på bruk av funksjoner i Python.
 Vi skal se at funksjoner er mer kraftfulle i Python enn i mange andre objektorientererte språk, som for eksempel Java.
 Vi tar også en titt på Pythons anonyme funksjoner, *lambdaer*.
 Til sist introduseres *dekoratorer*, en syntaks som legger til rette for å bruke funksjoner til å modifisere andre funksjoners oppførsel.
@@ -10,9 +10,9 @@ Til sist introduseres *dekoratorer*, en syntaks som legger til rette for å bruk
 I Python har man stor frihet i hvordan man lager og bruker funksjoner.
 Dette kommer av at funksjoner er *førsteklasses* verdier i Python, noe som vil si at funksjoner kan behandles på samme måte som data.
 
-En konsekvens av dette er at vi har muligheten til å definere funksjoner de samme stedene vi tilordner variabler.
+En konsekvens av dette er at vi har muligheten til å definere funksjoner på de samme stedene vi tilordner variabler.
 Funksjoner kan deklareres på toppnivå, som klasse-metoder, og til og med inne i andre funksjoner.
-La oss se et par eksempler.
+La oss se på et par eksempler.
 
 ```python
 def funksjon():
@@ -39,11 +39,11 @@ Eksempelet under lager et alias til Pythons innebygde `len`-funksjon.
 3
 ```
 
-Ettersom funksjoner kan definers inne i andre funksjoner, og kan tilordnes navngitte variabler, er det kanskje ikke så overaskende at de også kan brukes som argumenter og returverdier.
+Ettersom funksjoner kan defineres inne i andre funksjoner, og kan tilordnes navngitte variabler, er det kanskje ikke så overaskende at de også kan brukes som argumenter og returverdier.
 Dette gjøres på lik linje med alt annet som sendes inn og ut av funksjoner.
 Funksjoner som får inn eller returnerer andre funksjoner kalles *høyere ordens funksjoner*.
 
-Et argument som er en funksjon er ikke mer spesielle enn andre argumenter, bortsett fra at i dette tilfellet er det et argument som tilfeldigvis kan kalles.
+Et argument som er en funksjon er ikke mer spesielt enn andre argumenter, bortsett fra at i dette tilfellet er det et argument som tilfeldigvis kan kalles.
 
 ```python
 >>> def foo():
@@ -69,7 +69,7 @@ På tilsvarende måte er retur av en funksjon en vanlig retur, der navnet som re
 Greetings from foo
 ```
 
-En siste egenskap med funksjoner er at de, som annen data, kan lagres som del av datastrukturer.
+En siste egenskap med funksjoner er at de, som annen data, kan lagres som en del av datastrukturer.
 Eksempelet under viser en dictionary med funksjoner som verdier.
 
 ```python
@@ -89,7 +89,7 @@ Eksempelet under viser en dictionary med funksjoner som verdier.
 La oss oppsummere egenskapene til *førsteklasses* funksjoner. 
 En funksjon i Python kan:
 
-1. defineres de fleste steder der en kan tilordne variabler, også inne i andre funksjoner.
+1. defineres på de fleste steder der en kan tilordne variabler, også inne i andre funksjoner.
 1. sendes som argumenter til andre funksjoner.
 1. brukes som returverdier fra andre funksjoner.
 1. tilordnes variabler etter at den er definert.
@@ -109,7 +109,7 @@ Man *kan* dog naturligvis også tilordne lambdaer til variabler hvis man ønsker
 
 ### Syntaks
 
-Syntaktisk deklareres lambdaer på følgende måte.
+Syntaktisk deklareres lambdaer på følgende måte:
 
 ```python
 lambda arg1, arg2: uttrykk
@@ -118,14 +118,14 @@ lambda arg1, arg2: uttrykk
 Vi starter altså med nøkkelordet `lambda` etterfulgt av en (valgfri) liste med vilkårlig antall parametere.
 Dette er fulgt av et kolon, og deretter et enkelt uttrykk som evalueres og utgjør returverdien til lambdaen.
 
-Gitt den følgende *vanlige* funksjonen.
+Gitt den følgende *vanlige* funksjonen:
 
 ```python
 def inkrementer(num):
     return num + 1
 ```
 
-Denne kan skrives om til en lambda, på følgende måte.
+Denne kan skrives om til en lambda, på følgende måte:
 
 ```python
 inkrementer = lambda num: num + 1
@@ -196,7 +196,7 @@ Den nye funksjonen tilordnes, og erstatter, så navnet til den opprinnelige funk
 
 En dekorator er altså, som vi ser, en høyere ordens funksjon.
 Den tar inn en funksjon, modifiserer eller erstatter funksjoen, og returnerer en erstatning for den opprinnelige funksjonen.
-En typisk dekorator vil vanligvis se omtrent ut som følger.
+En typisk dekorator vil vanligvis se omtrent ut som følger:
 
 ```python
 def dekorator(fn):
@@ -244,7 +244,7 @@ Når vi så kaller `test()` ser vi at vi i virkeligheten kaller `wrapper`.
 
 Vi fortsetter med et litt mer reelt eksempel; en dekorator som printer antall argumenter en hvilken som helst dekorert funksjon får inn.
 
-For å kunne dekorere alle typer funksjoner, med ulike antall argumenter, må vi passe på at også funksjonen som dekoratoren returerer håndterer dette.
+For å kunne dekorere alle typer funksjoner, med ulike antall argumenter, må vi passe på at også funksjonen som dekoratoren returnerer håndterer dette.
 Det løser vi ved å la `wrapper` ta variabelt antall argumenter ved hjelp av `*args` og `**kwargs`.
 
 ```python
@@ -257,7 +257,7 @@ def tell_argumenter(fn):
 ```
 
 `wrapper` gjør ellers ikke noe mer magisk enn å summere antall argumenter, printe dette, og kalle videre til den dekorerte funksjonen.
-Legg også merke til at vi returerer resultatet fra `fn()`, slik at den dekorerte funksjonen beholder returverdien den ellers ville hatt.
+Legg også merke til at vi returnerer resultatet fra `fn()`, slik at den dekorerte funksjonen beholder returverdien den ellers ville hatt.
 
 For å teste dekoratoren lager vi en funksjon som tar inn variabelt antall argumenter, og kaller denne.
 
