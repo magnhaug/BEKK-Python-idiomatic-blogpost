@@ -465,7 +465,3 @@ Tilsvarende uten det syntaktiske sukkeret:
 - Dekoratorene erstatter den dekorerte funksjonen med en ny funksjon.
 - I praksis bare hendig syntaks for å benytte høyere ordens funksjoner.
 
----
-
-Magnus Haug / Kjetil Valle  
-Bekk Consulting AS
