@@ -1,10 +1,3 @@
-# Idiomatisk Python
-
-Alle språk har sine særegenheter, og bak hvert språk ligger en
-filosofi—en tanke om hvordan språket bør brukes.  For å skrive pen kode
-er det viktig å kjenne og bruke språkets særegenheter; de uttrykk som er
-idiomatiske for språket.
-
 I denne bloggposten skal vi gå nærmere inn på hva idiomatisk Python er.
 Denne bloggposten er beregnet for de som kjenner grunnleggende Python,
 men krever absolutt ikke at man har kodet mye i språket.
