@@ -1,10 +1,3 @@
-# Funksjoner - Idiomatisk Python del 3
-
-I denne siste delen av vår bloggpostserie om *idiomatisk Python* ser vi nærmere på bruk av funksjoner i Python.
-Vi skal se at funksjoner er mer kraftfulle i Python enn i mange andre objektorientererte språk, som for eksempel Java.
-Vi tar også en titt på Pythons anonyme funksjoner, *lambdaer*.
-Til sist introduseres *dekoratorer*, en syntaks som legger til rette for å bruke funksjoner til å modifisere andre funksjoners oppførsel.
-
 ## Funksjoner
 
 I Python har man stor frihet i hvordan man lager og bruker funksjoner.
