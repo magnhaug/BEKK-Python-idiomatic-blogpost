@@ -288,7 +288,3 @@ Denne bloggposten har tatt for seg noen konsepter som er idiomatiske for Python,
 I to kommende bloggposter skal vi gå nærmere inn på noen temaer som er sentrale når en arbeider i Python.
 Del 2 vil fokusere på lister, iteratorer og generatorer, mens vi i del 3 tar en nærmere titt på bruk av funksjoner i Python.
 
----
-
-Magnus Haug / Kjetil Valle  
-Bekk Consulting AS
