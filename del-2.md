@@ -1,7 +1,3 @@
-# Lister og sekvenser - Idiomatisk Python del 2
-
-En stor del å programmere omhandler å på én eller annen måte å behandle sekvenser av data. 
-I klassiske imperative språk kan det å jobbe med lister og sekvenser være ganske slitsomt, spesielt om en først har hatt gleden av å jobbe en stund med et mer moderne språk. 
 Denne blogposten fortsetter der vi slapp i [del 1](http://open.bekk.no/idiomatisk-python/), og tar for seg typiske idiomer for å arbeide med sekvenser i Python.
 Vi vil vise eksempler på mekanismer Python tilbyr, og se på hvilke fordeler disse gir.
 
