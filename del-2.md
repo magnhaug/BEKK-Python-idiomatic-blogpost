@@ -275,7 +275,3 @@ Til slutt vil vi anbefale David Beazleys to særdeles gode presentasjoner om [en
 - *Iteratorer* gir oss muligheten til å generere (uendelig) lange sekvenser uten at disse må lagres i minnet.
 - *Generatorer* og *generator expressions* er to enkle måter å definere iteratorer på.
 
----
-
-Magnus Haug / Kjetil Valle  
-Bekk Consulting AS
